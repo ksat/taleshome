@@ -11,7 +11,7 @@ permalink: /websockets
   </div>
   <div class="text-text">
     This page uses websockets! Try this. Open command prompt and copy paste this command: 
-<pre talesId="command">curl http://www.talesframework.org/Holy%20Cow/2339299292</pre>
+<pre id="command" talesId="command">curl http://www.talesframework.org/Holy%20Cow/2339299292</pre>
   </div>
   
   <div class="text-title">
@@ -93,3 +93,19 @@ w.onMessage|TextMessage t|{
 			<pre>websocket.stash["name"] = "Jhon Peter"</pre>
 	</div>
 </div>
+
+<script>
+var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
+var string_length = 5;
+var randomstring = '';
+for (var i=0; i<string_length; i++) {
+	var rnum = Math.floor(Math.random() * chars.length);
+	randomstring += chars.substring(rnum,rnum+1);
+}
+var url = "ws://examples.talesframework.org/ws/" + randomstring;
+var socket = new WebSocket(url); 
+document.getElementById("command").innerHTML = "curl http://examples.talesframework.org/ws-send/Holy%20Cow/" + randomstring;
+socket.onmessage = function(msg){  
+    alert(msg.data);  
+}
+</script>
