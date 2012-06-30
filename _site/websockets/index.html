@@ -296,12 +296,14 @@
 							</td>
 							<td valign="top" style="padding:10px;" align="left">
 								<div talesId="child"><div style="padding:10px">  
-  <div class="text-title">
-    Websockets - Demo
-  </div>
-  <div class="text-text">
-    This page uses websockets! Try this. Open command prompt and copy paste this command: 
-<pre id="command" talesId="command">curl http://www.talesframework.org/Holy%20Cow/2339299292</pre>
+  <div id="websocket-demo">
+	  <div class="text-title">
+	    Websockets - Demo
+	  </div>
+	  <div class="text-text">
+	    This page uses websockets! Try this. Open command prompt and copy paste this command: 
+	<pre id="command" talesId="command">curl http://www.talesframework.org/Holy%20Cow/2339299292</pre>
+	  </div>
   </div>
   
   <div class="text-title">
@@ -385,6 +387,10 @@ w.onMessage|TextMessage t|{
 </div>
 
 <script>
+
+if(! ("WebSocket" in window)){
+	document.getElementById("websocket-demo").style.display = "none";
+}
 var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
 var string_length = 5;
 var randomstring = '';
