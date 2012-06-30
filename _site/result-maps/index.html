@@ -1,0 +1,94 @@
+<div style="padding:10px">
+  <div class="text-title">
+    Using Resultmaps for complex query mapping
+  </div>
+  <div class="text-text">
+    Sometimes you will want to do more complex mapping when trying to fetch data from multiple tables using joins. Here's a example. You will want to look at the mybatis documentation see more about result maps.
+  </div>
+  <div class="text-text">
+    In this example we will solve the n+1 select problem by fetching all the blogs along with the author
+  </div>
+  <div class="text-text">
+    Let's see our blog class and author class
+  <pre>
+@Serializable
+class Blog {
+  Int? id
+  Str? subject
+  Str? detail
+  Author? author
+}
+  </pre>
+  </div>
+  <div class="text-text">
+    .. and the author class
+  <pre>
+@Serializable
+class Author{
+  Int? id
+  Str? name
+  DateTime? birthDate
+}
+  </pre>
+  </div>
+  <div class="text-text">
+    * Note make sure you have create the author table and have the blog_id field in blog table  
+  </div>
+
+  <div class="text-text">
+  Here's the sql map
+  </div>
+
+  <div class="text-text">
+  <pre>
+using fanbatis
+class BlogSqlMap : SqlMap{
+  @Select{resultMap = "blogMap"}
+  Blog[] selectBlogsWithAuthor(){
+    list(sql<|
+          select b.id blog_id, b.subject blog_subject,
+          b.detail blog_detail,
+          a.id author_id, a.name author_name,  
+          a.birthDate as birth_date
+          from
+          blog b 
+          left outer join
+          Author a on b.author_id = a.id
+     |>)
+  }
+
+
+  ResultMap blogMap := ResultMap{
+    it.type = Blog#
+    id->id = "blog_id"
+    result->subject = "blog_subject"
+    result->detail = "blog_detail"
+    association->author = Association{resultMap="authorMap"}
+  }
+
+  ResultMap authorMap := ResultMap{
+    it.type = Author#
+    id->id = "author_id"
+    result->name = "author_name"
+    result->birthDate = "birth_date"
+  }
+}
+  </pre>
+  </div>
+
+  <div class="text-text">
+  And try to fetch the list of blogs
+  <pre>
+Blog[] blogs := BlogSqlMap()->selectBlogsWithAuthor
+  blogs.each|Blog blog|{
+  echo("Author for blog $blog.name is $blog.author.name")
+}
+  </pre>
+  </div>
+  <div class="text-text" style="display:none;">
+  <a href="ResultMaps.fan">Download ResultMaps.fan</a> having all this in one script
+  </div>
+
+            
+
+</div>

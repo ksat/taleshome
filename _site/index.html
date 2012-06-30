@@ -1,0 +1,395 @@
+<html>
+ <head>
+	<link rel="stylesheet" href="/css/first.css" type="text/css" />
+	<title>The Tales web framework for Fantom</title>
+	<style type="text/css" media="screen">
+	 	
+		.header {
+			display: block;
+			overflow: hidden;
+			height: 70px;
+			padding-left:120px;
+			padding-top:3px;
+		}
+		
+		.container{
+			width: 1000px;
+			overflow: hidden;
+		}
+		
+		
+		
+		#main {
+			background-color: white;
+			border-color: #CED5E0;
+			-webkit-border-radius: 4px;
+			-moz-border-radius: 4px;
+			border-radius: 4px;
+			display: block;
+			-moz-box-shadow: 0 1px 5px rgba(0, 0, 0, .15);
+			-webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, .15);
+			box-shadow: 0 1px 5px rgba(0, 0, 0, .15);
+			border: 1px #D5D5D5 solid;
+			width:780px;
+			margin-left:178px;
+			margin-bottom:20px;
+			z-index:200;
+			opacity:0.8;
+		}
+		
+		#inner{
+			/*margin:10px;*/
+		}
+		
+		ul li{
+			list-style:none;
+		}
+		
+		#sidebar0{
+			width:180px;
+			float:left;
+			padding-top:10px;
+		}
+		
+		#sidebar0 ul li{
+			list-style:none;
+		}
+		
+		#sidebar0 ul li.active {
+			border:1px solid transparent;
+			border-right:none !important;
+			-webkit-border-top-left-radius: 5px;
+			-webkit-border-bottom-left-radius: 5px;
+			-moz-border-radius-top-left: 5px;
+			-moz-border-radius-bottom-left: 5px;
+			border-top-left-radius: 5px;
+			border-bottom-left-radius: 5px;
+			background: white;
+			*background: none;
+			*font-weight:bold;
+			-moz-box-shadow: -5px 1px 5px 0px rgba(0, 0, 0, .15);
+			-webkit-box-shadow: -3px 1px 5px .5px rgba(0, 0, 0, .15);
+			box-shadow: -5px 1px 5px 0px rgba(0, 0, 0, .15);
+			list-style:none;
+			opacity:0.7;
+			font-weight:bold;
+		}
+		
+		
+		
+		li.active-grey{
+			background:#FAFAFA !important;
+		}
+		
+		#sidebar0 ul li a{
+			text-align: right;
+			display: block;
+			padding: 18px ;
+			font-size: 12px;
+			text-decoration: none;
+			padding-right: 20px;
+			padding-top:15px;
+		}
+		
+		#sidebar0 ul li.active a{
+			padding-top:18px;
+		}
+		
+		ul li a{
+			text-align: right;
+			display: block;
+			font-size: 12px;
+			text-decoration: none;
+			padding-right: 20px;
+			padding-bottom:8px;
+		}
+		
+		a {
+			color: #525252;
+			/*text-decoration: none;*/
+		}
+		
+		a.selected{
+			font-weight: bold;
+			color: #5092BD;
+		}
+		
+		ul li a.selected{
+			background:#666;
+			color:white;
+		}
+		
+		.text-title, .title-text {
+			margin-top: 24px;
+			color: #393;
+			font-size: 16px;
+			font-family: 'lucida grande',verdana;
+		}
+		
+		
+		.text-text {
+			font-size: 13px;
+			padding-left: 20px;
+			margin-top: 10px;
+			line-height: 18px;
+		}
+		pre, .output {
+			color: #333;
+			background: #EEE;
+			-moz-border-radius: 5px;
+			-webkit-border-radius: 5px;
+			border: 1px solid #DFE0CD;
+			padding: 10px;
+			margin-top:4px;
+			font-family: Consolas, monospace;
+		}
+		
+		ul.inner{
+			padding-left:0px !important;
+		}
+	</style>
+	<script type="text/javascript">
+			  var _gaq = _gaq || [];
+			  _gaq.push(['_setAccount', 'UA-19500723-1']);
+			  _gaq.push(['_trackPageview']);
+
+			  (function() {
+			    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			  })();
+
+			</script>
+</head>
+<body> 
+	<div class="header" align="center">
+			<div class="container" align="left">
+				<table width="100%">
+					<tr>
+						<td align="left"><img src="/images/tales_logo.png" /></td>
+						<td align="right" style="line-height:50px; padding-right:110px;">
+							 <a href="http://help.talesframework.org/discussions/discuss">Discuss or ask a question</a>
+						</td>
+					<tr>
+				</table>
+			</div>
+	</div>
+	<div align="center">
+		<div class="container" align="left" >
+				
+			<div id="sidebar0" style="float:left;margin-right:0px;">
+					<ul>
+							<li  class="active" >
+								<a href="/" >Home</a>
+							 </li>
+					</ul>
+					
+					<div style="text-align:right; font-weight:bold;margin-right:20px; color:#393;font-size:13px;">
+							The Basics
+					</div>
+					<ul>
+						 	<li talesId="firstApp" >
+								<a href="/install-tales" >Install and make Your first app</a>
+							 </li>
+							<li talesId="examples">
+								<a href="http://examples.talesframework.org/" >Examples</a>
+							  </li>
+							<li talesId="ide" >
+								<a href="/eclipse" >IDE setup</a>
+							 </li>
+							<li talesId="gf" >
+								<a href="/gf-intro" class="">A more complete application</a>
+							 </li>
+							<li talesId="anatomy" >
+								<a href="/anatomy" class="">App Directory structure</a>
+							 </li>
+						</ul>
+						<div align="right">
+						<div style="text-align:right; border-top:1px solid #ccc; padding-top:10px; font-weight:bold;margin-right:20px; color:#393;font-size:13px; width:120px;">
+								Docs
+						</div>
+						</div>
+						<ul>
+							<li talesId="howtos" >
+								<a href="/templating" >Tales</a>
+							 </li>	
+							<!--
+							<li talesId="templating">
+								<a href="/templating" >Templating</a>
+							 </li>
+							 <li talesId="routing">
+								<a href="/routing">Routing</a>
+							  </li>
+							-->
+								<li talesId="fanquery" >
+									<a href="/what-is-fanquery" class="">Fanquery</a>
+								 </li>
+								<li talesId="fanbatis" >
+									<a href="/fanbatis" class="">Fanbatis</a>
+								 </li>
+							</ul>
+			 </div>
+				<div id="main">
+					<div id="inner" >
+						<html>
+  <head>
+      <title>The Tales Web Framework for Fantom</title>
+      <style type="text/css" media="screen">
+          h2{
+            font-size: 14px;
+            font-family: "Ludica Grande", Arial;
+            display: block;
+            color: #414F61;
+        }
+        
+        pre.fan {
+          color: #333;
+          background: #F7F7ED;
+          -moz-border-radius: 5px;
+          -webkit-border-radius: 5px;
+          border: 1px solid #DFE0CD;
+          padding: 5px;
+          margin-top:4px;
+          display:block;
+          float:left;
+          width:280px;
+          padding-left:10px;
+          line-height:18px;
+          
+        }
+        
+        td{
+          vertical-align:top;
+          padding:8px;
+        }
+        
+        a{
+          text-decoration:underline;
+        }
+      </style>
+  </head>
+  <body>
+    <div style="padding:25px;">
+        <div align="center"  >
+          <h1>Easy web applications. Written in Fantom</h1>
+          
+          <div style="margin-top:10px;border-bottom:1px dashed #e4e4e4;">
+            <table>
+              <tr>
+                <td>
+                  <div style="background:#f0f0f0; width:400px;-moz-border-radius:3px;-webkit-border-radius:3px; line-height:40px;text-align:center;font-size:13px;">
+                        fanr install -r http://repo.talesframework.org:9000 tales
+                  </div>
+                </td>
+                <td style="vertical-align:middle;">
+                    <a href="/install-tales">Make your first app</a>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        
+        <div style="margin-top:15px; padding:10px;-moz-border-radius: 5px; -webkit-border-radius: 5px; ">
+           	<table >
+                <tr>
+                    <td width="50%" valign="top" style="vertical-align:top">
+                        <div style="overflow:hidden; margin-top:0px;">
+                         <h2>Code on the most readable Jvm language</h2>
+                          <div>
+<pre class="fan" style="margin-top:10px;">//Hello world written in tales
+using tales
+
+class HelloWorld : Page{
+  <span style="color:#555;">@Route{uri="/hello-world"}</span>
+  Void main(){
+    response.writeStr("Hello World")
+  }
+}
+</pre> <div style="height:10px;">&nbsp;</div>
+                          </div>
+                       </div>
+                    </td>
+                    <td valign="top" >
+                       <h2>Auto reload</h2>
+                       <div>
+                            Never Restart your server. Just edit your file, Save and hit refresh. Compiler errors are shown directly in browser.
+                       </div>
+                        <div style="overflow:hidden; margin-top:10px;">
+                            <h2>Full Stack</h2>
+                            <div>
+                                Tales provides everything you need to build a cool web application for your next big idea.
+                            </div>
+                        </div>
+                        <div style="overflow:hidden; margin-top:10px;">
+                             <h2>IDE support</h2>
+                             <div>
+                                 Run and Debug tales projects in any one of two <a href="/eclipse">awesome IDEs</a>.
+                             </div>
+                           </div>
+                    </td>
+                </tr>
+              </table>
+              
+              <table style="margin-top:8px;">
+                <tr>
+                    <td valign="top" width="336px !important;">
+                        <div style="overflow:hidden">
+                            <h2>Write client code in Fantom, use Jquery</h2>
+                            <pre class="fan">Jq.ready{
+ Jq("#button").click{
+   Win.cur.alert("Hello world")
+ }
+}</pre>
+                          </div>
+                        
+                          
+                          <div style="overflow:hidden; margin-top:30px;clear:both;">
+                              <h2>Html Stays Html templating</h2>
+                              <pre class="fan">&lt;div talesId="name">&lt;/div></pre>
+                              <div style="clear:both;padding-bottom:5px;text-align:left;padding-left:130px;"> + </div>
+                              <pre class="fan">html.tag("name").text("Iam Fantom")</pre>
+                              <div style="clear:both;padding-left:130px;padding-bottom:5px;text-align:left;"> = </div>
+                              <pre class="fan">&lt;div>Iam Fantom&lt;/div></pre>
+                            </div>
+                      
+                    </td>
+                    <td width="50%">
+                       <div style="overflow:hidden">
+                          <h2>A Little ORM, A little Data Mapping</h2>
+                          <pre class="fan">//Simple shortcuts for common use cases
+  
+User user := Db.one(User{id = 1})
+User[] users := Db.list(User{dept = 1})
+
+
+//For complex requirements just
+//wrap the query in a method
+
+User getUser(Int id){S<| 
+    select u.userid, u.name 
+    from User u,Company c 
+    where u.id = #{id} and 
+          u.companid  = c.id and
+          c.isdeleted = 0
+|>}
+</pre>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+           </div>
+					<br/>
+					<a href="https://bitbucket.org/ksat/tales/">Source</a>. License: <a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache version 2.0</a>
+        </div>
+        
+    </div>
+  </body>
+</html>
+
+					</div>
+				</div>
+			 
+		</div>
+	</div>
+</body>
+</html>

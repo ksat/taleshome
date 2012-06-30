@@ -1,0 +1,72 @@
+---
+layout: base
+highlight: fanquery
+---
+<html>
+	<head>
+			
+			<style type="text/css" media="screen">
+				div.desc{
+					color:#555;
+					font-size:12px;
+					line-height:15px;
+				}
+				ol{
+					padding-left:20px;
+					padding-right:10px;
+				}
+				.example-link{
+					line-height:18px;
+					padding-top:10px;
+					border-bottom:1px dashed #ccc;
+				}
+				
+				a.selected{
+					color:#5092BD !important;
+					font-weight:bold;
+					background:none !important;
+				}
+				
+				ol.inner li{
+					padding-top:20px;
+				}
+			</style>
+	</head>
+	<body>
+			<div style="overflow:hidden;">
+					<table width="100%" cellspacing="0" cellpadding="0">
+						<tr>
+							<td valign="top" style="width:150px;background:#FAFAFA;height:200px;padding:10px;border-right:1px solid #eee">
+								<ul class="inner">
+									<li>
+										<a class="example-link {%if page.secondtitle == 'whatis' %}selected{% endif %}" talesId="whatis" href="/what-is-fanquery">What is Fanquery?</a>
+										
+									</li>
+									<li>
+										<a class="example-link {%if page.secondtitle == 'startusing' %}selected{% endif %}" talesId="startusing" href="/start-using-fanquery">Start using fanquery</a>
+									</li>
+									<li>
+										<a class="example-link {%if page.secondtitle == 'plugin' %}selected{% endif %}" talesId="usingplugin" href="/using-a-fanquery-plugin">Using a fanquery plugin</a>
+									</li>
+									<li>
+										<a class="example-link {%if page.secondtitle == 'develop' %}selected{% endif %}" talesId="develop" href="/develop-fanquery-plugin">Develop or port a plugin</a>
+									</li>
+									<li>
+										<a class="example-link" talesId="examples" href="http://examples.talesframework.org/selector">Examples</a>
+									</li>
+									<li>
+										<a class="example-link" target="_blank" href="http://www.fanzy.net/fanquery">Try online</a>
+									</li>
+									
+									<div style="height:400px">
+											&nbsp;
+									</div>
+							</td>
+							<td valign="top" style="padding:10px;" align="left">
+								<div talesId="child">{{content}}</div>
+							</td>
+						</tr>
+					</table>
+			</div>
+	</body>
+</html>

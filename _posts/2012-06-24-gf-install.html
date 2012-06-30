@@ -1,0 +1,63 @@
+---
+layout: gf
+title: Installing Tales
+secondtitle: install
+permalink: /gf-install
+---
+
+<div style="padding:10px">  
+  <div class="text-title" style="margin-top:5px">
+        Installing tales
+    </div>
+    <div class="text-text">
+        <a class="download" href="/install-tales">Follow the steps over here</a> to install tales
+    </div>
+    <div class="text-text">
+        Once tales is installed, go to command prompt and create a new app using the following command
+        <pre>tales new gf</pre>
+    </div>
+    <div class="text-text">
+        A new folder gf is create will application files on it
+    </div>
+    <div class="text-text">
+      cd to the gf directory and type
+      <pre>tales run</pre>
+      The web server will start on port 8000
+    </div>
+    <div class="text-text">
+      open browser and go to http://localhost:8000 you should see the welcome page.
+    </div>
+
+    <div class="title-text">
+        Connecting to Db
+    </div>
+    <div class="text-text">
+        Open <strong>fan/Settings.fan</strong>. In the main method, and add a db setting like this
+        <pre style="padding:4px;">using tales
+class Settings : tales::Settings{
+  override Void main(){
+    <strong>add(DbSetting{</strong>
+      <strong>hostString = "connnecton string"</strong>
+      <strong>driver = "Driver class"</strong>
+      <strong>username = "username"</strong>
+      <strong>password = "password"</strong>
+    <strong>})</strong>
+  }
+}</pre>
+    Change the driver, user name and password and host-string to match you database. Make sure you've added the driver jar to fan/lib/java/ext. For ex. if you use mysql. 
+			<ol>
+					<li>Copy mysql-xx driver.jar to fan/lib/java/ext/</li>
+					<li>add the following setting
+<pre><strong>add(DbSetting{</strong>
+	<strong>hostString = "jdbc:mysql://localhost:3306/db"</strong>
+	<strong>driver = "com.mysql.jdbc.Driver"</strong>
+	<strong>username = "username"</strong>
+	<strong>password = "password"</strong>
+<strong>})</strong></pre>
+</li>
+			</ol>
+    </div>
+    <div class="text-text">
+      That's it. Let's start <a class="download" href="/gf-model">creating the table and model classes</a>
+    </div>
+</div>

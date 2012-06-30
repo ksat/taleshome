@@ -1,0 +1,129 @@
+---
+layout: fanbatis
+title: SqlMaps
+secondtitle: sqlmaps
+permalink: /sql-maps
+---
+
+<div style="padding:10px">
+	<div class="text-title">
+		Using Sql maps	 
+	</div>
+	<div class="text-text">
+		SqlMaps are the "holy-grail" of fanbatis. SqlMap lets you map query results to objects in the simples-possible way.
+	</div>
+	<div class="text-text">
+		Before we start, let's modify the blog class a little bit
+	<pre>
+@Serializable
+class Blog {
+  Int? id
+  Str? subject
+  Str? detail
+}
+	</pre>
+	</div>
+
+	<div class="text-text">
+		Here are a few examples
+	</div>
+
+	<div class="text-text">
+		Select one blog by id
+		<pre>
+class BlogSqlMap : SqlMap{
+  @Select
+  Blog getBlogById(Int id){
+    one(sql<|
+         select * from blog where id = #{id}
+       |>)
+  }
+}
+
+//Getting the blog
+BlogSqlMap blogMap := BlogSqlMap()
+blog := blogMap->getBlogByName(1)
+	</pre>
+	</div>
+
+	<div class="text-text">
+		Select just the blog's subject from id
+	<pre>
+@Select
+Str getBlogSubject(Int id){
+  one(sql<|
+    select subject from blog where id = #{id}
+  |>)
+}
+	</pre>
+	</div>
+
+	<div class="text-text">
+	  Select the list first 10 blogs by id
+	<pre>
+@Select
+Blog[] getFirstTenBlogs(){
+  list(sql<|
+        select * from blog order by id limit 0 , 10
+    |>)
+}
+	</pre>
+	</div>
+	<div class="text-text">
+	Insert a blog
+	<pre>
+@Insert
+Void insertBlog(Blog blog){
+  insert(sql<|
+        insert into blog(subject, detail)
+        values(#{blog.subject}, #{blog.detail})
+       |>)
+}
+	</pre>
+	</div>
+
+	<div class="text-text">
+	Update a blog
+	<pre>
+@Update
+Void updateBlogSubject(Blog blog){
+  update(sql<|
+      update blog set subject = #{blog.subject} where id = #{blog.id}
+  |>)
+}
+	</pre>
+	</div>
+
+	<div class="text-text">
+	Insert a blog while selecting primary key from a auto generated field
+	<pre>
+@Insert{useGeneratedKeys = true; keyProperty="blog.id"}
+public Void insertBlog(Blog blog){
+  insert(sql<|
+      insert into blog(subject, detail) 
+      values(#{blog.subject}, #{blog.detail})
+       |>)
+}
+	</pre>
+	</div>
+
+	<div class="text-text">
+	Insert a blog while selecting key from a query
+	<pre>
+@Insert{useGeneratedKeys = true; keyProperty="blog.id"}
+@SelectKey{keyProperty="blog.id"; 
+           order="AFTER"; 
+           query = "SELECT IDENTITY()"}
+public Void insertBlog	(Blog blog){
+  insert(sql<|
+          insert into blog(subject, detail)
+          values(#{blog.subject}, #{blog.detail})
+        |>)
+}
+	</pre>
+	</div>
+	<div class="text-text" style="display:none;">
+	<a href="SqlMaps.fan">Download SqlMaps.fan</a> having all this in one script
+	</div>
+
+</div>

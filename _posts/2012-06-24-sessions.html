@@ -1,0 +1,30 @@
+---
+layout: howtos
+title: Session handling with tales
+secondtitle: sessions
+permalink: /sessions
+---
+
+<div style="padding:10px;min-height:500px;">  
+  <div class="text-title">
+    Session Handling
+  </div>
+  <div class="text-text">
+     request.session() methods returns you a Session object. You can use Session.get or Session.set method to set or get get values to it
+  </div>
+  <div class="text-text">
+     <pre>request.session["userId"] = 23</pre>
+    later..
+     <pre>response.writeStr("Your id is " + request.session["userId"])</pre>
+  </div>
+  
+  <div class="text-title">
+    Sessions and Scaling
+  </div>
+  <div class="text-text">
+     Session handling in tales works along with other types of Cache. Infact sessions are just a special type of cache. By default sessions are stored in memory - This means that with the default sessions setup you can't horizontally. That's perfectly fine for most.
+  </div>
+  <div class="text-text">
+    However if you want you can store your session information in redis [coming soon]
+  </div>
+</div>

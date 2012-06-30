@@ -1,0 +1,164 @@
+---
+layout: gf
+title: Adding Ajax
+secondtitle: ajax
+permalink: /gf-ajax
+---
+
+<div style="padding:10px">
+<div class="title-text">
+Getting started with Fanquery
+</div>
+<div class="text-text">
+Take a look at index.html again.
+
+we have a textfield with id "name" and a button with id "add-gf". When "add-gf" button is clicked we need to  add a girlfriend row in the database with the name given in the name text box. Create a IndexJs.fan with the following code
+</div>
+<div class="text-text">
+<strong style="color:#666">fan/IndexJs.fan</strong>
+<pre>
+using fanquery
+using tales 
+
+@Js
+@Include{plugins = [Plugin{name = "fanquery"}]}
+class IndexJs{
+  Void main(){
+    Jq.ready{
+      domReady
+    }
+  } 
+
+  Void domReady(){
+    Jq("#add-gf").click{
+      Str name := Jq("#name").getVal
+      Win.cur.alert(name)
+    }
+  }
+}</pre>
+</div>
+<div class="text-text">
+Take a look at the code above. In tales, Javascript can be written in fantom( which compiles to javascript and executes on browser).  Also fanquery is a library that will let us use all of the jquery awesomeness in fantom.[ Note however that not everything needs to be written in fantom. You can still use pure javascript if you want to. Just include script files in a &lt;script> tag in your html. This is very useful for all the "design-level" or off the shelf javascript where rewriting in fantom does not make sense]. 
+</div>
+<div class="text-text">
+  Next we need to modify the page class and ask it to use this js, You use the html.jsMain() method to do it. Here's the full source code of Index.fan now.
+</div>
+
+<div class="text-text">
+<strong style="color:#666;">fan/app/Index.fan </strong>
+<pre>using tales 
+using fanbatis
+
+class Index : Page{
+ <span style="color:#666">@Route{uri="/gf"}</span>  
+ Void main(){
+    GirlFriend[] friends := Db.list(GirlFriend{})
+    html := Html("template/Index.html")
+    rows := html.tag("rows").repeat(friends.size)
+    rows.each|Tag oneRow, Int index|{
+      oneFriend := friends[index]
+      oneRow.tag("name").text(oneFriend.name)
+                .attr("href","/gf/${oneFriend.id}")
+    }
+    html.tag("count").text("$friends.size")
+    <strong>html.jsMain(IndexJs#)</strong>
+		response.writeTag(html)
+ }
+}</pre>
+</div>
+<div class="text-text">
+  Now go to http://localhost:8000/gf in your browser  and click the "add-gf" button you should see an alert.
+</div>
+
+
+<div class="title-text">
+  Adding Ajax code and learning about "cut-and-send"
+</div>
+<div class="text-text">
+  Let's add code to our page class that will take the Ajax request
+</div>
+
+<div class="text-text">
+<strong style="color:#666;">fan/app/Index.fan </strong>
+<pre>using tales 
+
+class Index : Page{
+ <span style="color:#666">@Route{uri="/gf"}</span>  
+ Void main(){
+   ..
+ }
+ 
+ <strong style="color:#666">@Route{uri="/add-gf"}</strong>
+ <strong>Void addGf(Str name){</strong>
+   <strong>GirlFriend gf := Db.create(GirlFriend{it.name = name})</strong>
+   <strong>rowsTag := Html("template/examples/GfList.html").cutAt("rows")</strong>
+   <strong>rowsTag.tag("name").text(gf.name).attr("href", "/gf/${gf.id}")</strong>
+   
+   <strong>html := rowsTag.apply</strong>
+   <strong>response.writeStr(html)</strong>
+ <strong>}</strong>
+}</pre>
+</div>
+
+
+<div class="text-text">
+  Let's go through that code in method "addGf" line by line
+  <ol>
+    <li>The method defines a route. It can take an argument name</li>
+    <li>The first line creates a Gf row in database</li>
+    <li>The second line creates an html instance, but cut's it at talesId "rows"</li>
+    <li>Then we find the tag with talesId "name" inside that tag and add the "href" attr</li>
+    <li>The apply method gives the html for that current tag</li>
+    <li>Then we write html to the response</li>
+  </ol>
+</div>
+
+<div class="text-text">
+  Take another look at "cutAt" method and how it's used. This is called "cut-and-send" in tales and it's extremely useful in cases like this where you want take out a portion of html and dynamically insert it using ajax 
+</div>
+
+<div class="title-text">
+  Writing Js code code to make Ajax call
+</div>
+
+<div class="text-text">
+Let's modify the IndexJs to take the HTML back and just do a "prepend" 
+<pre>
+using fanquery
+using tales 
+
+@Js
+class IndexJs{
+  Void main(){
+    Jq.ready{
+      domReady
+   }
+  } 
+
+  Void domReady(){
+    Jq("#add-gf").click|cur, event|{
+      if(name.trim == "")
+        return
+        
+      <strong>HttpReq{it.uri=`/add-gf`}.postForm(["name" : name])|HttpRes res| {</strong>
+          <strong>Jq("#all-gfs").prepend(Jq(res.content))</strong>
+          <strong>Jq("#name").setVal("")</strong>
+      <strong>}</strong>
+    }
+  }
+}</pre>
+</div>
+<div class="text-text">
+  Lets take a look at the above code
+  <ol>
+    <li>We make an http request to uri "/add-gf" with post parameter "name"</li>
+    <li>It get routed to the addGf() method in the Index.fan class returning the html</li>
+    <li>res.content returns html returned by server</li>
+    <li>We prepend the result and clear the name field</li>
+  </ol>
+</div>
+
+<div class="text-text">
+We are done with the index page.. Let's add the <a href="/gf-production">detail page and deploy the application</a>
+</div>
+</div>

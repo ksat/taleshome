@@ -1,0 +1,76 @@
+---
+layout: base
+highlight: howtos
+---
+
+<html>
+	<head>
+			
+			<style type="text/css" media="screen">
+				div.desc{
+					color:#555;
+					font-size:12px;
+					line-height:15px;
+				}
+				ol{
+					padding-left:20px;
+					padding-right:10px;
+				}
+				.example-link{
+					line-height:18px;
+					padding-top:10px;
+					border-bottom:1px dashed #ccc;
+				}
+				
+				a.selected{
+					color:#5092BD !important;
+					font-weight:bold;
+					background:none !important;
+				}
+				
+				ol.inner li{
+					padding-top:20px;
+				}
+			</style>
+	</head>
+	<body>
+			<div style="overflow:hidden;">
+					<table width="100%" cellspacing="0" cellpadding="0">
+						<tr>
+							<td valign="top" style="width:150px;background:#FAFAFA;height:200px;padding:10px;border-right:1px solid #eee">
+								<ul class="inner">
+									<li>
+										<a class="example-link {%if page.secondtitle == 'templating' %}selected{% endif %}" talesId="templating" href="/templating">Templating</a>
+									</li>
+									<li>
+										<a class="example-link {%if page.secondtitle == 'routing' %}selected{% endif %}" talesId="routing" href="/routing">Routing</a>
+									</li>
+									<li>
+										<a class="example-link {%if page.secondtitle == 'custom' %}selected{% endif %}" talesId="custom" href="/custom">Custom Error and NotFound pages</a>
+									</li>
+									<li>
+										<a class="example-link {%if page.secondtitle == 'websockets' %}selected{% endif %}" talesId="websockets" href="/websockets">Websockets</a>
+									</li>
+									<li>
+										<a class="example-link {%if page.secondtitle == 'https' %}selected{% endif %}" talesId="https" href="/https">Https</a>
+									</li>
+									<li>
+										<a class="example-link {%if page.secondtitle == 'streaming' %}selected{% endif %}" talesId="chunked-writing" href="/streaming">Ansyc and Streaming</a>
+									</li>
+									<li>
+										<a class="example-link {%if page.secondtitle == 'sessions' %}selected{% endif %}" talesId="session-handling" href="/sessions">Session Handling</a>
+									</li>
+									<li>
+										<a class="example-link {%if page.secondtitle == 'jobs' %}selected{% endif %}" talesId="session-handling" href="/background-jobs">Startup &amp; Background Jobs</a>
+									</li>
+									
+								</ul>
+							</td>
+							<td valign="top" style="padding:10px;" align="left">
+								<div talesId="child">{{content}}</div>
+							</td>
+						</tr>
+					</table>
+			</div>
+	</body>
+</html>

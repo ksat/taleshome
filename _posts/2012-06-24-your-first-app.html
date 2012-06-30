@@ -1,0 +1,109 @@
+---
+layout: firstapp
+title: Install Tales
+secondtitle: firstapp
+permalink: /your-first-app
+---
+
+<head>
+  <title>Make your first quick tales app</title>
+  <style type="text/css" media="screen">
+    div.download {
+      background: url('/res/images/download.png') no-repeat;
+    }
+    div.div-img {
+      margin-left: 4px;
+      font-size: 13px;
+      padding-left: 40px;
+    }
+    
+    a.download {
+      text-decoration: underline;
+      color: #444;
+    }
+    a.download:hover {
+      color: black;
+    }
+  </style>
+</head>
+<body>
+<div style="padding:10px">  
+  In this example we will build a simple Hello world page:
+  
+  
+   <br/><br/>
+  <div>
+  Before you begin, make sure you have <a href="/install-tales">tales installed</a>.
+  </div>
+  <div class="text-title">
+    Step 1: Create the app and run
+  </div>
+  <div class="text-text">
+      Open terminal. Go to the directory where you want to create the app. And type   
+      <pre>&gt;fan tales new hello</pre>
+      You should now see a hello folder created in the current directory
+      <div>
+      cd to that directory using 
+      </div>
+      <pre>&gt;cd hello</pre>
+      <div>Now run the server using</div>
+      <pre>&gt;fan tales run</pre>
+      <div>Open your browser and point to http://localhost:8000.You should see the "Welcome to Tales" message. Its that easy to get started</div>
+  </div>
+  <div class="text-title">
+      Step 2: Print Hello world
+  </div>
+  <div class="text-text" >
+     Open fan/Index.fan and edit it as follows:
+			<br/><br/>
+     <strong style="color:#666">fan/Index.fan</strong>
+     <pre>
+using tales
+class Index : Page{
+  <strong>@Route{uri = "/"}</strong>
+  <strong>Void main(){</strong>
+    <strong>response.writeStr("Hello world")</strong>
+  <strong>}</strong>
+}
+</pre>
+    Now refresh your page in browser. You should see a hello world message
+  </div>  
+  
+  <div class="text-title">
+      Step 3: Print Hello world using a Template
+  </div>
+  <div class="text-text" >
+    Open template/Index.html, remove everything and change code to the following: <br/>
+    <br/>
+    <strong style="color:#666">template/Index.html</strong>
+    <pre>
+Hello world, time is: &lt;span <strong>talesId="time"</strong>&gt;&lt;/span></pre>
+
+    The code is self explanatory. Just note how talesId is defined in one of the tags. It defines a "slot" for dynamic data to be populated
+  </div>    
+    <div class="text-text" >
+      Now Open Index.fan, remove everything and change code to the following: <br/>
+      <br/>
+      <strong style="color:#666">fan/Index.fan</strong>
+    <pre>
+using tales
+class Index : Page{
+  <strong>@Route{uri = "/"}</strong>
+  <strong>Void main(){</strong>
+      <strong>html := Html("template/Index.html")</strong>
+      <strong>html.tag("time").text(DateTime.now.toLocale("hh:mm:ss aa"))</strong>
+      <strong>response.writeTag(html)</strong>
+  <strong>}</strong>
+}
+</pre>
+		  
+		   This time instead of writing a string we write a Tag. Note:
+				<ol>
+						<li>The html tag is create with a file, pointing to Index.html</li>
+						<li>In the slot (with talesid) "time", we add text with current date</li>
+  			</ol>
+    </div>
+  
+
+</div>
+</body>

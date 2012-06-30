@@ -1,0 +1,73 @@
+---
+layout: fanquery
+title: Using a fanquery plugin
+secondtitle: plugin
+permalink: /using-a-fanquery-plugin
+---
+
+<div style="padding:10px">
+  <div class="text-title" style="margin-top:5px">
+    Using a fanquery plugin
+  </div>
+	<div class="text-text">
+			Make sure you have gone through <a href="/start-using-fanquery">this example</a> on how to use fanquery. This page builds on that.
+	</div>
+	<div class="text-text">
+    Note: There are no plugins as of now except the two plugins created for experimentation.
+    I will add more. If you want to help me <a href="/develop-fanquery-plugin">Here's how you write a plugin</a>(it's really really simple)
+  <br/>
+  </div>
+  <div class="text-text">
+    Anyhow, this is how you use a plugin (for eg., 'fancybox'): <br/>
+  </div>
+	<div class="text-text">
+		1) Install fancybox like this <pre>fanr install -r http://repo.talesframework.org:9000 fancybox</pre>
+	</div>
+	
+  <div class="text-text">
+    Note: Tales has an optimization mechanism to include only plugins required per page to be delivered with the page.
+    Hence you need to tell tales per page on what plugins it uses. 
+    <br/>
+    For eg., <a href="/example/fanqueryplugin">This example</a>
+  </div>
+  <div class="text-text">
+      2) Open fan/Jq.fan and make Jq class extend the plugin class. For eg., to include the Fancybox plugin, modify the Jq class as below
+<pre>using fanquery
+using fancybox
+
+@Js
+<strong>class Jq : JqBase, FancyBox{</strong>
+  new make(Obj? selector, JqBase? context := null)
+      : super(selector, context){}
+}
+</pre>
+  </div>
+  <div class="text-text">
+    3) Now open IndexJs.fan and add the @Include facet to declare what plugins you use. (This is necessary because otherwise tales will have to include scripts for all plugins in every page)
+  <pre>
+using fanquery
+
+  <strong>@Js</strong>
+  <strong>@Include{ plugins =[</strong>
+        <strong>Plugin{name="fancybox"; conf=["easing":true]}</strong>
+     <strong>]</strong>
+  <strong>}</strong>
+  class IndexJs{
+    ...
+  }</pre>
+  </div>
+	<div class="text-text">
+		Take a look at @Include facet. You define the name of the pod that defines the plugin and some conf. you can omit "conf" if it's not required by plugin. Based on the "conf" parameter the plugin can load additional scripts.
+	</div>
+	
+	<div class="text-text">
+    4) The Jq class inherits all methods from extended plugins. For eg., if you just extended, 
+    fancybox mixin you can do :
+
+    <pre>Jq("link").fancybox</pre>
+  </div>
+	
+  <div class="text-text">
+  	Done.
+  </div>  
+</div>

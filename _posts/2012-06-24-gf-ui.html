@@ -1,0 +1,135 @@
+---
+layout: gf
+title: Making the UI
+secondtitle: ui
+permalink: /gf-ui
+---
+
+<div style="padding:10px">
+<div class="text-title" style="margin-top:5px">
+  Let's Do the UI
+</div>
+<div class="text-text">
+  Let's decide the UI for index page. It should have the ability to:
+  <ol style="padding-left:10px;">
+    <li>Display a list of girlfriends</li>
+    <li>Add a new girl friend</li>
+    <li>Redirect to the gf detail page when clicked on a row </li>
+  </ol>
+</div>
+<div class="text-text">
+  Open index.html, Remove the default html generated for you, add the following and hit refresh in your browser.
+</div>
+<div class="text-text">
+  <strong style="color:#666">template/Index.html :</strong>
+  <pre>You have &lt;span <b>talesId="count"</b>&gt; &lt;/span> girlfriends
+&lt;div id="wrap">
+  &lt;input type="text" id="name" />
+  &lt;input type="button" value="add" id="add-gf"/> 
+  &lt;ul id="all-gfs">
+     &lt;li <b>talesId="rows"</b> >
+       &lt;a <b>talesId="name"</b> href="#" >Name1&lt;/a>
+     &lt;/li>
+  &lt;/ul>
+&lt;/div></pre>
+</div>
+<div class="text-text">
+  Quick things to note about tales templating:
+  <ol style="margin-left:20px;">
+    <li>In tales, html stays Html. No kind of logic is allowed inside html</li>
+    <li>You can preview the html outside of tales and have your designer design or modify it</li>
+    <li>The only thing you will need is the "talesId" tag that represents a "dynamic" part of the page</li>
+  </ol>
+</div>
+
+<div class="text-text">
+  Open fan/Index.fan. 
+  Add a code in main() method to look like this:
+  <pre>using tales 
+class Index : Page{ 
+  <span style="color:#666">@Route{uri="/gf"}</span>
+  Void main(){
+    html := Html("template/Index.html")
+    html.tag("count").text("2")
+    response.writeTag(html)
+  }
+}</pre>
+</div>
+<div class="text-text">
+  Open your browser and browse to http://localhost:8000/gf. look at the first line. It should say You have "2" girlfriends. The "2" part was added in Index.fan
+</div>
+<div class="text-text">
+  So here's the deal once again. In our html we had a div with talesId = "count". In the fan file we did <strong>html.tag("count").text("2")</strong>. The output to the browser will the exact same html defined in Index.html, but with the text of the div with talesId "count" replace by value "2".
+
+</div>
+<div class="text-text">
+    We will play a little bit more with tales templating over here. For a complete templating guide <a href="/templating">go over here</a>
+</div>
+<div class="text-text">
+  Change the code in Index.fan like this
+<pre>using tales 
+class Index : Page{ 
+  <span style="color:#666">@Route{uri="/gf"}</span>
+  Void main(){
+    html := Html("template/Index.html")
+    <strong>html.tag("count").text("2").addCss("color", "red")</strong>
+    response.writeTag(html)
+  }
+}</pre>
+
+Now refresh the page in browser. The output should be exactly same, except the text "2" should appear in red.
+</div>
+
+<div class="text-text">
+  Lets try to repeat the count multiple times. Change the code in Index.fan like this
+<pre>using tales 
+class Index : Page{ 
+  <span style="color:#666">@Route{uri="/gf"}</span>
+  Void main(){
+    html := Html("template/Index.html")
+    <strong>tags := html.tag("count").repeat(4)</strong>
+    <strong>tags.each|Tag tag, Int index|{</strong>
+        <strong>tag.text("Count:$index")</strong>
+    <strong>}</strong>
+    response.writeTag(html)
+  }
+}</pre>
+
+Now refresh the page in browser. You should see count repeated 4 times
+</div>
+
+
+<div class="text-text">
+  Now that we know how to put dynamic text into tags and set attributes, let's write the actual code for the index page 
+</div>
+<div class="text-text">
+  <strong style="color:#666;">fan/app/Index.fan </strong>
+  <pre>using tales
+using fanbatis
+
+class Index : Page{
+ <span style="color:#666">@Route{uri="/gf"}</span>  
+ Void main(){
+    GirlFriend[] friends := Db.list(GirlFriend{})
+    html := Html("template/Index.html")
+    rows := html.tag("rows").repeat(friends.size)
+    rows.each|Tag oneRow, Int index|{
+      oneFriend := friends[index]
+      oneRow.tag("name").text(oneFriend.name)
+                .attr("href","/gf/${oneFriend.id}")
+    }
+    html.tag("count").text("$friends.size")
+    response.writeTag(html)
+ }
+}</pre>
+</div>
+<div class="text-text">
+  Before you refresh the page, you might want to add a row in the girlfriend table like this 
+  <pre>insert into girlfriend(name) values('Aishwarya Rai')</pre>
+  Now refresh the page and you should be seeing Aishwarya rai in the html 
+</div>
+
+<div class="text-text">
+  Now that we have page setup, Let's add the functionality to <a href="/gf-ajax">add a gf to db</a>
+</div>
+</div>

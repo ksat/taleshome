@@ -1,0 +1,95 @@
+---
+layout: howtos
+title: Websockets in Tales
+secondtitle: websockets
+permalink: /websockets
+---
+
+<div style="padding:10px">  
+  <div class="text-title">
+    Websockets - Demo
+  </div>
+  <div class="text-text">
+    This page uses websockets! Try this. Open command prompt and copy paste this command: 
+<pre talesId="command">curl http://www.talesframework.org/Holy%20Cow/2339299292</pre>
+  </div>
+  
+  <div class="text-title">
+      Listening for Websocket connections
+  </div>
+  <div class="text-text">
+      You can listen to websocket connections just by routing to it a method with that uri.  For eg., consider this code
+      <pre>class Index : Page{
+  <strong>@Route{uri = "/ws/}"}</strong>
+  <strong>Void ws(WebSocket websocket){</strong>
+    <strong>websocket.onMessage|TextMessage msg|{</strong>
+         <strong>echo("Received msg: ${msg.text} ")</strong>
+     <strong>}</strong>
+  <strong>}</strong>
+}</pre>
+     You can route to websocket urls just like you route to regular urls. A websocket method has a additional param of type "tales::WebSocket". You can have additional path parameterusing regular "{arg}" syntax like below
+    <pre><strong>@Route{uri = "/ws/{param}}"}</strong>
+<strong>Void ws(WebSocket websocket, Str param){..}</strong></pre>
+  
+  </div>  
+  <div class="text-title">
+      Websocket client
+  </div>
+  <div class="text-text">
+      You can write websocket client in Javscript or Fantom(which is compiled to javascript). 
+      <ol>
+          <li>
+            <strong>Example Websocket client in Javascript</strong>
+            <pre>var socket = new WebSocket("ws://localhost:8000/ws/"); 
+socket.onopen = function(){
+  socket.send("Hello");
+}
+socket.onmessage = function(msg){  
+    alert(msg.data);  
+}</pre>
+          </li>
+          <li>
+              <strong>Example Websocket client in Fantom</strong>
+              <pre>w := WebSocket("ws://localhost:8000/ws/") 
+w.onMessage|TextMessage t|{
+  Win.cur.alert("Got Message from server:" + t.text)
+}
+</pre>
+          </li>
+      </ol>
+  </div>
+
+  <div class="text-title">
+      Attaching websockets to Channels
+  </div>
+  <div class="text-text">
+     A lot of times on the server side, you will usually want to group websockets into channels to get hold of them later. Tales provides convenient methods for grouping websockets
+     <ol>
+        <li>You can attach a websocket to a channel like this
+      <pre>class Index : Page{
+  @Route{uri = "/chat/{roomName}}"}
+  Void chatRoom(WebSocket websocket, Str roomName){
+    websocket.onMessage|TextMessage msg|{
+         echo("Received msg: ${msg.text} ")
+    }
+    <strong>websocket.attachTo(roomName)</strong>
+  }
+}</pre> 
+        </li>
+        <li> Later you can get hold of all the open Websockets in a channel using the "eachInChannel" method. 
+          <pre>WebSocket.eachInChannel("Hacker-anonymous")|WebSocket websocket|{
+  websocket.send(TextMessage("Yo! dudes"))
+}</pre>
+        </li>
+     </ol>
+  </div>
+	
+  <div class="text-title">
+      Storing information on websocket
+  </div>
+	
+	<div class="text-text">
+			You can use the stash method to store information per websocket. E.g.,
+			<pre>websocket.stash["name"] = "Jhon Peter"</pre>
+	</div>
+</div>

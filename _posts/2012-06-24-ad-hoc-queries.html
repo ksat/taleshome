@@ -1,0 +1,61 @@
+---
+layout: fanbatis
+title: Adhoc queries in fanbatis
+secondtitle: adhoc
+permalink: /ad-hoc-queries
+---
+
+<div style="padding:10px">
+  <div class="text-title">
+    Ad-Hoc Queries(The DB class)
+  </div>
+  <div class="text-text">
+    If you are one of those dirty-but-quick types, the DB class provides some convenient methods for ad hoc querying. Here are a few examples
+  </div>
+  <div class="text-text">
+    Delete all blogs
+  <pre>
+DB.delete("Delete from blog")</pre>
+  </div>
+
+  <div class="text-text">
+    Insert a blog with a subject
+  <pre>
+DB.insert("insert into blog(subject) values(#{param.subject})", 
+   ["subject":"kaushik"])</pre>
+  </div>
+
+	  <div class="text-text">
+	  Select one blog
+	  <pre>
+Row? row := 
+ DB.queryOne("select * from blog where id = #{param.id}",
+	                        ["id" : 1])
+echo(row->subject)</pre>
+	  </div>
+
+	  <div class="text-text">
+	  Get the list of all blogs
+	  <pre>Row[] rows := DB.queryList("select * from blog")
+rows.each{
+  echo(it->subject)
+}</pre>
+	  </div>
+	  <div class="text-text">
+	  Update a blog's name
+	  <pre>
+DB.update("update blog set subject = #{param.subject} &lt;
+	where id = #{param.id}",["subject":"About me", "id":1])
+	  </pre>
+	  </div>
+
+	  <div class="text-text">
+	  The fanbatis::Row class: <br/>
+	  You will want to use The "Row" class returned by ad-hoc queries and queries whose result does not map cleanly to a class. You can access properties using row->(properyName)
+	  </div>
+
+	  <div class="text-text" style="display:none">
+	    <a href="AdHoc.fan">Download AdHoc.fan</a> having all this in one script
+	  </div>
+              
+</div>

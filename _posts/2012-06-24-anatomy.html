@@ -1,0 +1,50 @@
+---
+layout: base
+title: Anatomy of a tales app
+highlight: anatomy
+permalink: /anatomy
+---
+<div style="padding:25px;">
+		<div class="text-title">
+								Basic Structure
+						</div>
+						<div class="text-text">
+	When you create a new tales project, say "app",  you will see a directory structure that matches this.. 
+	<pre>app/
+- build.fan
+- fan/
+  - Index.fan
+- res/
+- template/
+  - Index.html
+</pre>							
+</div>
+
+<div class="text-title">
+	Top level files and directories
+</div>
+<div class="text-text" >
+<strong style="color:#666">build.fan:</strong><br/>
+Builds your pod.
+Note: You don't need to build pods for running  in dev/prod mode. 
+Just cd to the app directory and type "tales run"[dev mode]/"tales exec"[prod mode]
+</div>
+<div class="text-text" >
+<strong style="color:#666">fan/ directory</strong><br/>
+Contains all fantom files. 
+</div>
+<div class="text-text" >
+<strong style="color:#666">res/ directory: </strong><br/>
+Contains all public files. Whatever you put in this directory will be available for download from tales server. For eg., if you put a file page.css in res/ directory,
+ you can access the file from <pre> http://localhost:8000/page.css</pre>
+ If you put page.css in res/css/ directory you can access the file from
+ <pre> http://localhost:8000/css/page.css </pre>
+ So this is an excellent place to put your public , css, image and javascript files. 
+</div>
+<div class="text-text" >
+<strong style="color:#666">template/ directory: </strong><br/>
+Contains all template files.  A template file forms a base for the page that is displayed. Think of template files like your jsp files, but without any logic.
+<br/>
+
+</div>
+		</div>

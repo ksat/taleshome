@@ -1,0 +1,271 @@
+---
+layout: howtos
+title: Templating
+secondtitle: templating
+permalink: /templating
+---
+
+     <div style="padding:25px;">
+        Templating is way to generate dynamic pages. In tales Html stays html and you use a jquery like api to put dynamic data into it
+
+        <div class="text-title">
+            Html templating
+        </div>
+        <div class="text-text">
+          A html page that is displayed will at minimum have two file associate with it
+          <ul>
+            <li>a html template file</li>
+            <li>a fantom file that "puts" dynamic data into it </li>
+          </ul>
+        </div>
+        <div class="text-text">
+          Let's start with an example, create a new tales app. The home page that you see is generated using
+          <ul>
+            <li>template/Index.html</li>
+            <li>fan/Index.fan</li>
+          </ul>
+          Delete everything in Index.html and replace it with: 
+          <pre>&lt;div talesId="name">Test&lt;/div> </pre>
+          Open Index.fan and add this code in main() method: 
+          <pre>html := Html("template/Index.html")
+<strong>html.tag("text").text("Jhon")</strong>
+response.writeTag(html)
+</pre>
+          Refresh the browser. The generated html will look like this
+          <pre>&lt;div>Jhon&lt;/div></pre>
+        </div>
+
+        <div class="text-text">
+          <strong style="#666">Things to note:</strong>
+          <ol>
+            <li>The only div in html, had a talesId = "name"</li>
+            <li>The general syntax of markup in fan is
+              <pre>html.tag("talesid").text(str)</pre>
+            </li>
+            <li>
+            The output strips off the talesId but replaces the text of the tag with whatever you supplied in the fantom markup 
+            </li>
+          </ol>
+        </div>
+
+
+        <div class="text-text">
+          <strong style="#666">Let's look at a deeper example</strong>
+          <div>
+            Imagine you wanted to display a text that greets the user. You could write something like
+            <pre>username := "Kaushik"
+html.tag("talesid").text("Hello, welcome &lt;b>$username&lt;/b>")</pre>
+
+            A better way to do it would be to move all markups to html. You can write something like this: 
+            <pre>&lt;div>Hello, welcome &lt;b talesId="name">Something&lt;/b>&lt;/div></pre>              
+            and in markup
+            <pre>username := "kaushik"
+html.tag("name").text(username)
+</pre>
+          </div>
+        </div>
+
+        <div class="text-title">
+            Changing other attributes
+        </div>
+        <div class="text-text" >
+          You can manipulate other attributes using the ".attr()" method
+        </div>
+        <div class="text-text" >
+          html:
+          <pre>&lt;div talesId="name">Something&lt;/div></pre>
+          fan:
+          <pre>html.tag("name").text("Kaushik").attr("style", "color:red")</pre>
+        will result in html 
+        <pre>&lt;div style="color:red">Kaushik&lt;/div> </pre>            
+        </div>
+          <div class="text-text">
+            <strong>Another example: </strong>
+            <br/>
+            Html:
+            <pre>&lt;a href="#" talesId="myLink">Click here&lt;/a></pre>
+
+            Fan:
+            <pre>html.tag("myLink").attr("href","/user/id/1")</pre> 
+            Will result in:
+            <pre>&lt;a href="/user/id/1">Click here&lt;a></pre>           
+          </div>
+        
+        
+        <div class="text-title">
+            Adding and removing classes and styles
+        </div>
+        <div class="text-text">
+            The "Tag" class provides convenient shortcuts for adding and removing classes <br/>
+        html:
+          <pre>&lt;div talesId="name">Something&lt;/div></pre>
+        fan:
+        <pre>html.tag("name").addClass("active").addCss("color", "red")</pre>
+        will result in html:
+        <pre>&lt;div style="color:red" class="active">Kaushik&lt;/div> </pre> 
+        </div>
+      
+
+      
+
+        <div class="title-text">
+          Nested and duplicate markups
+        </div>
+        <div class="text-text">
+          talesids need not be unique.
+          <br/>
+          Html:
+          <pre>&lt;div talesId = "name" style="color:red">&lt;/div>
+&lt;div talesId = "name" style="color:blue">&lt;/div>
+</pre>
+          Fan:
+          <pre>html.tag("name").text("Jhon")</pre>
+          Will result in html:
+          <pre>&lt;div talesId = "name" style="color:red">Jhon&lt;/div>
+&lt;div talesId = "name" style="color:blue">Jhon&lt;/div>
+</pre>
+        </div>
+        <div class="text-text">
+          talesIds can be nested. For eg. 
+          <pre>
+&lt;div talesId="two">&lt;/div>
+&lt;div talesId = "one"> 
+  &lt;div talesId = "two" >&lt;/div>
+&lt;/div></pre>
+          A fantom code like this
+          <pre>html.tag("two").text("Hello")</pre>
+          Will affect nested and non-nested tags like this
+          <pre>
+&lt;div>Hello&lt;/div>
+&lt;div> 
+  &lt;div>Hello&lt;/div>
+&lt;/div></pre>
+        However you can choose to affect only nested tags like this
+        <pre>oneTag := html.tag("one")
+oneTag.tag("two").text("Hello")</pre>
+        The output will be
+        <pre>
+&lt;div>/div>
+&lt;div talesId = "one"> 
+&lt;div>Hello&lt;/div>
+&lt;/div></pre>
+        </div>
+        
+
+        <div class="title-text">
+          Repeaters
+        </div>
+        <div class="text-text">
+          You might want to repeat a tag multiple times
+        </div>
+        <div class="text-text">
+          Html:
+          <pre> &lt;div talesId="numbers">&lt;/div> 
+</pre>          
+          Fan:
+          <pre>vals := ["One", "Two", "Three"]
+html.tag("numbers").repeating
+vals.each{
+  tag := html.tag("numbers").addRow
+  tag.text("$it")
+}</pre>
+            gives an output:
+            <pre>&lt;div>One&lt;/div>
+&lt;div>Two&lt;/div>
+&lt;div>Three&lt;/div>
+</pre>
+        Repeating-tags themselves can have nested talesIds:
+        <pre>&lt;ul>
+  &lt;li talesId="number">
+    &lt;span talesId="val">&lt;/span>
+  &lt;/li>
+&lt;/ul>
+</pre>
+        Fan:
+        <pre>vals := ["One", "Two", "Three"]
+html.tag("numbers").repeating
+vals.each{
+  numberRow := html.tag("numbers").addRow
+  numberRow.tag("val").text("$it")
+}</pre>
+        gives an output:
+        <pre>&lt;ul>
+  &lt;li>
+       &lt;span>One&lt;/span>
+  &lt;/li>
+  &lt;li>
+       &lt;span>Two&lt;/span>
+  &lt;/li>
+  &lt;li>
+       &lt;span>Three&lt;/span>
+  &lt;/li>
+&lt;/ul>
+</pre>	
+				
+				Instead of calling ".repeating()" method you can call ".repeat(num)" if you know the number of times of repetition ahead of time. For eg.
+				<pre>&lt;span talesId="name">Test&lt;/span></pre>
+				and Fan:
+				<pre>tags := html.tag("name").repeat(10)
+tags.each|Tag tag, Int index|{
+	tag.text("$index")
+}
+</pre>
+        will result in html
+				<pre>&lt;span>1&lt;/span>&lt;span>2&lt;/span>&lt;span>3&lt;/span></pre>
+        </div>
+        <div class="title-text">
+          Panels and Layouts
+        </div>
+        <div class="text-text">
+            There is no separate concept of panels and layouts but you can arbitrarily nest tags with file names for eg., Consider this panel
+<pre>&lt;div>Hello, I am a panel&lt;/div></pre>
+        </div>
+        <div class="text-text">
+            and another page
+<pre>&lt;div> I am a parent panel <strong>&lt;div talesId="child">&lt;/div></strong>&lt;/div></pre>
+        </div>
+        <div class="text-text">
+            You can include the panel in page like this
+<pre>page := Html("template/page.html")
+panel := Html("template/panel.html")
+<strong>page.tag("child", panel)</strong>
+response.writeTag(page)</pre> 
+        </div>
+        
+				
+
+
+
+        <div class="title-text">
+          Apply method and "Cut and Send"
+        </div>
+				<div class="text-text">
+						On any Html tag you can call the apply method to get the html <br/>
+						for eg., Html:
+						<pre>&lt;span talesId="name">&lt;/span></pre>
+						and fan:
+						<pre>html := Html("template/page.html")	
+html.tag("name").text("Jhon")
+Str result := html.apply
+echo(result)
+</pre>
+					 	will print <strong>&lt;span >Jhon&lt;/span></strong> to the output.
+						
+				</div>
+        <div class="text-text">
+					You can only ask for portions of html instead of complete html. For eg.<br/>
+					Html:
+					<pre>&lt;span>Title&lt;/span>
+Some other html
+&lt;span talesId="age">&lt;/span>						
+</pre>
+					and fan
+					<pre>ageTag := Html("template/page.html").cutAt("age")
+ageTag.text("20")
+result := ageTag.apply
+echo(result)
+</pre>
+			will print <strong>&lt;span >20&lt;/span></strong> to the output (only html corresponding to tag with talesId="age"). 
+        </div>
+        
+     </div>

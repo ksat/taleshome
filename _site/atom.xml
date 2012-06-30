@@ -1,0 +1,2767 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+ 
+ <title>Kaushik Sathupadi</title>
+ <link href="http://ksat.me/atom.xml" rel="self"/>
+ <link href="http://ksat.me/"/>
+ <updated>2012-06-30T17:09:37+05:30</updated>
+ <id>http://ksat.me/</id>
+ <author>
+   <name>Kaushik Sathupadi</name>
+   <email>kaushik.sathupadi@gmail.com</email>
+ </author>
+
+ 
+ <entry>
+   <title>Install Tales</title>
+   <link href="http://ksat.me/your-first-app"/>
+   <updated>2012-06-24T00:00:00+05:30</updated>
+   <id>http://ksat.me/your-first-app</id>
+   <content type="html">&lt;head&gt;
+  &lt;title&gt;Make your first quick tales app&lt;/title&gt;
+  &lt;style type=&quot;text/css&quot; media=&quot;screen&quot;&gt;
+    div.download {
+      background: url('/res/images/download.png') no-repeat;
+    }
+    div.div-img {
+      margin-left: 4px;
+      font-size: 13px;
+      padding-left: 40px;
+    }
+    
+    a.download {
+      text-decoration: underline;
+      color: #444;
+    }
+    a.download:hover {
+      color: black;
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div style=&quot;padding:10px&quot;&gt;  
+  In this example we will build a simple Hello world page:
+  
+  
+   &lt;br/&gt;&lt;br/&gt;
+  &lt;div&gt;
+  Before you begin, make sure you have &lt;a href=&quot;/install-tales&quot;&gt;tales installed&lt;/a&gt;.
+  &lt;/div&gt;
+  &lt;div class=&quot;text-title&quot;&gt;
+    Step 1: Create the app and run
+  &lt;/div&gt;
+  &lt;div class=&quot;text-text&quot;&gt;
+      Open terminal. Go to the directory where you want to create the app. And type   
+      &lt;pre&gt;&amp;gt;fan tales new hello&lt;/pre&gt;
+      You should now see a hello folder created in the current directory
+      &lt;div&gt;
+      cd to that directory using 
+      &lt;/div&gt;
+      &lt;pre&gt;&amp;gt;cd hello&lt;/pre&gt;
+      &lt;div&gt;Now run the server using&lt;/div&gt;
+      &lt;pre&gt;&amp;gt;fan tales run&lt;/pre&gt;
+      &lt;div&gt;Open your browser and point to http://localhost:8000.You should see the &quot;Welcome to Tales&quot; message. Its that easy to get started&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;text-title&quot;&gt;
+      Step 2: Print Hello world
+  &lt;/div&gt;
+  &lt;div class=&quot;text-text&quot; &gt;
+     Open fan/Index.fan and edit it as follows:
+			&lt;br/&gt;&lt;br/&gt;
+     &lt;strong style=&quot;color:#666&quot;&gt;fan/Index.fan&lt;/strong&gt;
+     &lt;pre&gt;
+using tales
+class Index : Page{
+  &lt;strong&gt;@Route{uri = &quot;/&quot;}&lt;/strong&gt;
+  &lt;strong&gt;Void main(){&lt;/strong&gt;
+    &lt;strong&gt;response.writeStr(&quot;Hello world&quot;)&lt;/strong&gt;
+  &lt;strong&gt;}&lt;/strong&gt;
+}
+&lt;/pre&gt;
+    Now refresh your page in browser. You should see a hello world message
+  &lt;/div&gt;  
+  
+  &lt;div class=&quot;text-title&quot;&gt;
+      Step 3: Print Hello world using a Template
+  &lt;/div&gt;
+  &lt;div class=&quot;text-text&quot; &gt;
+    Open template/Index.html, remove everything and change code to the following: &lt;br/&gt;
+    &lt;br/&gt;
+    &lt;strong style=&quot;color:#666&quot;&gt;template/Index.html&lt;/strong&gt;
+    &lt;pre&gt;
+Hello world, time is: &amp;lt;span &lt;strong&gt;talesId=&quot;time&quot;&lt;/strong&gt;&amp;gt;&amp;lt;/span&gt;&lt;/pre&gt;
+
+    The code is self explanatory. Just note how talesId is defined in one of the tags. It defines a &quot;slot&quot; for dynamic data to be populated
+  &lt;/div&gt;    
+    &lt;div class=&quot;text-text&quot; &gt;
+      Now Open Index.fan, remove everything and change code to the following: &lt;br/&gt;
+      &lt;br/&gt;
+      &lt;strong style=&quot;color:#666&quot;&gt;fan/Index.fan&lt;/strong&gt;
+    &lt;pre&gt;
+using tales
+class Index : Page{
+  &lt;strong&gt;@Route{uri = &quot;/&quot;}&lt;/strong&gt;
+  &lt;strong&gt;Void main(){&lt;/strong&gt;
+      &lt;strong&gt;html := Html(&quot;template/Index.html&quot;)&lt;/strong&gt;
+      &lt;strong&gt;html.tag(&quot;time&quot;).text(DateTime.now.toLocale(&quot;hh:mm:ss aa&quot;))&lt;/strong&gt;
+      &lt;strong&gt;response.writeTag(html)&lt;/strong&gt;
+  &lt;strong&gt;}&lt;/strong&gt;
+}
+&lt;/pre&gt;
+		  
+		   This time instead of writing a string we write a Tag. Note:
+				&lt;ol&gt;
+						&lt;li&gt;The html tag is create with a file, pointing to Index.html&lt;/li&gt;
+						&lt;li&gt;In the slot (with talesid) &quot;time&quot;, we add text with current date&lt;/li&gt;
+  			&lt;/ol&gt;
+    &lt;/div&gt;
+  
+
+&lt;/div&gt;
+&lt;/body&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>What is fanquery</title>
+   <link href="http://ksat.me/what-is-fanquery"/>
+   <updated>2012-06-24T00:00:00+05:30</updated>
+   <id>http://ksat.me/what-is-fanquery</id>
+   <content type="html">&lt;div style=&quot;padding:10px&quot;&gt;
+	&lt;div class=&quot;text-title&quot; style=&quot;margin-top:5px&quot;&gt;
+		What is Fanquery?
+	&lt;/div&gt;
+	&lt;div class=&quot;text-text&quot;&gt;
+		Fantom is awesome. One of the awesomeness is the fact that it compiles to Javascript.  
+		Jquery is amazing too. Fanquery lets you use jquery and all it's plugins right inside fantom.
+
+	&lt;/div&gt;
+	&lt;div class=&quot;text-text&quot;&gt;
+		The goal is to match Jquery's syntax as much as possible, 
+		yet provide type safety and a sprinkle of what makes Fantom beautiful. A few examples..&lt;br/&gt;
+&lt;pre text-align=&quot;left&quot;&gt;Jq(&quot;#button&quot;).slideUp.slideDown([&quot;duration&quot;:Jq.slow])
+	
+Jq(&quot;#link&quot;).click|cur, event|{
+  Win.cur.alert(&quot;Ouch!&quot;)
+}	
+
+Jq(&quot;#myphoto&quot;).fancybox&lt;/pre&gt; 
+
+
+	&lt;/div&gt;
+	&lt;div class=&quot;text-text&quot;&gt;
+	Impatient to see how it works? &lt;a href=&quot;http://www.fanzy.net/fanquery&quot; target=&quot;_blank&quot;&gt;Try Fanquery online now&lt;/a&gt;
+	or &lt;a href=&quot;/start-using-fanquery&quot;&gt;Download and start using Fanquery&lt;/a&gt;
+	&lt;/div&gt;
+
+	&lt;div class=&quot;text-title&quot;&gt;
+	Develop, port and use Jquery plugins
+	&lt;/div&gt;
+	&lt;div class=&quot;text-text&quot;&gt;
+	Fanquery provides an easy way to develop your own plugin either from scratch totally in Fantom 
+	or just port an existing jquery plugin and wrap it up with a nice Fantom API.
+	&lt;/div&gt;
+	&lt;div class=&quot;text-text&quot;&gt;
+	Read on to see &lt;a href=&quot;/using-a-fanquery-plugin&quot;&gt;How to use an existing fanquery plugin&lt;/a&gt;
+	or &lt;a href=&quot;/develop-fanquery-plugin&quot;&gt;Develop your own plugin&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/div&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Websockets in Tales</title>
+   <link href="http://ksat.me/websockets"/>
+   <updated>2012-06-24T00:00:00+05:30</updated>
+   <id>http://ksat.me/websockets</id>
+   <content type="html">&lt;div style=&quot;padding:10px&quot;&gt;  
+  &lt;div class=&quot;text-title&quot;&gt;
+    Websockets - Demo
+  &lt;/div&gt;
+  &lt;div class=&quot;text-text&quot;&gt;
+    This page uses websockets! Try this. Open command prompt and copy paste this command: 
+&lt;pre talesId=&quot;command&quot;&gt;curl http://www.talesframework.org/Holy%20Cow/2339299292&lt;/pre&gt;
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;text-title&quot;&gt;
+      Listening for Websocket connections
+  &lt;/div&gt;
+  &lt;div class=&quot;text-text&quot;&gt;
+      You can listen to websocket connections just by routing to it a method with that uri.  For eg., consider this code
+      &lt;pre&gt;class Index : Page{
+  &lt;strong&gt;@Route{uri = &quot;/ws/}&quot;}&lt;/strong&gt;
+  &lt;strong&gt;Void ws(WebSocket websocket){&lt;/strong&gt;
+    &lt;strong&gt;websocket.onMessage|TextMessage msg|{&lt;/strong&gt;
+         &lt;strong&gt;echo(&quot;Received msg: ${msg.text} &quot;)&lt;/strong&gt;
+     &lt;strong&gt;}&lt;/strong&gt;
+  &lt;strong&gt;}&lt;/strong&gt;
+}&lt;/pre&gt;
+     You can route to websocket urls just like you route to regular urls. A websocket method has a additional param of type &quot;tales::WebSocket&quot;. You can have additional path parameterusing regular &quot;{arg}&quot; syntax like below
+    &lt;pre&gt;&lt;strong&gt;@Route{uri = &quot;/ws/{param}}&quot;}&lt;/strong&gt;
+&lt;strong&gt;Void ws(WebSocket websocket, Str param){..}&lt;/strong&gt;&lt;/pre&gt;
+  
+  &lt;/div&gt;  
+  &lt;div class=&quot;text-title&quot;&gt;
+      Websocket client
+  &lt;/div&gt;
+  &lt;div class=&quot;text-text&quot;&gt;
+      You can write websocket client in Javscript or Fantom(which is compiled to javascript). 
+      &lt;ol&gt;
+          &lt;li&gt;
+            &lt;strong&gt;Example Websocket client in Javascript&lt;/strong&gt;
+            &lt;pre&gt;var socket = new WebSocket(&quot;ws://localhost:8000/ws/&quot;); 
+socket.onopen = function(){
+  socket.send(&quot;Hello&quot;);
+}
+socket.onmessage = function(msg){  
+    alert(msg.data);  
+}&lt;/pre&gt;
+          &lt;/li&gt;
+          &lt;li&gt;
+              &lt;strong&gt;Example Websocket client in Fantom&lt;/strong&gt;
+              &lt;pre&gt;w := WebSocket(&quot;ws://localhost:8000/ws/&quot;) 
+w.onMessage|TextMessage t|{
+  Win.cur.alert(&quot;Got Message from server:&quot; + t.text)
+}
+&lt;/pre&gt;
+          &lt;/li&gt;
+      &lt;/ol&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;text-title&quot;&gt;
+      Attaching websockets to Channels
+  &lt;/div&gt;
+  &lt;div class=&quot;text-text&quot;&gt;
+     A lot of times on the server side, you will usually want to group websockets into channels to get hold of them later. Tales provides convenient methods for grouping websockets
+     &lt;ol&gt;
+        &lt;li&gt;You can attach a websocket to a channel like this
+      &lt;pre&gt;class Index : Page{
+  @Route{uri = &quot;/chat/{roomName}}&quot;}
+  Void chatRoom(WebSocket websocket, Str roomName){
+    websocket.onMessage|TextMessage msg|{
+         echo(&quot;Received msg: ${msg.text} &quot;)
+    }
+    &lt;strong&gt;websocket.attachTo(roomName)&lt;/strong&gt;
+  }
+}&lt;/pre&gt; 
+        &lt;/li&gt;
+        &lt;li&gt; Later you can get hold of all the open Websockets in a channel using the &quot;eachInChannel&quot; method. 
+          &lt;pre&gt;WebSocket.eachInChannel(&quot;Hacker-anonymous&quot;)|WebSocket websocket|{
+  websocket.send(TextMessage(&quot;Yo! dudes&quot;))
+}&lt;/pre&gt;
+        &lt;/li&gt;
+     &lt;/ol&gt;
+  &lt;/div&gt;
+	
+  &lt;div class=&quot;text-title&quot;&gt;
+      Storing information on websocket
+  &lt;/div&gt;
+	
+	&lt;div class=&quot;text-text&quot;&gt;
+			You can use the stash method to store information per websocket. E.g.,
+			&lt;pre&gt;websocket.stash[&quot;name&quot;] = &quot;Jhon Peter&quot;&lt;/pre&gt;
+	&lt;/div&gt;
+&lt;/div&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Using a fanquery plugin</title>
+   <link href="http://ksat.me/using-a-fanquery-plugin"/>
+   <updated>2012-06-24T00:00:00+05:30</updated>
+   <id>http://ksat.me/using-a-fanquery-plugin</id>
+   <content type="html">&lt;div style=&quot;padding:10px&quot;&gt;
+  &lt;div class=&quot;text-title&quot; style=&quot;margin-top:5px&quot;&gt;
+    Using a fanquery plugin
+  &lt;/div&gt;
+	&lt;div class=&quot;text-text&quot;&gt;
+			Make sure you have gone through &lt;a href=&quot;/start-using-fanquery&quot;&gt;this example&lt;/a&gt; on how to use fanquery. This page builds on that.
+	&lt;/div&gt;
+	&lt;div class=&quot;text-text&quot;&gt;
+    Note: There are no plugins as of now except the two plugins created for experimentation.
+    I will add more. If you want to help me &lt;a href=&quot;/develop-fanquery-plugin&quot;&gt;Here's how you write a plugin&lt;/a&gt;(it's really really simple)
+  &lt;br/&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;text-text&quot;&gt;
+    Anyhow, this is how you use a plugin (for eg., 'fancybox'): &lt;br/&gt;
+  &lt;/div&gt;
+	&lt;div class=&quot;text-text&quot;&gt;
+		1) Install fancybox like this &lt;pre&gt;fanr install -r http://repo.talesframework.org:9000 fancybox&lt;/pre&gt;
+	&lt;/div&gt;
+	
+  &lt;div class=&quot;text-text&quot;&gt;
+    Note: Tales has an optimization mechanism to include only plugins required per page to be delivered with the page.
+    Hence you need to tell tales per page on what plugins it uses. 
+    &lt;br/&gt;
+    For eg., &lt;a href=&quot;/example/fanqueryplugin&quot;&gt;This example&lt;/a&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;text-text&quot;&gt;
+      2) Open fan/Jq.fan and make Jq class extend the plugin class. For eg., to include the Fancybox plugin, modify the Jq class as below
+&lt;pre&gt;using fanquery
+using fancybox
+
+@Js
+&lt;strong&gt;class Jq : JqBase, FancyBox{&lt;/strong&gt;
+  new make(Obj? selector, JqBase? context := null)
+      : super(selector, context){}
+}
+&lt;/pre&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;text-text&quot;&gt;
+    3) Now open IndexJs.fan and add the @Include facet to declare what plugins you use. (This is necessary because otherwise tales will have to include scripts for all plugins in every page)
+  &lt;pre&gt;
+using fanquery
+
+  &lt;strong&gt;@Js&lt;/strong&gt;
+  &lt;strong&gt;@Include{ plugins =[&lt;/strong&gt;
+        &lt;strong&gt;Plugin{name=&quot;fancybox&quot;; conf=[&quot;easing&quot;:true]}&lt;/strong&gt;
+     &lt;strong&gt;]&lt;/strong&gt;
+  &lt;strong&gt;}&lt;/strong&gt;
+  class IndexJs{
+    ...
+  }&lt;/pre&gt;
+  &lt;/div&gt;
+	&lt;div class=&quot;text-text&quot;&gt;
+		Take a look at @Include facet. You define the name of the pod that defines the plugin and some conf. you can omit &quot;conf&quot; if it's not required by plugin. Based on the &quot;conf&quot; parameter the plugin can load additional scripts.
+	&lt;/div&gt;
+	
+	&lt;div class=&quot;text-text&quot;&gt;
+    4) The Jq class inherits all methods from extended plugins. For eg., if you just extended, 
+    fancybox mixin you can do :
+
+    &lt;pre&gt;Jq(&quot;link&quot;).fancybox&lt;/pre&gt;
+  &lt;/div&gt;
+	
+  &lt;div class=&quot;text-text&quot;&gt;
+  	Done.
+  &lt;/div&gt;  
+&lt;/div&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Editing your app in Texteditors like textmate</title>
+   <link href="http://ksat.me/textmate"/>
+   <updated>2012-06-24T00:00:00+05:30</updated>
+   <id>http://ksat.me/textmate</id>
+   <content type="html">&lt;div style=&quot;padding:10px&quot;&gt;  
+  &lt;div class=&quot;text-title&quot;&gt;
+    Setting up netbeans IDE
+  &lt;/div&gt;
+ 	&lt;div class=&quot;text-text&quot;&gt;
+    Create a new tales project using &quot;fan tales new&quot; command
+&lt;pre&gt;fan tales new newapp&lt;/pre&gt;
+  &lt;/div&gt;
+	&lt;div class=&quot;text-text&quot;&gt;
+			An app directory newapp/ is created for you
+	&lt;/div&gt;
+	&lt;div class=&quot;text-text&quot;&gt;
+			&lt;ol style=&quot;list-style:block;&quot;&gt;
+				&lt;li&gt;Open the directory in textmate using &lt;pre&gt;mate .&lt;/pre&gt;
+					&lt;div&gt;
+						&lt;img src=&quot;/images/textmate.png&quot; width=&quot;400px;&quot;/&gt;
+					&lt;/div&gt;
+				&lt;/li&gt;
+				
+				&lt;li&gt;
+						Edit files like usual. If there are any compiler errors, they are shown directly in the browser
+						&lt;div&gt;
+							&lt;img src=&quot;/images/compilererr.png&quot; width=&quot;400px;&quot;/&gt;
+						&lt;/div&gt;
+				&lt;/li&gt;
+			&lt;/ol&gt;
+	&lt;/div&gt;
+&lt;/div&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Templating</title>
+   <link href="http://ksat.me/templating"/>
+   <updated>2012-06-24T00:00:00+05:30</updated>
+   <id>http://ksat.me/templating</id>
+   <content type="html">     &lt;div style=&quot;padding:25px;&quot;&gt;
+        Templating is way to generate dynamic pages. In tales Html stays html and you use a jquery like api to put dynamic data into it
+
+        &lt;div class=&quot;text-title&quot;&gt;
+            Html templating
+        &lt;/div&gt;
+        &lt;div class=&quot;text-text&quot;&gt;
+          A html page that is displayed will at minimum have two file associate with it
+          &lt;ul&gt;
+            &lt;li&gt;a html template file&lt;/li&gt;
+            &lt;li&gt;a fantom file that &quot;puts&quot; dynamic data into it &lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;text-text&quot;&gt;
+          Let's start with an example, create a new tales app. The home page that you see is generated using
+          &lt;ul&gt;
+            &lt;li&gt;template/Index.html&lt;/li&gt;
+            &lt;li&gt;fan/Index.fan&lt;/li&gt;
+          &lt;/ul&gt;
+          Delete everything in Index.html and replace it with: 
+          &lt;pre&gt;&amp;lt;div talesId=&quot;name&quot;&gt;Test&amp;lt;/div&gt; &lt;/pre&gt;
+          Open Index.fan and add this code in main() method: 
+          &lt;pre&gt;html := Html(&quot;template/Index.html&quot;)
+&lt;strong&gt;html.tag(&quot;text&quot;).text(&quot;Jhon&quot;)&lt;/strong&gt;
+response.writeTag(html)
+&lt;/pre&gt;
+          Refresh the browser. The generated html will look like this
+          &lt;pre&gt;&amp;lt;div&gt;Jhon&amp;lt;/div&gt;&lt;/pre&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&quot;text-text&quot;&gt;
+          &lt;strong style=&quot;#666&quot;&gt;Things to note:&lt;/strong&gt;
+          &lt;ol&gt;
+            &lt;li&gt;The only div in html, had a talesId = &quot;name&quot;&lt;/li&gt;
+            &lt;li&gt;The general syntax of markup in fan is
+              &lt;pre&gt;html.tag(&quot;talesid&quot;).text(str)&lt;/pre&gt;
+            &lt;/li&gt;
+            &lt;li&gt;
+            The output strips off the talesId but replaces the text of the tag with whatever you supplied in the fantom markup 
+            &lt;/li&gt;
+          &lt;/ol&gt;
+        &lt;/div&gt;
+
+
+        &lt;div class=&quot;text-text&quot;&gt;
+          &lt;strong style=&quot;#666&quot;&gt;Let's look at a deeper example&lt;/strong&gt;
+          &lt;div&gt;
+            Imagine you wanted to display a text that greets the user. You could write something like
+            &lt;pre&gt;username := &quot;Kaushik&quot;
+html.tag(&quot;talesid&quot;).text(&quot;Hello, welcome &amp;lt;b&gt;$username&amp;lt;/b&gt;&quot;)&lt;/pre&gt;
+
+            A better way to do it would be to move all markups to html. You can write something like this: 
+            &lt;pre&gt;&amp;lt;div&gt;Hello, welcome &amp;lt;b talesId=&quot;name&quot;&gt;Something&amp;lt;/b&gt;&amp;lt;/div&gt;&lt;/pre&gt;              
+            and in markup
+            &lt;pre&gt;username := &quot;kaushik&quot;
+html.tag(&quot;name&quot;).text(username)
+&lt;/pre&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&quot;text-title&quot;&gt;
+            Changing other attributes
+        &lt;/div&gt;
+        &lt;div class=&quot;text-text&quot; &gt;
+          You can manipulate other attributes using the &quot;.attr()&quot; method
+        &lt;/div&gt;
+        &lt;div class=&quot;text-text&quot; &gt;
+          html:
+          &lt;pre&gt;&amp;lt;div talesId=&quot;name&quot;&gt;Something&amp;lt;/div&gt;&lt;/pre&gt;
+          fan:
+          &lt;pre&gt;html.tag(&quot;name&quot;).text(&quot;Kaushik&quot;).attr(&quot;style&quot;, &quot;color:red&quot;)&lt;/pre&gt;
+        will result in html 
+        &lt;pre&gt;&amp;lt;div style=&quot;color:red&quot;&gt;Kaushik&amp;lt;/div&gt; &lt;/pre&gt;            
+        &lt;/div&gt;
+          &lt;div class=&quot;text-text&quot;&gt;
+            &lt;strong&gt;Another example: &lt;/strong&gt;
+            &lt;br/&gt;
+            Html:
+            &lt;pre&gt;&amp;lt;a href=&quot;#&quot; talesId=&quot;myLink&quot;&gt;Click here&amp;lt;/a&gt;&lt;/pre&gt;
+
+            Fan:
+            &lt;pre&gt;html.tag(&quot;myLink&quot;).attr(&quot;href&quot;,&quot;/user/id/1&quot;)&lt;/pre&gt; 
+            Will result in:
+            &lt;pre&gt;&amp;lt;a href=&quot;/user/id/1&quot;&gt;Click here&amp;lt;a&gt;&lt;/pre&gt;           
+          &lt;/div&gt;
+        
+        
+        &lt;div class=&quot;text-title&quot;&gt;
+            Adding and removing classes and styles
+        &lt;/div&gt;
+        &lt;div class=&quot;text-text&quot;&gt;
+            The &quot;Tag&quot; class provides convenient shortcuts for adding and removing classes &lt;br/&gt;
+        html:
+          &lt;pre&gt;&amp;lt;div talesId=&quot;name&quot;&gt;Something&amp;lt;/div&gt;&lt;/pre&gt;
+        fan:
+        &lt;pre&gt;html.tag(&quot;name&quot;).addClass(&quot;active&quot;).addCss(&quot;color&quot;, &quot;red&quot;)&lt;/pre&gt;
+        will result in html:
+        &lt;pre&gt;&amp;lt;div style=&quot;color:red&quot; class=&quot;active&quot;&gt;Kaushik&amp;lt;/div&gt; &lt;/pre&gt; 
+        &lt;/div&gt;
+      
+
+      
+
+        &lt;div class=&quot;title-text&quot;&gt;
+          Nested and duplicate markups
+        &lt;/div&gt;
+        &lt;div class=&quot;text-text&quot;&gt;
+          talesids need not be unique.
+          &lt;br/&gt;
+          Html:
+          &lt;pre&gt;&amp;lt;div talesId = &quot;name&quot; style=&quot;color:red&quot;&gt;&amp;lt;/div&gt;
+&amp;lt;div talesId = &quot;name&quot; style=&quot;color:blue&quot;&gt;&amp;lt;/div&gt;
+&lt;/pre&gt;
+          Fan:
+          &lt;pre&gt;html.tag(&quot;name&quot;).text(&quot;Jhon&quot;)&lt;/pre&gt;
+          Will result in html:
+          &lt;pre&gt;&amp;lt;div talesId = &quot;name&quot; style=&quot;color:red&quot;&gt;Jhon&amp;lt;/div&gt;
+&amp;lt;div talesId = &quot;name&quot; style=&quot;color:blue&quot;&gt;Jhon&amp;lt;/div&gt;
+&lt;/pre&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;text-text&quot;&gt;
+          talesIds can be nested. For eg. 
+          &lt;pre&gt;
+&amp;lt;div talesId=&quot;two&quot;&gt;&amp;lt;/div&gt;
+&amp;lt;div talesId = &quot;one&quot;&gt; 
+  &amp;lt;div talesId = &quot;two&quot; &gt;&amp;lt;/div&gt;
+&amp;lt;/div&gt;&lt;/pre&gt;
+          A fantom code like this
+          &lt;pre&gt;html.tag(&quot;two&quot;).text(&quot;Hello&quot;)&lt;/pre&gt;
+          Will affect nested and non-nested tags like this
+          &lt;pre&gt;
+&amp;lt;div&gt;Hello&amp;lt;/div&gt;
+&amp;lt;div&gt; 
+  &amp;lt;div&gt;Hello&amp;lt;/div&gt;
+&amp;lt;/div&gt;&lt;/pre&gt;
+        However you can choose to affect only nested tags like this
+        &lt;pre&gt;oneTag := html.tag(&quot;one&quot;)
+oneTag.tag(&quot;two&quot;).text(&quot;Hello&quot;)&lt;/pre&gt;
+        The output will be
+        &lt;pre&gt;
+&amp;lt;div&gt;/div&gt;
+&amp;lt;div talesId = &quot;one&quot;&gt; 
+&amp;lt;div&gt;Hello&amp;lt;/div&gt;
+&amp;lt;/div&gt;&lt;/pre&gt;
+        &lt;/div&gt;
+        
+
+        &lt;div class=&quot;title-text&quot;&gt;
+          Repeaters
+        &lt;/div&gt;
+        &lt;div class=&quot;text-text&quot;&gt;
+          You might want to repeat a tag multiple times
+        &lt;/div&gt;
+        &lt;div class=&quot;text-text&quot;&gt;
+          Html:
+          &lt;pre&gt; &amp;lt;div talesId=&quot;numbers&quot;&gt;&amp;lt;/div&gt; 
+&lt;/pre&gt;          
+          Fan:
+          &lt;pre&gt;vals := [&quot;One&quot;, &quot;Two&quot;, &quot;Three&quot;]
+html.tag(&quot;numbers&quot;).repeating
+vals.each{
+  tag := html.tag(&quot;numbers&quot;).addRow
+  tag.text(&quot;$it&quot;)
+}&lt;/pre&gt;
+            gives an output:
+            &lt;pre&gt;&amp;lt;div&gt;One&amp;lt;/div&gt;
+&amp;lt;div&gt;Two&amp;lt;/div&gt;
+&amp;lt;div&gt;Three&amp;lt;/div&gt;
+&lt;/pre&gt;
+        Repeating-tags themselves can have nested talesIds:
+        &lt;pre&gt;&amp;lt;ul&gt;
+  &amp;lt;li talesId=&quot;number&quot;&gt;
+    &amp;lt;span talesId=&quot;val&quot;&gt;&amp;lt;/span&gt;
+  &amp;lt;/li&gt;
+&amp;lt;/ul&gt;
+&lt;/pre&gt;
+        Fan:
+        &lt;pre&gt;vals := [&quot;One&quot;, &quot;Two&quot;, &quot;Three&quot;]
+html.tag(&quot;numbers&quot;).repeating
+vals.each{
+  numberRow := html.tag(&quot;numbers&quot;).addRow
+  numberRow.tag(&quot;val&quot;).text(&quot;$it&quot;)
+}&lt;/pre&gt;
+        gives an output:
+        &lt;pre&gt;&amp;lt;ul&gt;
+  &amp;lt;li&gt;
+       &amp;lt;span&gt;One&amp;lt;/span&gt;
+  &amp;lt;/li&gt;
+  &amp;lt;li&gt;
+       &amp;lt;span&gt;Two&amp;lt;/span&gt;
+  &amp;lt;/li&gt;
+  &amp;lt;li&gt;
+       &amp;lt;span&gt;Three&amp;lt;/span&gt;
+  &amp;lt;/li&gt;
+&amp;lt;/ul&gt;
+&lt;/pre&gt;	
+				
+				Instead of calling &quot;.repeating()&quot; method you can call &quot;.repeat(num)&quot; if you know the number of times of repetition ahead of time. For eg.
+				&lt;pre&gt;&amp;lt;span talesId=&quot;name&quot;&gt;Test&amp;lt;/span&gt;&lt;/pre&gt;
+				and Fan:
+				&lt;pre&gt;tags := html.tag(&quot;name&quot;).repeat(10)
+tags.each|Tag tag, Int index|{
+	tag.text(&quot;$index&quot;)
+}
+&lt;/pre&gt;
+        will result in html
+				&lt;pre&gt;&amp;lt;span&gt;1&amp;lt;/span&gt;&amp;lt;span&gt;2&amp;lt;/span&gt;&amp;lt;span&gt;3&amp;lt;/span&gt;&lt;/pre&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;title-text&quot;&gt;
+          Panels and Layouts
+        &lt;/div&gt;
+        &lt;div class=&quot;text-text&quot;&gt;
+            There is no separate concept of panels and layouts but you can arbitrarily nest tags with file names for eg., Consider this panel
+&lt;pre&gt;&amp;lt;div&gt;Hello, I am a panel&amp;lt;/div&gt;&lt;/pre&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;text-text&quot;&gt;
+            and another page
+&lt;pre&gt;&amp;lt;div&gt; I am a parent panel &lt;strong&gt;&amp;lt;div talesId=&quot;child&quot;&gt;&amp;lt;/div&gt;&lt;/strong&gt;&amp;lt;/div&gt;&lt;/pre&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;text-text&quot;&gt;
+            You can include the panel in page like this
+&lt;pre&gt;page := Html(&quot;template/page.html&quot;)
+panel := Html(&quot;template/panel.html&quot;)
+&lt;strong&gt;page.tag(&quot;child&quot;, panel)&lt;/strong&gt;
+response.writeTag(page)&lt;/pre&gt; 
+        &lt;/div&gt;
+        
+				
+
+
+
+        &lt;div class=&quot;title-text&quot;&gt;
+          Apply method and &quot;Cut and Send&quot;
+        &lt;/div&gt;
+				&lt;div class=&quot;text-text&quot;&gt;
+						On any Html tag you can call the apply method to get the html &lt;br/&gt;
+						for eg., Html:
+						&lt;pre&gt;&amp;lt;span talesId=&quot;name&quot;&gt;&amp;lt;/span&gt;&lt;/pre&gt;
+						and fan:
+						&lt;pre&gt;html := Html(&quot;template/page.html&quot;)	
+html.tag(&quot;name&quot;).text(&quot;Jhon&quot;)
+Str result := html.apply
+echo(result)
+&lt;/pre&gt;
+					 	will print &lt;strong&gt;&amp;lt;span &gt;Jhon&amp;lt;/span&gt;&lt;/strong&gt; to the output.
+						
+				&lt;/div&gt;
+        &lt;div class=&quot;text-text&quot;&gt;
+					You can only ask for portions of html instead of complete html. For eg.&lt;br/&gt;
+					Html:
+					&lt;pre&gt;&amp;lt;span&gt;Title&amp;lt;/span&gt;
+Some other html
+&amp;lt;span talesId=&quot;age&quot;&gt;&amp;lt;/span&gt;						
+&lt;/pre&gt;
+					and fan
+					&lt;pre&gt;ageTag := Html(&quot;template/page.html&quot;).cutAt(&quot;age&quot;)
+ageTag.text(&quot;20&quot;)
+result := ageTag.apply
+echo(result)
+&lt;/pre&gt;
+			will print &lt;strong&gt;&amp;lt;span &gt;20&amp;lt;/span&gt;&lt;/strong&gt; to the output (only html corresponding to tag with talesId=&quot;age&quot;). 
+        &lt;/div&gt;
+        
+     &lt;/div&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Streaming content</title>
+   <link href="http://ksat.me/streaming"/>
+   <updated>2012-06-24T00:00:00+05:30</updated>
+   <id>http://ksat.me/streaming</id>
+   <content type="html">&lt;div style=&quot;padding:10px&quot;&gt;  
+  &lt;div class=&quot;text-title&quot;&gt;
+    Async methods
+  &lt;/div&gt;
+
+  &lt;div class=&quot;text-text&quot;&gt;
+    Usually tales ends the request when your handler method returns.
+    but Anotate the method with @Async facet and tales will not close it when the method completes. You should complete the the request yourself by calling the response.proceed method
+  &lt;/div&gt;
+  &lt;div class=&quot;text-text&quot;&gt;
+    &lt;pre&gt;@Async
+@Route{uri = &quot;/aysnc&quot;}
+Void aysnc(){
+  response.writeStr(&quot;Test&quot;)
+  response.proceed
+}&lt;/pre&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;text-text&quot;&gt;
+     Note that it's totally up to you to when to call the proceed method. If you never call it the request will never close. The proceed method takes an optional Err? parameter(on dev mode this will be used to pretty print the error on screen, on production mode this will lead to the display of custom error page)
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;text-title&quot;&gt;
+    Streaming data 
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;text-text&quot;&gt;
+    You can club async methods with response.stream to stream long responses a little at a time. Whatever is passed to stream is directly written to client. 
+    
+    &lt;pre&gt;using tales
+using concurrent
+
+class Index : Page{
+    @Async
+    @Route{uri = &quot;/async&quot;}
+    Void write100Lines(){
+        (Write100Lines(ActorPool())).send(Unsafe(response))
+    }
+}
+
+const class Write100Lines : Actor{
+    new make(ActorPool pool):super(pool){}
+
+    override Obj? receive(Obj? msg){
+        Response response := ((Unsafe)msg).val
+        (1..10).each{
+            response.writeStr(&quot;test&quot;)
+            Actor.sleep(1sec)
+        }
+        response.proceed
+
+        return null
+    }
+}&lt;/pre&gt;
+  &lt;/div&gt;
+  
+&lt;/div&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Start using fanquery</title>
+   <link href="http://ksat.me/start-using-fanquery"/>
+   <updated>2012-06-24T00:00:00+05:30</updated>
+   <id>http://ksat.me/start-using-fanquery</id>
+   <content type="html">&lt;div style=&quot;padding:10px&quot;&gt;
+  &lt;div class=&quot;text-title&quot; style=&quot;margin-top:5px&quot;&gt;
+              Using fanquery with tales:
+  &lt;/div&gt;
+  &lt;div class=&quot;text-text&quot;&gt;
+    Though fanquery was initially developed as a project separate from tales, tales provides some really handy tools like auto-reloading which is essential for working with javascript. So even if you are using fanquery outside of tales, just develop it using tales and then copy the scripts to your other environment.
+  &lt;/div&gt;
+  &lt;div class=&quot;text-text&quot;&gt;
+    Create a new app. &lt;pre&gt;fan tales new fanquerytest&lt;/pre&gt; cd to the &quot;fanquerytest&quot; and start the server using &lt;pre&gt;fan tales run&lt;/pre&gt;
+    
+    create &lt;strong&gt;fan/IndexJs.fan&lt;/strong&gt;. And type the following code
+    &lt;pre&gt;using fanquery
+using tales
+
+@Js
+class IndexJs : PageJs{
+  override Void main(){
+    Jq.ready{
+      Win.cur.alert(&quot;hello&quot;)
+    }
+  }
+}&lt;/pre&gt;       
+  &lt;/div&gt;
+  &lt;div class=&quot;text-text&quot;&gt;
+    The code should be simple to follow through
+    &lt;ol&gt;
+      &lt;li&gt;We add the &lt;strong&gt;@Js facet&lt;/strong&gt; to the class that &lt;strong&gt;extends PageJs&lt;/strong&gt;&lt;/li&gt;
+      &lt;li&gt;main() is called as the page loads. Jq.ready{} is equivalent of $(document).ready{} jquery method&lt;/li&gt;
+      &lt;li&gt;when dom is ready we show an alert&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;text-text&quot;&gt;
+    Now we need to tell the index page to use the IndexJs script. Open Index.fan and add make the following changes(shown in bold):
+&lt;pre&gt;using tales
+class Index : Page{
+  @Route{uri = &quot;/&quot;}
+  Void main(){
+    html := Html(&quot;template/Index.html&quot;)
+    html.tag(&quot;dynamic&quot;).text(&quot;Tales&quot;)
+    &lt;strong&gt;html.jsMain(IndexJs#)&lt;/strong&gt;
+    response.writeTag(html)
+  }
+}&lt;/pre&gt;
+    The only important line is &lt;pre&gt;html.jsMain(IndexJs#)&lt;/pre&gt;. We indicate that the script in IndexJs has to be used for this html.
+Now modify IndexJs.fan to try out various Jquery methods.
+  &lt;/div&gt;
+
+  &lt;div class=&quot;text-text&quot;&gt;
+    Read this &lt;a href=&quot;/using-a-fanquery-plugin&quot;&gt;if want to use some plugin &lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;  
+&lt;/div&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>SqlMaps</title>
+   <link href="http://ksat.me/sql-maps"/>
+   <updated>2012-06-24T00:00:00+05:30</updated>
+   <id>http://ksat.me/sql-maps</id>
+   <content type="html">&lt;div style=&quot;padding:10px&quot;&gt;
+	&lt;div class=&quot;text-title&quot;&gt;
+		Using Sql maps	 
+	&lt;/div&gt;
+	&lt;div class=&quot;text-text&quot;&gt;
+		SqlMaps are the &quot;holy-grail&quot; of fanbatis. SqlMap lets you map query results to objects in the simples-possible way.
+	&lt;/div&gt;
+	&lt;div class=&quot;text-text&quot;&gt;
+		Before we start, let's modify the blog class a little bit
+	&lt;pre&gt;
+@Serializable
+class Blog {
+  Int? id
+  Str? subject
+  Str? detail
+}
+	&lt;/pre&gt;
+	&lt;/div&gt;
+
+	&lt;div class=&quot;text-text&quot;&gt;
+		Here are a few examples
+	&lt;/div&gt;
+
+	&lt;div class=&quot;text-text&quot;&gt;
+		Select one blog by id
+		&lt;pre&gt;
+class BlogSqlMap : SqlMap{
+  @Select
+  Blog getBlogById(Int id){
+    one(sql&lt;|
+         select * from blog where id = #{id}
+       |&gt;)
+  }
+}
+
+//Getting the blog
+BlogSqlMap blogMap := BlogSqlMap()
+blog := blogMap-&gt;getBlogByName(1)
+	&lt;/pre&gt;
+	&lt;/div&gt;
+
+	&lt;div class=&quot;text-text&quot;&gt;
+		Select just the blog's subject from id
+	&lt;pre&gt;
+@Select
+Str getBlogSubject(Int id){
+  one(sql&lt;|
+    select subject from blog where id = #{id}
+  |&gt;)
+}
+	&lt;/pre&gt;
+	&lt;/div&gt;
+
+	&lt;div class=&quot;text-text&quot;&gt;
+	  Select the list first 10 blogs by id
+	&lt;pre&gt;
+@Select
+Blog[] getFirstTenBlogs(){
+  list(sql&lt;|
+        select * from blog order by id limit 0 , 10
+    |&gt;)
+}
+	&lt;/pre&gt;
+	&lt;/div&gt;
+	&lt;div class=&quot;text-text&quot;&gt;
+	Insert a blog
+	&lt;pre&gt;
+@Insert
+Void insertBlog(Blog blog){
+  insert(sql&lt;|
+        insert into blog(subject, detail)
+        values(#{blog.subject}, #{blog.detail})
+       |&gt;)
+}
+	&lt;/pre&gt;
+	&lt;/div&gt;
+
+	&lt;div class=&quot;text-text&quot;&gt;
+	Update a blog
+	&lt;pre&gt;
+@Update
+Void updateBlogSubject(Blog blog){
+  update(sql&lt;|
+      update blog set subject = #{blog.subject} where id = #{blog.id}
+  |&gt;)
+}
+	&lt;/pre&gt;
+	&lt;/div&gt;
+
+	&lt;div class=&quot;text-text&quot;&gt;
+	Insert a blog while selecting primary key from a auto generated field
+	&lt;pre&gt;
+@Insert{useGeneratedKeys = true; keyProperty=&quot;blog.id&quot;}
+public Void insertBlog(Blog blog){
+  insert(sql&lt;|
+      insert into blog(subject, detail) 
+      values(#{blog.subject}, #{blog.detail})
+       |&gt;)
+}
+	&lt;/pre&gt;
+	&lt;/div&gt;
+
+	&lt;div class=&quot;text-text&quot;&gt;
+	Insert a blog while selecting key from a query
+	&lt;pre&gt;
+@Insert{useGeneratedKeys = true; keyProperty=&quot;blog.id&quot;}
+@SelectKey{keyProperty=&quot;blog.id&quot;; 
+           order=&quot;AFTER&quot;; 
+           query = &quot;SELECT IDENTITY()&quot;}
+public Void insertBlog	(Blog blog){
+  insert(sql&lt;|
+          insert into blog(subject, detail)
+          values(#{blog.subject}, #{blog.detail})
+        |&gt;)
+}
+	&lt;/pre&gt;
+	&lt;/div&gt;
+	&lt;div class=&quot;text-text&quot; style=&quot;display:none;&quot;&gt;
+	&lt;a href=&quot;SqlMaps.fan&quot;&gt;Download SqlMaps.fan&lt;/a&gt; having all this in one script
+	&lt;/div&gt;
+
+&lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Short hand queries</title>
+   <link href="http://ksat.me/short-hand-queries"/>
+   <updated>2012-06-24T00:00:00+05:30</updated>
+   <id>http://ksat.me/short-hand-queries</id>
+   <content type="html">&lt;div style=&quot;padding:10px&quot;&gt;
+	&lt;div class=&quot;text-title&quot;&gt;
+								Short hand queries (Using Entity Mixin)
+						&lt;/div&gt;
+						&lt;div class=&quot;text-text&quot;&gt;
+								The entity facet provides you a way to do short-hand queries 
+						&lt;/div&gt;
+						&lt;div class=&quot;text-text&quot;&gt;
+	  						Let's revisit the Blog class. Let's modify it and add the @Entity facet
+&lt;pre&gt;@Serializable
+@Entity
+class Blog {
+ @Primary
+ @Autogen
+ Int? id
+ Str? subject
+ Str? detail
+
+ @Column{name=&quot;author_id&quot;}
+ Int? authorId
+}&lt;/pre&gt;
+	  					&lt;/div&gt;
+	
+						
+	  					&lt;div class=&quot;text-text&quot; &gt;
+	  					 	The @Primary and @Autogen facet describes that the Id field is primary and has a auto generated value. You can also use the @Table and @Column annotation to specify alternate names used in the database.  
+	  					&lt;/div&gt;
+	  					&lt;div class=&quot;text-text&quot; style=&quot;font-weight:bold;&quot;&gt;
+	  					 	Here are a few examples of doing short-hand queries
+	  					&lt;/div&gt;
+	  					&lt;div class=&quot;text-text&quot;&gt;
+	  						Fetch one blog by id 
+&lt;pre&gt;
+Blog blog := Db.one(Blog{id = 1})&lt;/pre&gt;
+						&lt;/div&gt;
+
+						&lt;div class=&quot;text-text&quot;&gt;
+	  					 	Fetch all blogs
+&lt;pre&gt;
+Blog[] blogs := Db.list( Blog{})&lt;/pre&gt;
+						&lt;/div&gt;
+						&lt;div class=&quot;text-text&quot;&gt;
+	  					 	Fetch all blogs by subject
+&lt;pre&gt;
+Blog[] blogs := Db.list(Blog{subject=&quot;My First blog&quot;})&lt;/pre&gt;
+						&lt;/div&gt;
+
+						&lt;div class=&quot;text-text&quot;&gt;
+	  					 	Fetch one blog by name and authorId
+&lt;pre&gt;
+Blog blog := Db.one(Blog{name=&quot;My Blog&quot;; authorId = 1})&lt;/pre&gt;
+						&lt;/div&gt;
+						&lt;div class=&quot;text-text&quot;&gt;
+	  					 	Create a blog
+&lt;pre&gt;Blog blog := Db.create(Blog{subject = &quot;test&quot;; it.detail=&quot;test&quot;})
+echo(blog.id) 
+//Note: since id is annotated with autogen,
+// id will be auto populated&lt;/pre&gt;
+						&lt;/div&gt;
+						
+						&lt;div class=&quot;text-text&quot;&gt;
+	  					 	Fetching and updating a blog
+&lt;pre&gt;Blog blog := Db.one(Blog{id = 1})
+blog.authorId = 2
+Db.save(blog)&lt;/pre&gt;
+						&lt;/div&gt;
+
+						&lt;div class=&quot;text-text&quot;&gt;
+	  					 	Deleting a blog
+&lt;pre&gt;
+Blog blog := Blog{id = 1}.one
+Db.remove(blog)
+&lt;/pre&gt;
+						&lt;/div&gt;
+						&lt;div class=&quot;text-text&quot;&gt;
+	  					 	Fetching a list of blogs with custom where clause ordered by id
+&lt;pre&gt;Blog[] blogs := Db.list(Blog{},
+  Filter{ 
+	orderBy = &quot;id desc&quot;;
+	where=&quot;subject=#{param.name}&quot;; 
+	whereParams=[&quot;subject&quot;:&quot;My Blog&quot;] 
+  })&lt;/pre&gt;
+						&lt;/div&gt;
+
+						&lt;div class=&quot;text-text&quot; style=&quot;display:none&quot;&gt;
+	  					 	&lt;a href=&quot;ShortHand.fan&quot;&gt;Download ShortHand.fan&lt;/a&gt; having all this in one script
+	  					 &lt;/div&gt;
+							
+&lt;/div&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Session handling with tales</title>
+   <link href="http://ksat.me/sessions"/>
+   <updated>2012-06-24T00:00:00+05:30</updated>
+   <id>http://ksat.me/sessions</id>
+   <content type="html">&lt;div style=&quot;padding:10px;min-height:500px;&quot;&gt;  
+  &lt;div class=&quot;text-title&quot;&gt;
+    Session Handling
+  &lt;/div&gt;
+  &lt;div class=&quot;text-text&quot;&gt;
+     request.session() methods returns you a Session object. You can use Session.get or Session.set method to set or get get values to it
+  &lt;/div&gt;
+  &lt;div class=&quot;text-text&quot;&gt;
+     &lt;pre&gt;request.session[&quot;userId&quot;] = 23&lt;/pre&gt;
+    later..
+     &lt;pre&gt;response.writeStr(&quot;Your id is &quot; + request.session[&quot;userId&quot;])&lt;/pre&gt;
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;text-title&quot;&gt;
+    Sessions and Scaling
+  &lt;/div&gt;
+  &lt;div class=&quot;text-text&quot;&gt;
+     Session handling in tales works along with other types of Cache. Infact sessions are just a special type of cache. By default sessions are stored in memory - This means that with the default sessions setup you can't horizontally. That's perfectly fine for most.
+  &lt;/div&gt;
+  &lt;div class=&quot;text-text&quot;&gt;
+    However if you want you can store your session information in redis [coming soon]
+  &lt;/div&gt;
+&lt;/div&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Tales routing</title>
+   <link href="http://ksat.me/routing"/>
+   <updated>2012-06-24T00:00:00+05:30</updated>
+   <id>http://ksat.me/routing</id>
+   <content type="html">     &lt;div style=&quot;padding:25px;&quot;&gt;
+        &lt;div class=&quot;title-text&quot;&gt;
+          Routing in Tales
+        &lt;/div&gt;
+        &lt;div class=&quot;text-text&quot;&gt;
+          There are two approaches to define routes. You can define a route using the @Route facet right on a method or you can define your routes in the RouteDef.fan file. Each method has its own pros and cons. 
+        &lt;/div&gt;
+        &lt;div class=&quot;text-text&quot;&gt;
+          Let's start with a simple route. Create a new application. Open Index.fan and write the following code:
+          &lt;pre&gt;
+class Index : Page{
+  @Route{uri=&quot;/test&quot;}
+  Void main(){
+    response.writeStr(&quot;Hello dude&quot;)
+  }
+}&lt;/pre&gt;
+        Now open your browser and go to http://localhost:8000/test. You can see &quot;Hello dude&quot; printed on screen
+        &lt;/div&gt;
+        &lt;div class=&quot;title-text&quot;&gt;Get and Post Parameters&lt;/div&gt;
+        &lt;div class=&quot;text-text&quot;&gt;
+            The parameters are automatically mapped to method arguments for eg., this method:
+          &lt;pre&gt; @Route{uri=&quot;/test&quot;}
+Void main(Str name){
+  response.writeStr(&quot;Hello $name&quot;)
+}
+&lt;/pre&gt;  
+        and in your browser go to url &lt;strong&gt;http://localhost:8080/test?name=Kaushik&lt;/strong&gt;, You should see Hello Kaushik in the output. &lt;/pre&gt;
+         This is also true for post parametes. For eg., Try creating an html with a form posting to url &quot;/test&quot; and with a input text with name &quot;name&quot; like this
+&lt;pre&gt;&amp;lt;form action=&quot;/test&quot; method=&quot;post&quot;&gt;
+  &amp;lt;input type=&quot;text&quot; name=&quot;name&quot; /&gt;
+  &amp;lt;input type=&quot;submt&quot; /&gt;
+&amp;lt;/form&gt;
+&lt;/pre&gt;
+      The post parameters are mapped to correct variables too.
+        &lt;/div&gt;
+
+				&lt;div class=&quot;title-text&quot;&gt;Path parameters&lt;/div&gt;
+				&lt;div class=&quot;text-text&quot;&gt;
+					You can also define path parameters
+					&lt;pre&gt;@Route{uri=&quot;/test/{name}&quot;}
+Void main(Str name){
+}&lt;/pre&gt;
+				and this method will match a url like &lt;strong&gt;/test/Kaushik&lt;/strong&gt; and name will be mapped to &quot;Kaushik&quot;.
+				&lt;/div&gt;
+				&lt;div class=&quot;text-text&quot;&gt;
+					it is possible to define the types of the path variables. for eg., &lt;strong&gt;@Route{uri=&quot;/test/{name:$int}&quot;}&lt;/strong&gt; will only match /test/1 and not /test/abcd.
+				&lt;/div&gt;
+				&lt;div class=&quot;text-text&quot;&gt;
+					like wise you can also define $str and $bool.  The types can be any valid regular expression. For eg., instead of $int you can define &lt;pre&gt;@Route{uri=&quot;/test/{name:[0-9]+&quot;}&lt;/pre&gt; and this will match only numbers after /test/.  &lt;br/&gt;
+					You can also define a route to match only specific request methods for eg., &lt;pre&gt;@Route{uri=&quot;/test&quot;; method=RequestMethod.post}&lt;/pre&gt; will only match post requests. To match any request, just don't set a method or set RequestMethod.any
+				&lt;/div&gt;
+				&lt;div class=&quot;title-text&quot;&gt;Externalizing routes&lt;/div&gt;
+				&lt;div class=&quot;text-text&quot;&gt;Defining routes along with methods as facets is cool and quick, but it has the following disadvantages
+					&lt;ol&gt;
+							&lt;li&gt;Does not clearly define the order in which routes will be picked up&lt;/li&gt;
+							&lt;li&gt;You cannot see all the routes that your app defines in one place.&lt;/li&gt;
+					&lt;/ol&gt;
+					If you want to externalize your routes, open fan/RoutesDef.fan and define a route like this
+					&lt;pre&gt;using tales
+class RoutesDef : tales::RoutesDef{
+  override Void main(){
+    add(Route{uri=&quot;/test&quot;; toMethod=Test#.method(&quot;main&quot;)})
+  }
+}
+&lt;/pre&gt;
+				Note that Route definition is almost same except that along with the uri you should define a &quot;toMethod&quot;(which is obvious since tales cannot figure out the method from the facet)
+
+				
+				&lt;/div&gt;
+				
+     &lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>ResultMaps</title>
+   <link href="http://ksat.me/result-maps"/>
+   <updated>2012-06-24T00:00:00+05:30</updated>
+   <id>http://ksat.me/result-maps</id>
+   <content type="html">&lt;div style=&quot;padding:10px&quot;&gt;
+  &lt;div class=&quot;text-title&quot;&gt;
+    Using Resultmaps for complex query mapping
+  &lt;/div&gt;
+  &lt;div class=&quot;text-text&quot;&gt;
+    Sometimes you will want to do more complex mapping when trying to fetch data from multiple tables using joins. Here's a example. You will want to look at the mybatis documentation see more about result maps.
+  &lt;/div&gt;
+  &lt;div class=&quot;text-text&quot;&gt;
+    In this example we will solve the n+1 select problem by fetching all the blogs along with the author
+  &lt;/div&gt;
+  &lt;div class=&quot;text-text&quot;&gt;
+    Let's see our blog class and author class
+  &lt;pre&gt;
+@Serializable
+class Blog {
+  Int? id
+  Str? subject
+  Str? detail
+  Author? author
+}
+  &lt;/pre&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;text-text&quot;&gt;
+    .. and the author class
+  &lt;pre&gt;
+@Serializable
+class Author{
+  Int? id
+  Str? name
+  DateTime? birthDate
+}
+  &lt;/pre&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;text-text&quot;&gt;
+    * Note make sure you have create the author table and have the blog_id field in blog table  
+  &lt;/div&gt;
+
+  &lt;div class=&quot;text-text&quot;&gt;
+  Here's the sql map
+  &lt;/div&gt;
+
+  &lt;div class=&quot;text-text&quot;&gt;
+  &lt;pre&gt;
+using fanbatis
+class BlogSqlMap : SqlMap{
+  @Select{resultMap = &quot;blogMap&quot;}
+  Blog[] selectBlogsWithAuthor(){
+    list(sql&lt;|
+          select b.id blog_id, b.subject blog_subject,
+          b.detail blog_detail,
+          a.id author_id, a.name author_name,  
+          a.birthDate as birth_date
+          from
+          blog b 
+          left outer join
+          Author a on b.author_id = a.id
+     |&gt;)
+  }
+
+
+  ResultMap blogMap := ResultMap{
+    it.type = Blog#
+    id-&gt;id = &quot;blog_id&quot;
+    result-&gt;subject = &quot;blog_subject&quot;
+    result-&gt;detail = &quot;blog_detail&quot;
+    association-&gt;author = Association{resultMap=&quot;authorMap&quot;}
+  }
+
+  ResultMap authorMap := ResultMap{
+    it.type = Author#
+    id-&gt;id = &quot;author_id&quot;
+    result-&gt;name = &quot;author_name&quot;
+    result-&gt;birthDate = &quot;birth_date&quot;
+  }
+}
+  &lt;/pre&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;text-text&quot;&gt;
+  And try to fetch the list of blogs
+  &lt;pre&gt;
+Blog[] blogs := BlogSqlMap()-&gt;selectBlogsWithAuthor
+  blogs.each|Blog blog|{
+  echo(&quot;Author for blog $blog.name is $blog.author.name&quot;)
+}
+  &lt;/pre&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;text-text&quot; style=&quot;display:none;&quot;&gt;
+  &lt;a href=&quot;ResultMaps.fan&quot;&gt;Download ResultMaps.fan&lt;/a&gt; having all this in one script
+  &lt;/div&gt;
+
+            
+
+&lt;/div&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Debugging Tales project using netbeans IDE</title>
+   <link href="http://ksat.me/netbeans"/>
+   <updated>2012-06-24T00:00:00+05:30</updated>
+   <id>http://ksat.me/netbeans</id>
+   <content type="html">&lt;div style=&quot;padding:10px&quot;&gt;  
+  &lt;div class=&quot;text-title&quot;&gt;
+    Setting up netbeans IDE
+  &lt;/div&gt;
+ 	&lt;div class=&quot;text-text&quot;&gt;
+    Create a new tales project using &quot;fan tales new&quot; command
+&lt;pre&gt;fan tales new newapp&lt;/pre&gt;
+  &lt;/div&gt;
+	&lt;div class=&quot;text-text&quot;&gt;
+			An app directory newapp/ is created for you
+	&lt;/div&gt;
+	&lt;div class=&quot;text-text&quot;&gt;
+			&lt;ol style=&quot;list-style:block;&quot;&gt;
+				&lt;li&gt;Select File-&gt;Open Project&lt;/li&gt;
+				&lt;li&gt;Select your project folder &quot;newapp/&quot;
+						&lt;div&gt;
+							&lt;img src=&quot;/images/fantomide.png&quot; width=&quot;400px;&quot;/&gt;
+						&lt;/div&gt;
+				&lt;/li&gt;
+				&lt;li&gt;Choose menu Run-&gt;Build Project&lt;/li&gt;
+				&lt;li&gt;Choose menu Debug-&gt;Debug Project&lt;/li&gt;
+			&lt;/ol&gt;
+	&lt;/div&gt;
+	&lt;div class=&quot;text-text&quot;&gt;
+			That's it. now Just modify the classes as usual and debug.
+	&lt;/div&gt;
+&lt;/div&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Install Tales</title>
+   <link href="http://ksat.me/install-tales"/>
+   <updated>2012-06-24T00:00:00+05:30</updated>
+   <id>http://ksat.me/install-tales</id>
+   <content type="html">&lt;head&gt;
+	&lt;title&gt;Installing Tales&lt;/title&gt;
+	&lt;style type=&quot;text/css&quot; media=&quot;screen&quot;&gt;
+		div.download {
+			background: url('/res/images/download.png') no-repeat;
+		}
+		div.div-img {
+			margin-left: 4px;
+			font-size: 13px;
+			padding-left: 40px;
+		}
+		
+		a.download {
+			text-decoration: underline;
+			color: #444;
+		}
+		a.download:hover {
+			color: black;
+		}
+	&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div style=&quot;padding:10px&quot;&gt;	
+	&lt;div class=&quot;title-text&quot;&gt;
+		Install
+	&lt;/div&gt;
+	&lt;div class=&quot;text-text&quot;&gt;
+    Installing Tales is really simple. First, make sure you have &lt;a class=&quot;download&quot; href=&quot;http://fantom.org&quot;&gt;Fantom&lt;/a&gt; installed. Then execute this command
+	&lt;/div&gt;		
+					
+	&lt;div class=&quot;text-text&quot;&gt;
+		&lt;pre&gt;fanr install -r http://repo.talesframework.org:9000 tales&lt;/pre&gt;
+	&lt;/div&gt;
+	&lt;div class=&quot;title-text&quot;&gt;
+		Test
+	&lt;/div&gt;
+	&lt;div class=&quot;text-text&quot;&gt;
+		Open command prompt and type &lt;pre&gt;fan tales&lt;/pre&gt;. You should see a welcome message.
+	&lt;/div&gt;
+
+
+	&lt;div style=&quot;margin-top:27px; font-size:13px;&quot;&gt;
+		That's all. Now you can &lt;a href=&quot;/your-first-app&quot; &gt;make your first app&lt;/a&gt;, a echo server.
+	&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/body&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Installing Fanbatis</title>
+   <link href="http://ksat.me/install-fanbatis"/>
+   <updated>2012-06-24T00:00:00+05:30</updated>
+   <id>http://ksat.me/install-fanbatis</id>
+   <content type="html">&lt;div style=&quot;padding:10px&quot;&gt;
+	&lt;div class=&quot;text-title&quot;&gt;
+			If you're using tales
+	&lt;/div&gt;
+
+	&lt;div class=&quot;text-text&quot;&gt;
+		If you're using tales, there is no need to install fanbatis. Tales comes with fanbatis bundled up	
+	&lt;/div&gt;
+
+
+	&lt;div class=&quot;text-title&quot;&gt;
+			Installing Fanbatis outside of tales
+	&lt;/div&gt;
+
+	&lt;div class=&quot;text-text&quot;&gt;
+	   &lt;pre&gt;fanr install -r http://repo.talesframework.org:9000 fanbatis&lt;/pre&gt;
+	&lt;/div&gt;
+	
+
+
+&lt;/div&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Https in Tales</title>
+   <link href="http://ksat.me/https"/>
+   <updated>2012-06-24T00:00:00+05:30</updated>
+   <id>http://ksat.me/https</id>
+   <content type="html">&lt;div style=&quot;padding:10px&quot;&gt;  
+  &lt;div class=&quot;text-title&quot;&gt;
+    Https
+  &lt;/div&gt;
+
+  &lt;div class=&quot;text-text&quot;&gt;
+    SSL support in Tales is as simple as adding &quot;cert&quot; and &quot;key&quot; files to cert/ directory 
+  &lt;/div&gt;
+  &lt;div class=&quot;text-text&quot;&gt;
+    To get started, create a cert/ directory directly under your app directory and copy the &quot;key&quot; and &quot;cert&quot; files into it. 
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;text-text&quot;&gt;
+    You can generate the cert files using openssl like this
+    &lt;pre&gt;openssl genrsa 1024 &gt; host.key&lt;/pre&gt;
+    &lt;pre&gt;openssl req -new -x509 -nodes -sha1 -days 365 -key host.key &gt; host.cert&lt;/pre&gt;
+  &lt;/div&gt;
+  
+  &lt;div class=&quot;text-text&quot;&gt;
+    Now open fan/Settings.fan and add a Https Setting like this
+    &lt;pre&gt;using tales
+
+class Settings : tales::Settings{
+    override Void main(){
+      add(HttpsSetting{})
+    }
+}&lt;/pre&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;text-text&quot;&gt;
+      You can pass additional parameters to HttpsSetting 
+      &lt;pre&gt;add(HttpsSetting{
+  port = &amp;lt;port&gt;
+  keyFile = &amp;lt;key-file-location&gt;        
+  certFile = &amp;lt;cert-file-location&gt;
+  certPassword = &amp;lt;certificate-password&gt;
+})
+&lt;/pre&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Making the UI</title>
+   <link href="http://ksat.me/gf-ui"/>
+   <updated>2012-06-24T00:00:00+05:30</updated>
+   <id>http://ksat.me/gf-ui</id>
+   <content type="html">&lt;div style=&quot;padding:10px&quot;&gt;
+&lt;div class=&quot;text-title&quot; style=&quot;margin-top:5px&quot;&gt;
+  Let's Do the UI
+&lt;/div&gt;
+&lt;div class=&quot;text-text&quot;&gt;
+  Let's decide the UI for index page. It should have the ability to:
+  &lt;ol style=&quot;padding-left:10px;&quot;&gt;
+    &lt;li&gt;Display a list of girlfriends&lt;/li&gt;
+    &lt;li&gt;Add a new girl friend&lt;/li&gt;
+    &lt;li&gt;Redirect to the gf detail page when clicked on a row &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+&lt;div class=&quot;text-text&quot;&gt;
+  Open index.html, Remove the default html generated for you, add the following and hit refresh in your browser.
+&lt;/div&gt;
+&lt;div class=&quot;text-text&quot;&gt;
+  &lt;strong style=&quot;color:#666&quot;&gt;template/Index.html :&lt;/strong&gt;
+  &lt;pre&gt;You have &amp;lt;span &lt;b&gt;talesId=&quot;count&quot;&lt;/b&gt;&amp;gt; &amp;lt;/span&gt; girlfriends
+&amp;lt;div id=&quot;wrap&quot;&gt;
+  &amp;lt;input type=&quot;text&quot; id=&quot;name&quot; /&gt;
+  &amp;lt;input type=&quot;button&quot; value=&quot;add&quot; id=&quot;add-gf&quot;/&gt; 
+  &amp;lt;ul id=&quot;all-gfs&quot;&gt;
+     &amp;lt;li &lt;b&gt;talesId=&quot;rows&quot;&lt;/b&gt; &gt;
+       &amp;lt;a &lt;b&gt;talesId=&quot;name&quot;&lt;/b&gt; href=&quot;#&quot; &gt;Name1&amp;lt;/a&gt;
+     &amp;lt;/li&gt;
+  &amp;lt;/ul&gt;
+&amp;lt;/div&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class=&quot;text-text&quot;&gt;
+  Quick things to note about tales templating:
+  &lt;ol style=&quot;margin-left:20px;&quot;&gt;
+    &lt;li&gt;In tales, html stays Html. No kind of logic is allowed inside html&lt;/li&gt;
+    &lt;li&gt;You can preview the html outside of tales and have your designer design or modify it&lt;/li&gt;
+    &lt;li&gt;The only thing you will need is the &quot;talesId&quot; tag that represents a &quot;dynamic&quot; part of the page&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;text-text&quot;&gt;
+  Open fan/Index.fan. 
+  Add a code in main() method to look like this:
+  &lt;pre&gt;using tales 
+class Index : Page{ 
+  &lt;span style=&quot;color:#666&quot;&gt;@Route{uri=&quot;/gf&quot;}&lt;/span&gt;
+  Void main(){
+    html := Html(&quot;template/Index.html&quot;)
+    html.tag(&quot;count&quot;).text(&quot;2&quot;)
+    response.writeTag(html)
+  }
+}&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class=&quot;text-text&quot;&gt;
+  Open your browser and browse to http://localhost:8000/gf. look at the first line. It should say You have &quot;2&quot; girlfriends. The &quot;2&quot; part was added in Index.fan
+&lt;/div&gt;
+&lt;div class=&quot;text-text&quot;&gt;
+  So here's the deal once again. In our html we had a div with talesId = &quot;count&quot;. In the fan file we did &lt;strong&gt;html.tag(&quot;count&quot;).text(&quot;2&quot;)&lt;/strong&gt;. The output to the browser will the exact same html defined in Index.html, but with the text of the div with talesId &quot;count&quot; replace by value &quot;2&quot;.
+
+&lt;/div&gt;
+&lt;div class=&quot;text-text&quot;&gt;
+    We will play a little bit more with tales templating over here. For a complete templating guide &lt;a href=&quot;/templating&quot;&gt;go over here&lt;/a&gt;
+&lt;/div&gt;
+&lt;div class=&quot;text-text&quot;&gt;
+  Change the code in Index.fan like this
+&lt;pre&gt;using tales 
+class Index : Page{ 
+  &lt;span style=&quot;color:#666&quot;&gt;@Route{uri=&quot;/gf&quot;}&lt;/span&gt;
+  Void main(){
+    html := Html(&quot;template/Index.html&quot;)
+    &lt;strong&gt;html.tag(&quot;count&quot;).text(&quot;2&quot;).addCss(&quot;color&quot;, &quot;red&quot;)&lt;/strong&gt;
+    response.writeTag(html)
+  }
+}&lt;/pre&gt;
+
+Now refresh the page in browser. The output should be exactly same, except the text &quot;2&quot; should appear in red.
+&lt;/div&gt;
+
+&lt;div class=&quot;text-text&quot;&gt;
+  Lets try to repeat the count multiple times. Change the code in Index.fan like this
+&lt;pre&gt;using tales 
+class Index : Page{ 
+  &lt;span style=&quot;color:#666&quot;&gt;@Route{uri=&quot;/gf&quot;}&lt;/span&gt;
+  Void main(){
+    html := Html(&quot;template/Index.html&quot;)
+    &lt;strong&gt;tags := html.tag(&quot;count&quot;).repeat(4)&lt;/strong&gt;
+    &lt;strong&gt;tags.each|Tag tag, Int index|{&lt;/strong&gt;
+        &lt;strong&gt;tag.text(&quot;Count:$index&quot;)&lt;/strong&gt;
+    &lt;strong&gt;}&lt;/strong&gt;
+    response.writeTag(html)
+  }
+}&lt;/pre&gt;
+
+Now refresh the page in browser. You should see count repeated 4 times
+&lt;/div&gt;
+
+
+&lt;div class=&quot;text-text&quot;&gt;
+  Now that we know how to put dynamic text into tags and set attributes, let's write the actual code for the index page 
+&lt;/div&gt;
+&lt;div class=&quot;text-text&quot;&gt;
+  &lt;strong style=&quot;color:#666;&quot;&gt;fan/app/Index.fan &lt;/strong&gt;
+  &lt;pre&gt;using tales
+using fanbatis
+
+class Index : Page{
+ &lt;span style=&quot;color:#666&quot;&gt;@Route{uri=&quot;/gf&quot;}&lt;/span&gt;  
+ Void main(){
+    GirlFriend[] friends := Db.list(GirlFriend{})
+    html := Html(&quot;template/Index.html&quot;)
+    rows := html.tag(&quot;rows&quot;).repeat(friends.size)
+    rows.each|Tag oneRow, Int index|{
+      oneFriend := friends[index]
+      oneRow.tag(&quot;name&quot;).text(oneFriend.name)
+                .attr(&quot;href&quot;,&quot;/gf/${oneFriend.id}&quot;)
+    }
+    html.tag(&quot;count&quot;).text(&quot;$friends.size&quot;)
+    response.writeTag(html)
+ }
+}&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class=&quot;text-text&quot;&gt;
+  Before you refresh the page, you might want to add a row in the girlfriend table like this 
+  &lt;pre&gt;insert into girlfriend(name) values('Aishwarya Rai')&lt;/pre&gt;
+  Now refresh the page and you should be seeing Aishwarya rai in the html 
+&lt;/div&gt;
+
+&lt;div class=&quot;text-text&quot;&gt;
+  Now that we have page setup, Let's add the functionality to &lt;a href=&quot;/gf-ajax&quot;&gt;add a gf to db&lt;/a&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Deploying tales in production mode</title>
+   <link href="http://ksat.me/gf-production"/>
+   <updated>2012-06-24T00:00:00+05:30</updated>
+   <id>http://ksat.me/gf-production</id>
+   <content type="html">&lt;div style=&quot;padding:10px&quot;&gt;
+ &lt;div class=&quot;title-text&quot;&gt;
+ 	Making the detail page
+ &lt;/div&gt;
+ &lt;div class=&quot;text-text&quot;&gt;
+		The detail page which displays one girlfriend and a list of note is left as a exercise. If you want the reference code the entire application and all it's &lt;a href=&quot;/example/gf&quot;&gt;source code is over here.&lt;/a&gt;
+ &lt;/div&gt;
+
+ &lt;div class=&quot;title-text&quot;&gt;
+	Beautifying with css
+ &lt;/div&gt;
+ &lt;div class=&quot;text-text&quot;&gt;
+	This is a quick one..Take a look at the res/ folder , add any file in there and it will available for download directly
+ &lt;/div&gt;
+ &lt;div class=&quot;text-text&quot;&gt;
+	For example try adding a css file &quot;page.css&quot; to res/css/.   Now, in your browser this file can be accessed from url http://localhost:8000/css/page.css. Since files in res are delivered as-is, it's great for putting custom javascript, css and images. 
+ &lt;/div&gt;	
+ &lt;div class=&quot;text-text&quot;&gt;
+	 for example, I can include this css in the head tag like this
+     &lt;pre&gt;&amp;lt;head&gt;
+ &amp;lt;link rel=&quot;stylesheet&quot; href=&quot;/css/page.css&quot; type=&quot;text/css&quot;/&gt;
+&amp;lt;/head&gt;&lt;/pre&gt;
+ &lt;/div&gt;
+
+ &lt;div class=&quot;title-text&quot;&gt;
+	Running the code in Production mode
+ &lt;/div&gt;
+ &lt;div class=&quot;text-text&quot;&gt;
+	 Remember the &quot;fan tales run&quot; command? All along we have been running the code in dev mode. Dev mode supports things like auto reloading which is great for development. However for running the code in production you might want to run the server in production mode.
+ &lt;/div&gt;
+ &lt;div class=&quot;text-text&quot;&gt;
+	 To run code in production mode use the &quot;exec&quot; command instead of &quot;run&quot;. Open command prompt. Cd to the application directory and type &lt;pre&gt;fan tales exec&lt;/pre&gt;
+ &lt;/div&gt;
+ &lt;div class=&quot;text-text&quot;&gt;
+		That's it. Your code is running production mode now.
+ &lt;/div&gt;
+&lt;/div&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Creating tales and model classes</title>
+   <link href="http://ksat.me/gf-model"/>
+   <updated>2012-06-24T00:00:00+05:30</updated>
+   <id>http://ksat.me/gf-model</id>
+   <content type="html">&lt;div style=&quot;padding:10px&quot;&gt;	
+	&lt;div class=&quot;text-title&quot; style=&quot;margin-top:5px&quot;&gt;
+				Creating tables
+		&lt;/div&gt;
+		&lt;div class=&quot;text-text&quot; style=&quot;margin-top:5px&quot;&gt;
+			Think  about the tables required. I'd say two tables are required:
+			&lt;ul&gt;
+			  &lt;li&gt;Girlfriend&lt;/li&gt;
+			   &lt;li&gt;Notes&lt;/li&gt;
+			&lt;/ul&gt;
+		&lt;/div&gt;
+		&lt;div class=&quot;text-text&quot; style=&quot;margin-top:5px&quot;&gt;
+			Let's create the two tables. Fire your mysql client and create the two tables like this: 
+			&lt;pre text-align=&quot;left&quot;&gt;CREATE TABLE girlfriend (
+  id int NOT NULL AUTO_INCREMENT,
+  name varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);&lt;/pre&gt;
+			&lt;pre text-align=&quot;left&quot;&gt;CREATE TABLE gfnote (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  gfid int(11) DEFAULT NULL,
+  text varchar(30) DEFAULT NULL,
+PRIMARY KEY (`id`)
+); 
+			&lt;/pre&gt;
+		&lt;/div&gt;
+		&lt;div class=&quot;text-title&quot; style=&quot;margin-top:5px&quot;&gt;
+				Creating Model Objects
+		&lt;/div&gt;
+		&lt;div class=&quot;text-text&quot; style=&quot;margin-top:5px&quot;&gt;
+			Create the following two classes to represent the rows in two tables correspondingly 
+			&lt;br /&gt;
+			&lt;strong&gt;fan/GirlFriend.fan :&lt;/strong&gt;
+			&lt;pre&gt;using fanbatis 
+@Entity
+class GirlFriend{
+  @Primary
+  @Autogen
+  Int? id
+  Str? name
+  DateTime? lastUpdated
+}&lt;/pre&gt;
+		&lt;br /&gt;
+		&lt;strong&gt;fan/Note.fan :&lt;/strong&gt;
+		&lt;pre&gt;using fanbatis 
+@Entity
+@Table{name=&quot;gfnote&quot;}
+class Note{
+  @Primary
+  @Autogen
+  Int? id
+  Int? gfId
+  Str? text
+}&lt;/pre&gt;
+		&lt;/div&gt;
+		&lt;div class=&quot;text-text&quot; style=&quot;margin-top:5px&quot;&gt;
+			Quick things to note:
+			&lt;ol&gt;
+			  &lt;li&gt;You need to mark your entity classes with @Entity facet. You will also generally want to mark an Entity with @Js and @Serializable if you also want to share them with your client(js) code also written in fantom&lt;/li&gt;
+			 &lt;li&gt;If the table name is different from your class name use the @Table{name=&quot;table_name&quot;} facet, if the column name is different from  your field name use @Column{name=&quot;table_name&quot;} facet &lt;/li&gt;
+			&lt;/ol&gt;
+		&lt;/div&gt;
+		&lt;div class=&quot;text-title&quot; &gt;
+			Quick fanbatis introduction (A.K.A how to query)
+		&lt;/div&gt;
+		&lt;div class=&quot;text-text&quot; style=&quot;margin-top:5px&quot;&gt;
+			Once you have the model classes, you can do crud like this.. 
+			&lt;div style=&quot;margin-top:8px;&quot;&gt;
+				&lt;strong style=&quot;color:#666&quot;&gt;Fetch one GirlFriend row from db:&lt;/strong&gt;
+				&lt;pre&gt;GirlFriend  gf := Db.one(GirlFriend{it.id = id})&lt;/pre&gt;
+			&lt;/div&gt;
+			&lt;div style=&quot;margin-top:8px;&quot;&gt;
+				&lt;strong style=&quot;color:#666&quot;&gt;Fetch a list of all GirlFriend rows from db:&lt;/strong&gt;
+				&lt;pre&gt;GirlFriend[] gfs := Db.list(GirlFriend{}) &lt;/pre&gt;
+			&lt;/div&gt;
+			&lt;div style=&quot;margin-top:8px;&quot;&gt;
+				&lt;strong style=&quot;color:#666&quot;&gt;Create a GirlFriend row:&lt;/strong&gt;
+				&lt;pre&gt;Db.create(GirlFriend{it.name = name})  &lt;/pre&gt;
+			&lt;/div&gt;
+			&lt;div style=&quot;margin-top:8px;&quot;&gt;
+				&lt;strong style=&quot;color:#666&quot;&gt;Save a GirlFriend row:&lt;/strong&gt;
+				&lt;pre&gt;GirlFriend  gf := Db.one(GirlFriend{it.id = id})
+gf.name = &quot;new name&quot;
+Db.save(gf)
+&lt;/pre&gt;
+			&lt;/div&gt;
+		&lt;/div&gt;
+		&lt;div class=&quot;text-text&quot; style=&quot;margin-top:5px&quot;&gt;
+				For more information on fanbatis &lt;a href=&quot;/what-is-fanbatis/&quot;&gt;look here&lt;/a&gt;		
+		&lt;/div&gt;
+		&lt;div class=&quot;text-text&quot; style=&quot;margin-top:5px&quot;&gt;
+				Now that we have our model classes ready, and know how to query, we can &lt;a href=&quot;/gf-ui&quot;&gt;Start writing the ui code&lt;/a&gt;
+		&lt;/div&gt;
+&lt;/div&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Making a complete 'Girlfriend' app in tales</title>
+   <link href="http://ksat.me/gf-intro"/>
+   <updated>2012-06-24T00:00:00+05:30</updated>
+   <id>http://ksat.me/gf-intro</id>
+   <content type="html">&lt;div style=&quot;padding:10px&quot;&gt;	
+	&lt;div class=&quot;text-title&quot; style=&quot;margin-top:5px&quot;&gt;
+			Let's get started
+	&lt;/div&gt;
+
+	&lt;div class=&quot;text-text&quot;&gt;
+			In this tutorial we will make a real-world GirlFriend app with tales that lets you remember things about your girlfriends.  
+
+			 At the end of this tutorial you will not only have learnt tales and made a complete app with it,
+			  but also have a brand new application that will help you to astonish your girlfriends by
+			   remembering  their birthday, their cousin's brother's name, their second brother's daughter's school name, 
+			   .. Din't I tell you tales was going to be fun?	
+	&lt;/div&gt;	
+
+
+	&lt;div class=&quot;text-text&quot;&gt;
+			The app will contain two pages that will look like this 
+	&lt;/div&gt;
+	&lt;div class=&quot;text-title&quot;&gt;
+		An index page that will list all girlfriends and lets you add one more
+	&lt;/div&gt;
+	&lt;div&gt;
+		&lt;img src=&quot;/images/indexpage.png&quot; width=&quot;400px;&quot;/&gt;
+	&lt;/div&gt;
+
+	&lt;div class=&quot;text-title&quot;&gt;
+		An detail page that will let you store notes against a girl friend
+	&lt;/div&gt;
+	&lt;div&gt;
+		&lt;img src=&quot;/images/detailpage.png&quot; width=&quot;400px;&quot;/&gt;
+	&lt;/div&gt;
+	
+&lt;/div&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Installing Tales</title>
+   <link href="http://ksat.me/gf-install"/>
+   <updated>2012-06-24T00:00:00+05:30</updated>
+   <id>http://ksat.me/gf-install</id>
+   <content type="html">&lt;div style=&quot;padding:10px&quot;&gt;  
+  &lt;div class=&quot;text-title&quot; style=&quot;margin-top:5px&quot;&gt;
+        Installing tales
+    &lt;/div&gt;
+    &lt;div class=&quot;text-text&quot;&gt;
+        &lt;a class=&quot;download&quot; href=&quot;/install-tales&quot;&gt;Follow the steps over here&lt;/a&gt; to install tales
+    &lt;/div&gt;
+    &lt;div class=&quot;text-text&quot;&gt;
+        Once tales is installed, go to command prompt and create a new app using the following command
+        &lt;pre&gt;tales new gf&lt;/pre&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;text-text&quot;&gt;
+        A new folder gf is create will application files on it
+    &lt;/div&gt;
+    &lt;div class=&quot;text-text&quot;&gt;
+      cd to the gf directory and type
+      &lt;pre&gt;tales run&lt;/pre&gt;
+      The web server will start on port 8000
+    &lt;/div&gt;
+    &lt;div class=&quot;text-text&quot;&gt;
+      open browser and go to http://localhost:8000 you should see the welcome page.
+    &lt;/div&gt;
+
+    &lt;div class=&quot;title-text&quot;&gt;
+        Connecting to Db
+    &lt;/div&gt;
+    &lt;div class=&quot;text-text&quot;&gt;
+        Open &lt;strong&gt;fan/Settings.fan&lt;/strong&gt;. In the main method, and add a db setting like this
+        &lt;pre style=&quot;padding:4px;&quot;&gt;using tales
+class Settings : tales::Settings{
+  override Void main(){
+    &lt;strong&gt;add(DbSetting{&lt;/strong&gt;
+      &lt;strong&gt;hostString = &quot;connnecton string&quot;&lt;/strong&gt;
+      &lt;strong&gt;driver = &quot;Driver class&quot;&lt;/strong&gt;
+      &lt;strong&gt;username = &quot;username&quot;&lt;/strong&gt;
+      &lt;strong&gt;password = &quot;password&quot;&lt;/strong&gt;
+    &lt;strong&gt;})&lt;/strong&gt;
+  }
+}&lt;/pre&gt;
+    Change the driver, user name and password and host-string to match you database. Make sure you've added the driver jar to fan/lib/java/ext. For ex. if you use mysql. 
+			&lt;ol&gt;
+					&lt;li&gt;Copy mysql-xx driver.jar to fan/lib/java/ext/&lt;/li&gt;
+					&lt;li&gt;add the following setting
+&lt;pre&gt;&lt;strong&gt;add(DbSetting{&lt;/strong&gt;
+	&lt;strong&gt;hostString = &quot;jdbc:mysql://localhost:3306/db&quot;&lt;/strong&gt;
+	&lt;strong&gt;driver = &quot;com.mysql.jdbc.Driver&quot;&lt;/strong&gt;
+	&lt;strong&gt;username = &quot;username&quot;&lt;/strong&gt;
+	&lt;strong&gt;password = &quot;password&quot;&lt;/strong&gt;
+&lt;strong&gt;})&lt;/strong&gt;&lt;/pre&gt;
+&lt;/li&gt;
+			&lt;/ol&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;text-text&quot;&gt;
+      That's it. Let's start &lt;a class=&quot;download&quot; href=&quot;/gf-model&quot;&gt;creating the table and model classes&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Adding Ajax</title>
+   <link href="http://ksat.me/gf-ajax"/>
+   <updated>2012-06-24T00:00:00+05:30</updated>
+   <id>http://ksat.me/gf-ajax</id>
+   <content type="html">&lt;div style=&quot;padding:10px&quot;&gt;
+&lt;div class=&quot;title-text&quot;&gt;
+Getting started with Fanquery
+&lt;/div&gt;
+&lt;div class=&quot;text-text&quot;&gt;
+Take a look at index.html again.
+
+we have a textfield with id &quot;name&quot; and a button with id &quot;add-gf&quot;. When &quot;add-gf&quot; button is clicked we need to  add a girlfriend row in the database with the name given in the name text box. Create a IndexJs.fan with the following code
+&lt;/div&gt;
+&lt;div class=&quot;text-text&quot;&gt;
+&lt;strong style=&quot;color:#666&quot;&gt;fan/IndexJs.fan&lt;/strong&gt;
+&lt;pre&gt;
+using fanquery
+using tales 
+
+@Js
+@Include{plugins = [Plugin{name = &quot;fanquery&quot;}]}
+class IndexJs{
+  Void main(){
+    Jq.ready{
+      domReady
+    }
+  } 
+
+  Void domReady(){
+    Jq(&quot;#add-gf&quot;).click{
+      Str name := Jq(&quot;#name&quot;).getVal
+      Win.cur.alert(name)
+    }
+  }
+}&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class=&quot;text-text&quot;&gt;
+Take a look at the code above. In tales, Javascript can be written in fantom( which compiles to javascript and executes on browser).  Also fanquery is a library that will let us use all of the jquery awesomeness in fantom.[ Note however that not everything needs to be written in fantom. You can still use pure javascript if you want to. Just include script files in a &amp;lt;script&gt; tag in your html. This is very useful for all the &quot;design-level&quot; or off the shelf javascript where rewriting in fantom does not make sense]. 
+&lt;/div&gt;
+&lt;div class=&quot;text-text&quot;&gt;
+  Next we need to modify the page class and ask it to use this js, You use the html.jsMain() method to do it. Here's the full source code of Index.fan now.
+&lt;/div&gt;
+
+&lt;div class=&quot;text-text&quot;&gt;
+&lt;strong style=&quot;color:#666;&quot;&gt;fan/app/Index.fan &lt;/strong&gt;
+&lt;pre&gt;using tales 
+using fanbatis
+
+class Index : Page{
+ &lt;span style=&quot;color:#666&quot;&gt;@Route{uri=&quot;/gf&quot;}&lt;/span&gt;  
+ Void main(){
+    GirlFriend[] friends := Db.list(GirlFriend{})
+    html := Html(&quot;template/Index.html&quot;)
+    rows := html.tag(&quot;rows&quot;).repeat(friends.size)
+    rows.each|Tag oneRow, Int index|{
+      oneFriend := friends[index]
+      oneRow.tag(&quot;name&quot;).text(oneFriend.name)
+                .attr(&quot;href&quot;,&quot;/gf/${oneFriend.id}&quot;)
+    }
+    html.tag(&quot;count&quot;).text(&quot;$friends.size&quot;)
+    &lt;strong&gt;html.jsMain(IndexJs#)&lt;/strong&gt;
+		response.writeTag(html)
+ }
+}&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class=&quot;text-text&quot;&gt;
+  Now go to http://localhost:8000/gf in your browser  and click the &quot;add-gf&quot; button you should see an alert.
+&lt;/div&gt;
+
+
+&lt;div class=&quot;title-text&quot;&gt;
+  Adding Ajax code and learning about &quot;cut-and-send&quot;
+&lt;/div&gt;
+&lt;div class=&quot;text-text&quot;&gt;
+  Let's add code to our page class that will take the Ajax request
+&lt;/div&gt;
+
+&lt;div class=&quot;text-text&quot;&gt;
+&lt;strong style=&quot;color:#666;&quot;&gt;fan/app/Index.fan &lt;/strong&gt;
+&lt;pre&gt;using tales 
+
+class Index : Page{
+ &lt;span style=&quot;color:#666&quot;&gt;@Route{uri=&quot;/gf&quot;}&lt;/span&gt;  
+ Void main(){
+   ..
+ }
+ 
+ &lt;strong style=&quot;color:#666&quot;&gt;@Route{uri=&quot;/add-gf&quot;}&lt;/strong&gt;
+ &lt;strong&gt;Void addGf(Str name){&lt;/strong&gt;
+   &lt;strong&gt;GirlFriend gf := Db.create(GirlFriend{it.name = name})&lt;/strong&gt;
+   &lt;strong&gt;rowsTag := Html(&quot;template/examples/GfList.html&quot;).cutAt(&quot;rows&quot;)&lt;/strong&gt;
+   &lt;strong&gt;rowsTag.tag(&quot;name&quot;).text(gf.name).attr(&quot;href&quot;, &quot;/gf/${gf.id}&quot;)&lt;/strong&gt;
+   
+   &lt;strong&gt;html := rowsTag.apply&lt;/strong&gt;
+   &lt;strong&gt;response.writeStr(html)&lt;/strong&gt;
+ &lt;strong&gt;}&lt;/strong&gt;
+}&lt;/pre&gt;
+&lt;/div&gt;
+
+
+&lt;div class=&quot;text-text&quot;&gt;
+  Let's go through that code in method &quot;addGf&quot; line by line
+  &lt;ol&gt;
+    &lt;li&gt;The method defines a route. It can take an argument name&lt;/li&gt;
+    &lt;li&gt;The first line creates a Gf row in database&lt;/li&gt;
+    &lt;li&gt;The second line creates an html instance, but cut's it at talesId &quot;rows&quot;&lt;/li&gt;
+    &lt;li&gt;Then we find the tag with talesId &quot;name&quot; inside that tag and add the &quot;href&quot; attr&lt;/li&gt;
+    &lt;li&gt;The apply method gives the html for that current tag&lt;/li&gt;
+    &lt;li&gt;Then we write html to the response&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;text-text&quot;&gt;
+  Take another look at &quot;cutAt&quot; method and how it's used. This is called &quot;cut-and-send&quot; in tales and it's extremely useful in cases like this where you want take out a portion of html and dynamically insert it using ajax 
+&lt;/div&gt;
+
+&lt;div class=&quot;title-text&quot;&gt;
+  Writing Js code code to make Ajax call
+&lt;/div&gt;
+
+&lt;div class=&quot;text-text&quot;&gt;
+Let's modify the IndexJs to take the HTML back and just do a &quot;prepend&quot; 
+&lt;pre&gt;
+using fanquery
+using tales 
+
+@Js
+class IndexJs{
+  Void main(){
+    Jq.ready{
+      domReady
+   }
+  } 
+
+  Void domReady(){
+    Jq(&quot;#add-gf&quot;).click|cur, event|{
+      if(name.trim == &quot;&quot;)
+        return
+        
+      &lt;strong&gt;HttpReq{it.uri=`/add-gf`}.postForm([&quot;name&quot; : name])|HttpRes res| {&lt;/strong&gt;
+          &lt;strong&gt;Jq(&quot;#all-gfs&quot;).prepend(Jq(res.content))&lt;/strong&gt;
+          &lt;strong&gt;Jq(&quot;#name&quot;).setVal(&quot;&quot;)&lt;/strong&gt;
+      &lt;strong&gt;}&lt;/strong&gt;
+    }
+  }
+}&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class=&quot;text-text&quot;&gt;
+  Lets take a look at the above code
+  &lt;ol&gt;
+    &lt;li&gt;We make an http request to uri &quot;/add-gf&quot; with post parameter &quot;name&quot;&lt;/li&gt;
+    &lt;li&gt;It get routed to the addGf() method in the Index.fan class returning the html&lt;/li&gt;
+    &lt;li&gt;res.content returns html returned by server&lt;/li&gt;
+    &lt;li&gt;We prepend the result and clear the name field&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;text-text&quot;&gt;
+We are done with the index page.. Let's add the &lt;a href=&quot;/gf-production&quot;&gt;detail page and deploy the application&lt;/a&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>First fanbatis mapping</title>
+   <link href="http://ksat.me/first-fanbatis-mapping"/>
+   <updated>2012-06-24T00:00:00+05:30</updated>
+   <id>http://ksat.me/first-fanbatis-mapping</id>
+   <content type="html">&lt;div style=&quot;padding:10px&quot;&gt;
+	&lt;div class=&quot;text-title&quot;&gt;
+			Making your first query
+	&lt;/div&gt;
+	&lt;div class=&quot;text-text&quot;&gt;
+			Start by firing up the h2 database that comes with fanbatis distribution
+				&lt;pre&gt;
+java -jar h2-1.2.145.jar&lt;/pre&gt;
+	&lt;/div&gt;
+	&lt;div class=&quot;text-text&quot;&gt;
+				Let's create the blog table next
+				&lt;pre&gt;
+create table IF NOT EXISTS blog
+ (id integer auto_increment primary key, 
+  subject varchar(200), detail varchar(2000));&lt;/pre&gt;
+			&lt;/div&gt;
+			&lt;div class=&quot;text-text&quot;&gt;
+			 	and insert a row
+			 	&lt;pre&gt;
+insert into blog(subject, detail) values('My First blog',
+'My First blog . Its cool');&lt;/pre&gt;
+	&lt;/div&gt;
+	&lt;div class=&quot;text-text&quot;&gt;
+			 	Write a Fantom class for blog
+&lt;pre&gt;class Blog {
+  Int? id
+  Str? subject
+  Str? detail
+}	&lt;/pre&gt;
+	&lt;/div&gt;
+
+	&lt;div class=&quot;text-text&quot;&gt;
+			 	Write a Sql Map that will fetch  a blog
+&lt;pre&gt;using fanbatis
+class BlogSql{
+   static Blog getBlogBySubject(Str subject){
+    S&lt;|
+       select * from blog where subject = #{subject}
+    |&gt;
+  }
+}&lt;/pre&gt;
+	&lt;/div&gt;
+	&lt;div class=&quot;title-text&quot;&gt;
+		If you're using tales
+	&lt;/div&gt;
+	&lt;div class=&quot;text-text&quot;&gt;
+			Just write the above code in fan/sql/BlogSqlMap.fan
+	&lt;/div&gt;
+	&lt;div class=&quot;text-text&quot;&gt;
+			Make sure Settings.fan has correct db configuration &lt;br/&gt;&lt;br/&gt;
+			Define a binding like this in Bindings.fan
+			&lt;pre&gt;Bind{name=&quot;blogSqlMap&quot;; toType=&quot;BlogSqlMap&quot;}&lt;/pre&gt;
+			In your page or service class, get blog sqlMap injected like this
+			&lt;pre&gt;class MyService{
+&lt;strong&gt;  @inject SqlMap? blogSqlMap&lt;/strong&gt;
+  Void aServiceMethod(){
+     &lt;strong&gt;Blog blog := blogSqlMap-&gt;getBlogBySubject(&quot;3 idiots&quot;)&lt;/strong&gt;
+  }							
+}&lt;/pre&gt;
+	&lt;/div&gt;
+
+	&lt;div class=&quot;title-text&quot;&gt;
+		If you using fanbatis outside of tales
+	&lt;/div&gt;
+
+	&lt;div class=&quot;text-text&quot;&gt;
+			 	Write code that will use the sql map
+&lt;pre&gt;
+class FetchBlog{
+  Void main(){
+    Setup.setup //We will come to this in a second
+
+    BlogSqlMap map := BlogSqlMap()
+    Blog blog := map-&gt;getBlogBySubject(&quot;My First blog&quot;)
+    echo(blog.detail)
+  }
+}&lt;/pre&gt;
+	&lt;/div&gt;
+
+	&lt;div class=&quot;text-text&quot;&gt;
+			 	Write a Setup utility class 
+&lt;pre&gt;
+class Setup{
+  static const Str:Str props :=  Str:Str[
+    &quot;url&quot;:&quot;jdbc:h2:tcp://localhost/~/fanbatis&quot;,
+    &quot;driver&quot;:&quot;org.h2.Driver&quot;,
+    &quot;username&quot;:&quot;sa&quot;,
+    &quot;password&quot;: &quot;&quot;]
+
+  static Void setup(){
+      if(Actor.locals[&quot;fanbatis-associate&quot;] != null){
+        return
+      }
+      batis := Batis(true)
+      batis.configure(props)
+      Actor.locals[&quot;fanbatis-associate&quot;] = DefaultAssociate(batis)
+  }
+}&lt;/pre&gt;
+	&lt;/div&gt;
+	&lt;div class=&quot;text-text&quot;&gt;
+			 	Make sure you configure the correct connection string, user name and password in Setup.fan and run FetchBlog.fan
+			 &lt;/div&gt;
+
+	&lt;div class=&quot;text-text&quot; style=&quot;display:none;&quot;&gt;
+			 	&lt;a href=&quot;FirstMap.fan&quot;&gt;Download FirstMap.fan&lt;/a&gt; having all this in one script
+			 &lt;/div&gt;
+
+&lt;/div&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Fanbatis</title>
+   <link href="http://ksat.me/fanbatis"/>
+   <updated>2012-06-24T00:00:00+05:30</updated>
+   <id>http://ksat.me/fanbatis</id>
+   <content type="html">&lt;div style=&quot;padding:25px&quot;&gt;
+  &lt;div align=&quot;center&quot;&gt;
+    &lt;h1 style=&quot;color:#888&quot;&gt;Fanbatis - Easy data access for Fantom&lt;/h1&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;text-title&quot;&gt;
+                What is Fanbatis?
+            &lt;/div&gt;
+            &lt;div class=&quot;text-text&quot;&gt;	
+			  ORM was a simple problem to solve. Until the likes of hibernate complicated it.
+			&lt;/div&gt;
+			&lt;div class=&quot;text-text&quot;&gt;	
+			  &lt;a href=&quot;http://www.mybatis.org/&quot;&gt;Mybatis&lt;/a&gt; nicely fitted the bill of being a pefectly-simple datamappter but is more verbose than necessary due to Java itself. With Fantom's syntax sugars and Dsls we can simplify everything and try to hit that sweet spot between directly using SQL, datamappers and ORMs.
+			&lt;/div&gt;
+           
+            &lt;div class=&quot;text-text&quot;&gt;
+               Fanbatis is the default data-access library that comes with tales. However fanbatis can be used outside of it
+            &lt;/div&gt;
+
+            &lt;div class=&quot;text-text&quot;&gt;
+                The goal is to provide syntax sugar for commonly used things..
+                &lt;pre text-align=&quot;left&quot;&gt;//Get one blog from database
+Blog blog := Db.one(Blog{id = 1})
+&lt;/pre&gt;
+
+            &lt;/div&gt;
+            
+            &lt;div class=&quot;text-text&quot;&gt;
+                .. and expose the full power of sql for everything else
+            &lt;/div&gt;
+            &lt;div class=&quot;text-text&quot;&gt;
+                &lt;pre&gt;User getUser(Int id){S&lt;| 
+    select u.userid, u.name from User u,Company c 
+    where u.id = #{id} and u.company_id  = c.id and c.is_deleted = 0
+|&gt;}&lt;/pre&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;title-text&quot;&gt;
+                Installing Fanbatis
+            &lt;/div&gt;
+            &lt;div class=&quot;text-text&quot;&gt;
+              If you're using tales, there is no need to install fanbatis. Tales comes with fanbatis bundled up 
+            &lt;/div&gt;
+            &lt;div class=&quot;text-text&quot;&gt;
+              If you're using fanbatis outside of tales, get it from tales repo
+              &lt;pre&gt;fanr install -r http://repo.talesframework.org:9000 fanbatis&lt;/pre&gt;
+            &lt;/div&gt;
+            
+            &lt;div class=&quot;title-text&quot;&gt;
+                Configuring
+            &lt;/div&gt;
+            &lt;div class=&quot;text-text&quot;&gt;
+              If you are using fanbatis with tales, open Settings.fan and add a DbSetting like this:
+              &lt;pre&gt;add(DbSetting{
+  hostString = &quot;jdbc:mysql://localhost:3306/host&quot;
+  driver = &quot;com.mysql.jdbc.Driver&quot;
+  username = &quot;kaushik&quot;
+  password = &quot;password&quot;
+})&lt;/pre&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;text-text&quot;&gt;
+              If you are running fanbatis outside of tales, configure the Batis object like this
+              &lt;pre&gt;using fanbatis
+class Main{
+  static const Str:Str props :=  Str:Str[
+                                 &quot;url&quot;:&quot;jdbc:h2:mem:test&quot;,
+                                 &quot;driver&quot;:&quot;org.h2.Driver&quot;,
+                                 &quot;username&quot;: &quot;sa&quot;,
+                                 &quot;password&quot;:&quot;&quot;]
+
+  static Void setup(){
+    batis := Batis(true) //true if dev mode
+    batis.configure(props)
+    
+    Blog blog := Db.one(Blog{id = 1})
+    ...
+  }
+}
+&lt;/pre&gt;
+            &lt;/div&gt;
+            
+            &lt;div class=&quot;title-text&quot;&gt;
+                Querying
+            &lt;/div&gt;
+            
+            &lt;div class=&quot;text-text&quot;&gt;
+                Assume a table like this:
+                &lt;pre&gt;
+create table IF NOT EXISTS blog
+(id integer auto_increment primary key, 
+subject varchar(200), detail varchar(2000));&lt;/pre&gt;
+            &lt;/div&gt;
+            
+            &lt;div class=&quot;text-text&quot;&gt;
+                And a class like this:
+&lt;pre&gt;class Blog {
+  @Primary
+  @Autogen
+  Int? id
+  Str? subject
+  Str? detail
+} &lt;/pre&gt;
+            &lt;/div&gt;
+            
+            &lt;div class=&quot;text-title&quot;&gt;
+              Using the &quot;Db&quot; class
+            &lt;/div&gt;  
+            &lt;div class=&quot;text-text&quot;&gt;
+              &lt;strong&gt;Here are a few examples of doing short-hand queries&lt;/strong&gt;
+            &lt;/div&gt;
+            
+            &lt;div class=&quot;text-text&quot;&gt;
+              Fetch one blog by id 
+&lt;pre&gt;
+Blog blog := Db.one(Blog{id = 1})&lt;/pre&gt;
+          &lt;/div&gt;
+
+          &lt;div class=&quot;text-text&quot;&gt;
+              Fetch all blogs
+&lt;pre&gt;
+Blog[] blogs := Db.list(Blog{})&lt;/pre&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;text-text&quot;&gt;
+              Fetch all blogs by subject
+&lt;pre&gt;
+Blog[] blogs := Db.list(Blog{subject=&quot;My First blog&quot;})&lt;/pre&gt;
+          &lt;/div&gt;
+
+          &lt;div class=&quot;text-text&quot;&gt;
+              Fetch one blog by name and authorId
+&lt;pre&gt;
+Blog blog := Db.one(Blog{name=&quot;My Blog&quot;; authorId = 1})&lt;/pre&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;text-text&quot;&gt;
+              Create a blog
+&lt;pre&gt;Blog blog := Db.create(Blog{subject = &quot;test&quot;; it.detail=&quot;test&quot;})
+echo(blog.id) 
+//Note: since id is annotated with autogen,
+// id will be auto populated&lt;/pre&gt;
+          &lt;/div&gt;
+          
+          &lt;div class=&quot;text-text&quot;&gt;
+              Fetching and updating a blog
+&lt;pre&gt;Blog blog := Db.one(Blog{id = 1})
+blog.authorId = 2
+Db.save(blog)&lt;/pre&gt;
+          &lt;/div&gt;
+
+          &lt;div class=&quot;text-text&quot;&gt;
+              Deleting a blog
+&lt;pre&gt;
+Blog blog := Db.one(Blog{id = 1})
+Db.remove(blog)
+&lt;/pre&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;text-text&quot;&gt;
+              Fetching a list of blogs with custom where clause
+&lt;pre&gt;Blog[] blogs := Db.list(Blog#, &quot;subject = #{param.subject}&quot;, [&quot;subject&quot;, &quot;My Blog&quot;])&lt;/pre&gt;
+          &lt;/div&gt;
+          
+          &lt;div class=&quot;text-text&quot;&gt;
+              Ad hoc querying for one value
+&lt;pre&gt;Row row := Db.queryOne(&quot;select 1*2 val from dual&quot;);
+echo(row-&gt;val)
+&lt;/pre&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;text-text&quot;&gt;
+              Ad hoc querying for one multiple values
+&lt;pre&gt;Row[] rows := Db.querylist(&quot;select id, name from employees where name like '#{param.name}%'&quot;,
+                                [&quot;name&quot;, &quot;A&quot;]);
+rows.each{  
+  echo(row-&gt;id)
+  echo(row-&gt;name)
+}
+&lt;/pre&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;text-title&quot;&gt;
+            Annotations that go with the &quot;Db&quot; class
+          &lt;/div&gt;
+          &lt;div class=&quot;text-text&quot;&gt;
+              You can make use of the following annotations when querying with the Db class
+              &lt;pre&gt;
+@Primary - Mark a column as the primary column, required when updating a row
+@Autogen - Mark a column as having autogenerated value after insert
+@Table{name = &quot;xx&quot;} - By default table name is assumed to be the class name, 
+                      to change this use this annotation on a class
+@Column{name=&quot;xx&quot;} - By default column name is assumed to be the field name, 
+                     to change this use this annotation on a field 
+&lt;/pre&gt;
+          &lt;/div&gt;
+          
+          
+          &lt;div class=&quot;title-text&quot;&gt;  
+              Using sql maps
+          &lt;/div&gt;  
+          &lt;div class=&quot;text-text&quot;&gt;
+            SqlMaps are the &quot;holy-grail&quot; of fanbatis. SqlMap lets you map query results to objects in the simples-possible way.
+          &lt;/div&gt;
+          &lt;div class=&quot;text-text&quot;&gt;
+            Here's a sql map to select one blog by id
+            &lt;pre&gt;
+class BlogSql {
+  static Blog findById(Int id){
+    S&lt;|
+         select * from blog where id = #{id}
+    |&gt;
+  }
+}
+
+//Getting the blog
+blog := BlogSql.findById(1)
+          &lt;/pre&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;text-text&quot;&gt;
+              Take a look at how you can wrap a sql in a method. That's all there to it. Fanbatis will execute the query, map the result to return  type and return you the result
+          &lt;/div&gt;
+          &lt;div class=&quot;text-text&quot;&gt;
+              There are 4 DSLs S&lt;||&gt; (for select), I&lt;||&gt; (for insert), U&lt;||&gt; (for update), D&lt;||&gt; (for delete)
+          &lt;/div&gt;
+          &lt;div class=&quot;text-text&quot;&gt;
+              You can use any method parameter or any of it's own property for example
+              &lt;pre&gt;static Void saveBlog(Blog blog){
+  U&lt;|
+       update blog set subject = &lt;strong&gt;#{blog.subject}&lt;/strong&gt; where id = &lt;strong&gt;#{blog.id}&lt;/strong&gt;
+  |&gt;
+}&lt;/pre&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;text-text&quot;&gt;
+              Here's a simple insert
+              &lt;pre&gt;static Void create(Blog blog){
+  I&lt;|
+    insert into tblog(subject, post) values(#{blog.subject}, #{blog.post})
+  |&gt;
+}&lt;/pre&gt;
+              When inserting you can fetch back autogenerated values using @UseGeneratedKeys facet, example
+              &lt;pre&gt;&lt;strong&gt;@UseGeneratedKeys{key = &quot;blog.id&quot;}&lt;/strong&gt;
+static Void create(Blog blog){
+  I&lt;|
+    insert into tblog(subject, post) values(#{blog.subject}, #{blog.post})
+  |&gt;
+}&lt;/pre&gt;
+            
+            You can also fetch back auto generated values by querying using the @SelectKey facet
+            &lt;pre&gt;&lt;strong&gt;@SelectKey{keyProperty=&quot;blog.id&quot;; order=&quot;AFTER&quot;; type=Int#; query = &quot;SELECT IDENTITY()&quot;}&lt;/strong&gt;
+static Void insertBlogWithSelect(Blog blog){
+  I&lt;|
+      insert into blog(subject, post)
+        values(#{blog.subject} , #{blog.post})
+  |&gt;
+}&lt;/pre&gt;
+          &lt;/div&gt;
+          
+          &lt;div class=&quot;title-text&quot;&gt;
+              ResultMaps for complex query mapping
+          &lt;/div&gt;
+          &lt;div class=&quot;text-text&quot;&gt;
+            Sometimes you will want to do more complex mapping when trying to fetch data from multiple tables using joins. Here's a example. You will want to look at the mybatis documentation see more about result maps.
+          &lt;/div&gt;
+          &lt;div class=&quot;text-text&quot;&gt;
+            In this example we will solve the n+1 select problem by fetching all the blogs along with the author
+          &lt;/div&gt;
+          &lt;div class=&quot;text-text&quot;&gt;
+            Assume the blog class with Author
+          &lt;pre&gt;class Blog {
+  Int? id
+  Str? subject
+  Str? detail
+  Author? author
+}
+  &lt;/pre&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;text-text&quot;&gt;
+            .. and the author class
+          &lt;pre&gt;class Author{
+  Int? id
+  Str? name
+  DateTime? birthDate
+}&lt;/pre&gt;
+          &lt;/div&gt;
+         
+          &lt;div class=&quot;text-text&quot;&gt;
+          Here's the sql map to fetch all blogs along with their authors
+          &lt;/div&gt;
+
+          &lt;div class=&quot;text-text&quot;&gt;
+          &lt;pre&gt;using fanbatis
+class BlogSql{
+  &lt;strong&gt;@MapWith{name = &quot;blogMap&quot;}&lt;/strong&gt;
+  Blog[] selectBlogsWithAuthor(){
+    S&lt;|
+          select b.id blog_id, b.subject blog_subject,
+          b.detail blog_detail,
+          a.id author_id, a.name author_name,  
+          a.birthDate as birth_date
+          from
+          blog b 
+          left outer join
+          Author a on b.author_id = a.id
+     |&gt;
+  }
+
+
+  static ResultMap blogMap(){ 
+    ResultMap{
+      it.type = Blog#
+      id-&gt;id = &quot;blog_id&quot;
+      result-&gt;subject = &quot;blog_subject&quot;
+      result-&gt;detail = &quot;blog_detail&quot;
+      association-&gt;author = Association{resultMap=&quot;authorMap&quot;}
+    }
+  } 
+
+  static ResultMap authorMap(){
+    ResultMap{
+      it.type = Author#
+      id-&gt;id = &quot;author_id&quot;
+      result-&gt;name = &quot;author_name&quot;
+      result-&gt;birthDate = &quot;birth_date&quot;
+    }
+  }
+}&lt;/pre&gt;
+          &lt;/div&gt;
+
+          &lt;div class=&quot;text-text&quot;&gt;
+              Note how resultmaps are declared as static methods in the same class. Mention the resultmap's name using @MapWith annotation. 
+          &lt;/div&gt;
+
+&lt;/div&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Debugging Tales project using Eclipse F4 IDE</title>
+   <link href="http://ksat.me/eclipse"/>
+   <updated>2012-06-24T00:00:00+05:30</updated>
+   <id>http://ksat.me/eclipse</id>
+   <content type="html">&lt;div style=&quot;padding:10px&quot;&gt;  
+  &lt;div class=&quot;text-title&quot;&gt;
+    Setting up eclipse IDE
+  &lt;/div&gt;
+ 	&lt;div class=&quot;text-text&quot;&gt;
+    Create a new tales project using &quot;fan tales new&quot; command
+&lt;pre&gt;fan tales new newapp&lt;/pre&gt;
+  &lt;/div&gt;
+	&lt;div class=&quot;text-text&quot;&gt;
+			An app directory newapp/ is created for you
+	&lt;/div&gt;
+	&lt;div class=&quot;text-text&quot;&gt;
+			&lt;ol style=&quot;list-style:block;&quot;&gt;
+				&lt;li&gt;Open F4 IDE, choose a location for workspace other than the project location&lt;/li&gt;
+				&lt;li&gt;Select File-&gt;new-&gt;Fantom Project&lt;/li&gt;
+				&lt;li&gt;Type your project name(&quot;newapp&quot; in this example) in the project name box.&lt;/li&gt;
+				&lt;li&gt;Select &quot;Create project from existing location (from existing source)&quot; &lt;/li&gt;
+				&lt;li&gt;Click on browse and choose your app directory &lt;/li&gt;
+				&lt;li&gt;click finish
+					&lt;div&gt;
+						&lt;img src=&quot;/images/eclipsenewproj.png&quot; width=&quot;400px;&quot;/&gt;
+					&lt;/div&gt;
+				&lt;/li&gt;
+				&lt;li&gt;Open fan/build.fan, Right click anywhere on the editor and select &quot;Run as-&gt;Fantom class&quot;. This should build the pod for the first time&lt;/li&gt;
+				&lt;li&gt;Open fan/Debug.fan and select &quot;Debug As-&gt;Fantom class&quot;&lt;/li&gt;
+			&lt;/ol&gt;
+	&lt;/div&gt;
+	&lt;div class=&quot;text-text&quot;&gt;
+			That's it. now Just modify the classes as usual and and debug-away :)
+	&lt;/div&gt;
+&lt;/div&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Develop a fanquery plugin</title>
+   <link href="http://ksat.me/develop-fanquery-plugin"/>
+   <updated>2012-06-24T00:00:00+05:30</updated>
+   <id>http://ksat.me/develop-a-fanquery-plugin</id>
+   <content type="html">&lt;div style=&quot;padding:10px&quot;&gt;
+  &lt;div class=&quot;text-title&quot; style=&quot;margin-top:5px&quot;&gt;
+    I) Adding more methods to Jq class
+  &lt;/div&gt;
+  &lt;div class=&quot;text-text&quot;&gt;
+      Make sure you have read how to use &lt;a href=&quot;/using-a-fanquery-plugin&quot;&gt;fanqery plugins&lt;/a&gt; before you read this page. &lt;br/&gt; In any app if you want to add more methods to the Jq class, you can do it. For eg., let's add a method &quot;slideUpAndDown&quot; to Jq class. Open fan/Jq.fan and modify it as below
+    &lt;pre&gt;using fanquery
+using fancybox
+
+@Js
+class Jq : JqBase{
+  new make(Obj? selector, JqBase? context := null) 
+                            : super(selector, context){}
+  &lt;strong&gt;Void slideUpAndDown(){&lt;/strong&gt;
+    &lt;strong&gt;slideUp.slideDown&lt;/strong&gt;
+  &lt;strong&gt;}&lt;/strong&gt;
+}&lt;/pre&gt; 
+    That's it. Now you can use this method like this 
+&lt;pre&gt;Jq(&quot;link&quot;).click{
+ Jq(&quot;button&quot;).slideUpAndDown
+}&lt;/pre&gt;
+		Now let's go on to see how to develop reusable fanquery plugins
+  &lt;/div&gt;
+  &lt;div class=&quot;text-title&quot; style=&quot;margin-top:5px&quot;&gt;
+    II) Write a pure fantom fanquery plugin
+  &lt;/div&gt;
+
+  &lt;div class=&quot;text-text&quot;&gt;
+    Let's develop a simple plugin called &quot;betterclick&quot; that will show an alert when clicked on anything it's attached to:
+  &lt;/div&gt;
+
+  &lt;div class=&quot;text-text&quot;&gt;
+      1) Create a regular pod &quot;betterclick&quot; with on mixin BetterClick on it. Code it like this
+&lt;pre&gt;using fanquerybase
+using dom
+
+@Js
+mixin BetterClick{
+  JqBase betterClick(){
+    JqBase self := (Obj)this
+
+    self.click|cur, event|{
+      Win.cur.alert(&quot;Ouch, you clicked me...&quot;)
+      event.preventDefault
+    }
+
+    return self
+  }
+}&lt;/pre&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;text-text&quot;&gt;
+          That's it. Build pod. Now you can use it in &lt;a href=&quot;/using-a-fanquery-plugin&quot;&gt;your app like this&lt;/a&gt;
+      &lt;/div&gt;           
+  &lt;/div&gt;
+ 
+  &lt;div class=&quot;text-text&quot;&gt;
+    Distribute betterclick.pod and your consumer's will be able to use the betterclick() method like this:
+  &lt;pre&gt;Jq(&quot;#mylink&quot;).betterClick()&lt;/pre&gt;              
+
+  &lt;/div&gt;
+
+  &lt;div class=&quot;text-title&quot; style=&quot;margin-top:5px&quot;&gt;
+    III) Porting a Existing Jquery plugin
+  &lt;/div&gt;
+
+  &lt;div class=&quot;text-text&quot;&gt;
+    Let's see how to code the fancybox plugin. Almost all the steps remains same, except you need to write some native javascript code 
+  &lt;/div&gt;
+
+  &lt;div class=&quot;text-text&quot;&gt;
+  1) Write a regular pod(&quot;fancybox&quot;) with one class FancyBox like this
+  &lt;pre&gt;using fanquery
+@Js
+mixin FancyBox{
+  Void fancybox([Str:Obj]? props := null){
+    JqBase self := (Obj)this
+    FancyBoxNative.fancybox(self, props)
+  }
+
+  static Void close(){
+    FancyBoxNative.close
+  }
+}
+
+@Js
+class FancyBoxNative{
+  native static Void fancybox(JqBase self, [Str:Obj]? props := null)
+  native static Void close()
+}&lt;/pre&gt;
+
+  &lt;/div&gt;
+  &lt;div class=&quot;text-text&quot;&gt;
+    add &lt;strong&gt;js/FanyBoxNativePeer.js&lt;/strong&gt; which looks like this
+  &lt;pre&gt;fan.fancybox.FancyBoxNativePeer = fan.sys.Obj.$extend(fan.sys.Obj);
+  
+fan.fancybox.FancyBoxNativePeer.fancybox = function(self, props){
+  var jsProps = toJsMap(props);
+  if(jsProps){
+    self.selector.fancybox(jsProps);
+  }
+  else{
+    self.selector.fancybox();
+  }
+
+}&lt;/pre&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;text-text&quot;&gt;
+      You can also add a &lt;strong&gt;fan/Conf.fan&lt;/strong&gt;. It defines the set of additional js files that needs to be delivered. You can also optionally deliver more js files depending on conf parameter. You can include all these files in your pods res/ directory.
+      &lt;pre&gt;class Conf{
+  Str[] getExtraJsFiles([Str:Obj]? conf){
+    args := [&quot;res/fancybox/jquery.fancybox-1.3.4.js&quot;]
+    if(conf[&quot;easing&quot;] == true){
+      args.add(&quot;res/fancybox/jquery.easing.js&quot;)
+    }
+    return args
+  }
+}&lt;/pre&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;text-text&quot;&gt;
+    Now when someone includes this plugin like this
+&lt;pre&gt;&lt;strong&gt;@Js&lt;/strong&gt;
+&lt;strong&gt;@Include{ plugins =[&lt;/strong&gt;
+      &lt;strong&gt;Plugin{name=&quot;fancybox&quot;; conf=[&quot;easing&quot;:true]}&lt;/strong&gt;
+   &lt;strong&gt;]&lt;/strong&gt;
+&lt;strong&gt;}&lt;/strong&gt;
+class IndexJs{..}&lt;/pre&gt;
+    Both fancybox js and easing js will be included.
+  &lt;/div&gt;
+&lt;/div&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Custom error and not found pages</title>
+   <link href="http://ksat.me/custom"/>
+   <updated>2012-06-24T00:00:00+05:30</updated>
+   <id>http://ksat.me/custom</id>
+   <content type="html">&lt;div style=&quot;padding:25px;min-height:500px;&quot;&gt;
+    &lt;div class=&quot;title-text&quot;&gt;
+      Custom Error and NotFound Pages
+    &lt;/div&gt;
+    &lt;div class=&quot;text-text&quot;&gt;
+       Custom error and notfound pages can be displayed using the CustomPageSetting
+    &lt;/div&gt;
+    &lt;div class=&quot;text-text&quot;&gt;
+       To define custom error and notfound pages open Settings.fan and add a CustomPageSetting like this
+      &lt;pre&gt;add(CustomPageSetting{
+  notFound = Index#.method(&quot;notFound&quot;)
+  error = Index#.method(&quot;error&quot;)
+})&lt;/pre&gt;
+   
+    &lt;/div&gt;
+    &lt;div class=&quot;text-text&quot;&gt;
+        Now, When a page is not found the request will be routed to &quot;notFound&quot; method in the class Index and when an error occurs the request will be routed using the &quot;error&quot; method in class Index.
+    &lt;/div&gt;
+    
+ &lt;/div&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Background Jobs</title>
+   <link href="http://ksat.me/background-jobs"/>
+   <updated>2012-06-24T00:00:00+05:30</updated>
+   <id>http://ksat.me/background-jobs</id>
+   <content type="html">&lt;div style=&quot;padding:10px;min-height:500px;&quot;&gt;  
+  &lt;div class=&quot;text-title&quot;&gt;
+    Jobs
+  &lt;/div&gt;
+  &lt;div class=&quot;text-text&quot;&gt;
+      Tales provides the &quot;Job&quot; class to help create background jobs. A &quot;Job&quot; is nothing but a special kind of Actor managed by tales. The &quot;Job&quot; has two methods that you can override &quot;setup&quot; and &quot;doJob&quot;
+  &lt;/div&gt;
+  &lt;div class=&quot;text-title&quot;&gt;
+     Run code on server startup
+  &lt;/div&gt;
+  &lt;div class=&quot;text-text&quot;&gt;
+      You can override the setup method to run code on server startup
+      &lt;pre&gt;using tales
+
+const class Startup : Job{
+    new make() : super(&quot;startup&quot;){}
+
+    override Void setup(){
+        echo(&quot;On Startup&quot;)
+    }
+}&lt;/pre&gt;
+    &quot;On Startup&quot; will be printed on sever startup. There is no need for any more configuration. On startup, tales will scan all classes that extends Job and call the &quot;setup&quot; method
+  &lt;/div&gt;
+  &lt;div class=&quot;text-text&quot;&gt;
+      Note that code in &quot;setup&quot; method will block the server from starting up - that is utill all Job's setup method is not complete, the server cannot take it's first request. If you want the execute something on startup but in the background, you can send the job a message from the &quot;setup&quot; method and handle it on the &quot;doJob&quot; method. 
+      &lt;pre&gt;using tales
+        
+const class Startup : Job{
+    new make() : super(&quot;Test job&quot;){}
+
+    override Void setup(){
+        this.send(null)
+    }
+
+    override Obj? doJob(Obj? msg){
+        echo(&quot;On Startup&quot;)
+        return null
+    }
+}&lt;/pre&gt;
+  &lt;/div&gt;
+   &lt;div class=&quot;text-text&quot;&gt;
+      The above code is equivalent to the first one except that the execution will happen on the background and will not block the server from starting up
+   &lt;/div&gt;
+   &lt;div class=&quot;text-title&quot;&gt;
+      Running Recurring background jobs
+   &lt;/div&gt;
+   &lt;div class=&quot;text-text&quot;&gt;
+       You can for example configure a job to run every 1hr using standard methods in Actor class. Here's an example
+       &lt;pre&gt;using tales
+
+const class MailChecker : Job{
+   new make() : super(&quot;Mailer&quot;){}
+
+   override Void setup(){
+       this.sendLater(1hr, null)
+   }
+
+   override Obj? doJob(Obj? msg){
+       checkForNewAccountsAndSendMail
+       this.sendLater(1hr, null)
+       return null
+   }
+}&lt;/pre&gt;
+         
+    &lt;/div&gt;
+&lt;/div&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Anatomy of a tales app</title>
+   <link href="http://ksat.me/anatomy"/>
+   <updated>2012-06-24T00:00:00+05:30</updated>
+   <id>http://ksat.me/anatomy</id>
+   <content type="html">&lt;div style=&quot;padding:25px;&quot;&gt;
+		&lt;div class=&quot;text-title&quot;&gt;
+								Basic Structure
+						&lt;/div&gt;
+						&lt;div class=&quot;text-text&quot;&gt;
+	When you create a new tales project, say &quot;app&quot;,  you will see a directory structure that matches this.. 
+	&lt;pre&gt;app/
+- build.fan
+- fan/
+  - Index.fan
+- res/
+- template/
+  - Index.html
+&lt;/pre&gt;							
+&lt;/div&gt;
+
+&lt;div class=&quot;text-title&quot;&gt;
+	Top level files and directories
+&lt;/div&gt;
+&lt;div class=&quot;text-text&quot; &gt;
+&lt;strong style=&quot;color:#666&quot;&gt;build.fan:&lt;/strong&gt;&lt;br/&gt;
+Builds your pod.
+Note: You don't need to build pods for running  in dev/prod mode. 
+Just cd to the app directory and type &quot;tales run&quot;[dev mode]/&quot;tales exec&quot;[prod mode]
+&lt;/div&gt;
+&lt;div class=&quot;text-text&quot; &gt;
+&lt;strong style=&quot;color:#666&quot;&gt;fan/ directory&lt;/strong&gt;&lt;br/&gt;
+Contains all fantom files. 
+&lt;/div&gt;
+&lt;div class=&quot;text-text&quot; &gt;
+&lt;strong style=&quot;color:#666&quot;&gt;res/ directory: &lt;/strong&gt;&lt;br/&gt;
+Contains all public files. Whatever you put in this directory will be available for download from tales server. For eg., if you put a file page.css in res/ directory,
+ you can access the file from &lt;pre&gt; http://localhost:8000/page.css&lt;/pre&gt;
+ If you put page.css in res/css/ directory you can access the file from
+ &lt;pre&gt; http://localhost:8000/css/page.css &lt;/pre&gt;
+ So this is an excellent place to put your public , css, image and javascript files. 
+&lt;/div&gt;
+&lt;div class=&quot;text-text&quot; &gt;
+&lt;strong style=&quot;color:#666&quot;&gt;template/ directory: &lt;/strong&gt;&lt;br/&gt;
+Contains all template files.  A template file forms a base for the page that is displayed. Think of template files like your jsp files, but without any logic.
+&lt;br/&gt;
+
+&lt;/div&gt;
+		&lt;/div&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Adhoc queries in fanbatis</title>
+   <link href="http://ksat.me/ad-hoc-queries"/>
+   <updated>2012-06-24T00:00:00+05:30</updated>
+   <id>http://ksat.me/ad-hoc-queries</id>
+   <content type="html">&lt;div style=&quot;padding:10px&quot;&gt;
+  &lt;div class=&quot;text-title&quot;&gt;
+    Ad-Hoc Queries(The DB class)
+  &lt;/div&gt;
+  &lt;div class=&quot;text-text&quot;&gt;
+    If you are one of those dirty-but-quick types, the DB class provides some convenient methods for ad hoc querying. Here are a few examples
+  &lt;/div&gt;
+  &lt;div class=&quot;text-text&quot;&gt;
+    Delete all blogs
+  &lt;pre&gt;
+DB.delete(&quot;Delete from blog&quot;)&lt;/pre&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;text-text&quot;&gt;
+    Insert a blog with a subject
+  &lt;pre&gt;
+DB.insert(&quot;insert into blog(subject) values(#{param.subject})&quot;, 
+   [&quot;subject&quot;:&quot;kaushik&quot;])&lt;/pre&gt;
+  &lt;/div&gt;
+
+	  &lt;div class=&quot;text-text&quot;&gt;
+	  Select one blog
+	  &lt;pre&gt;
+Row? row := 
+ DB.queryOne(&quot;select * from blog where id = #{param.id}&quot;,
+	                        [&quot;id&quot; : 1])
+echo(row-&gt;subject)&lt;/pre&gt;
+	  &lt;/div&gt;
+
+	  &lt;div class=&quot;text-text&quot;&gt;
+	  Get the list of all blogs
+	  &lt;pre&gt;Row[] rows := DB.queryList(&quot;select * from blog&quot;)
+rows.each{
+  echo(it-&gt;subject)
+}&lt;/pre&gt;
+	  &lt;/div&gt;
+	  &lt;div class=&quot;text-text&quot;&gt;
+	  Update a blog's name
+	  &lt;pre&gt;
+DB.update(&quot;update blog set subject = #{param.subject} &amp;lt;
+	where id = #{param.id}&quot;,[&quot;subject&quot;:&quot;About me&quot;, &quot;id&quot;:1])
+	  &lt;/pre&gt;
+	  &lt;/div&gt;
+
+	  &lt;div class=&quot;text-text&quot;&gt;
+	  The fanbatis::Row class: &lt;br/&gt;
+	  You will want to use The &quot;Row&quot; class returned by ad-hoc queries and queries whose result does not map cleanly to a class. You can access properties using row-&gt;(properyName)
+	  &lt;/div&gt;
+
+	  &lt;div class=&quot;text-text&quot; style=&quot;display:none&quot;&gt;
+	    &lt;a href=&quot;AdHoc.fan&quot;&gt;Download AdHoc.fan&lt;/a&gt; having all this in one script
+	  &lt;/div&gt;
+              
+&lt;/div&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Kloudo.com – A Fantom Success story</title>
+   <link href="http://ksat.me/kloudo-a-fantom-success-story"/>
+   <updated>2010-09-21T00:00:00+05:30</updated>
+   <id>http://ksat.me/kloudo-a-fantom-success-story</id>
+   <content type="html">&lt;h1&gt;Kloudo.com – A Fantom Success story2&lt;/h1&gt;
+&lt;p&gt;Well, You don’t know me. I am sure. So, Hey! I am kaushik.  Programmer. I usually freelance.   And this is my first blog.&lt;/p&gt;
+&lt;p&gt;Yesterday we launched &lt;a href=&quot;http://www.kloudo.com&quot;&gt;kloudo.com&lt;/a&gt; – A Integrated business organizer. Obviously I think it’s pretty awesome. That’s not the point of this post, however.&lt;/p&gt;
+&lt;p&gt;What better way to start to blog than by thanking the open source projects that has helped you to get your things done.  I’ve my share of list to thank. Including Mysql, redis, ngnix  and fantom. Yeah &lt;a href=&quot;http://www.fantom.org&quot;&gt;Fantom&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Kloudo.com was built mostly-completely written on the Fantom programming language. Ofcourse since its pretty easy to use Java libraries from inside fantom, I’ve done that too.&lt;/p&gt;
+&lt;p&gt;Why Fantom?  fantom.org has a &lt;a href=&quot;http://fantom.org/doc/docIntro/WhyFantom.html&quot;&gt;page on that&lt;/a&gt; .And one more point they missed over there. The developers(Brian and Andy) are pretty damn amazing.  So is the community.  The language is beautiful. APIs are elegant.  Has Actors. Ruby like closures . Runs on &lt;span class=&quot;caps&quot;&gt;JVM&lt;/span&gt;. And very attractive to a Java Programmers.&lt;/p&gt;
+&lt;p&gt;So the point of this post, mostly, is to let you know, if you din’t know already, that Fantom is mature and usable right now. I made an entire product on it and loved every second programming with it. So will you. So go give it a try.&lt;/p&gt;
+&lt;p&gt;Hopefully, I will write more about my experiences with Fantom.&lt;/p&gt;
+&lt;p&gt;And, Andy,Brian, tactics, tcolar,  xored and every one else in the Fantom community, if you are reading this. Thank You! You made my life easier and fun and so you will for a lot of other people. Love you guys and will try to contribute back in ways that I can&lt;/p&gt;</content>
+ </entry>
+ 
+ 
+</feed>

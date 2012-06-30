@@ -1,0 +1,334 @@
+---
+layout: base
+title: Fanbatis
+secondtitle: whatis
+highlight: fanbatis
+permalink: /fanbatis
+---
+
+<div style="padding:25px">
+  <div align="center">
+    <h1 style="color:#888">Fanbatis - Easy data access for Fantom</h1>
+  </div>
+  <div class="text-title">
+                What is Fanbatis?
+            </div>
+            <div class="text-text">	
+			  ORM was a simple problem to solve. Until the likes of hibernate complicated it.
+			</div>
+			<div class="text-text">	
+			  <a href="http://www.mybatis.org/">Mybatis</a> nicely fitted the bill of being a pefectly-simple datamappter but is more verbose than necessary due to Java itself. With Fantom's syntax sugars and Dsls we can simplify everything and try to hit that sweet spot between directly using SQL, datamappers and ORMs.
+			</div>
+           
+            <div class="text-text">
+               Fanbatis is the default data-access library that comes with tales. However fanbatis can be used outside of it
+            </div>
+
+            <div class="text-text">
+                The goal is to provide syntax sugar for commonly used things..
+                <pre text-align="left">//Get one blog from database
+Blog blog := Db.one(Blog{id = 1})
+</pre>
+
+            </div>
+            
+            <div class="text-text">
+                .. and expose the full power of sql for everything else
+            </div>
+            <div class="text-text">
+                <pre>User getUser(Int id){S<| 
+    select u.userid, u.name from User u,Company c 
+    where u.id = #{id} and u.company_id  = c.id and c.is_deleted = 0
+|>}</pre>
+            </div>
+            <div class="title-text">
+                Installing Fanbatis
+            </div>
+            <div class="text-text">
+              If you're using tales, there is no need to install fanbatis. Tales comes with fanbatis bundled up 
+            </div>
+            <div class="text-text">
+              If you're using fanbatis outside of tales, get it from tales repo
+              <pre>fanr install -r http://repo.talesframework.org:9000 fanbatis</pre>
+            </div>
+            
+            <div class="title-text">
+                Configuring
+            </div>
+            <div class="text-text">
+              If you are using fanbatis with tales, open Settings.fan and add a DbSetting like this:
+              <pre>add(DbSetting{
+  hostString = "jdbc:mysql://localhost:3306/host"
+  driver = "com.mysql.jdbc.Driver"
+  username = "kaushik"
+  password = "password"
+})</pre>
+            </div>
+            <div class="text-text">
+              If you are running fanbatis outside of tales, configure the Batis object like this
+              <pre>using fanbatis
+class Main{
+  static const Str:Str props :=  Str:Str[
+                                 "url":"jdbc:h2:mem:test",
+                                 "driver":"org.h2.Driver",
+                                 "username": "sa",
+                                 "password":""]
+
+  static Void setup(){
+    batis := Batis(true) //true if dev mode
+    batis.configure(props)
+    
+    Blog blog := Db.one(Blog{id = 1})
+    ...
+  }
+}
+</pre>
+            </div>
+            
+            <div class="title-text">
+                Querying
+            </div>
+            
+            <div class="text-text">
+                Assume a table like this:
+                <pre>
+create table IF NOT EXISTS blog
+(id integer auto_increment primary key, 
+subject varchar(200), detail varchar(2000));</pre>
+            </div>
+            
+            <div class="text-text">
+                And a class like this:
+<pre>class Blog {
+  @Primary
+  @Autogen
+  Int? id
+  Str? subject
+  Str? detail
+} </pre>
+            </div>
+            
+            <div class="text-title">
+              Using the "Db" class
+            </div>  
+            <div class="text-text">
+              <strong>Here are a few examples of doing short-hand queries</strong>
+            </div>
+            
+            <div class="text-text">
+              Fetch one blog by id 
+<pre>
+Blog blog := Db.one(Blog{id = 1})</pre>
+          </div>
+
+          <div class="text-text">
+              Fetch all blogs
+<pre>
+Blog[] blogs := Db.list(Blog{})</pre>
+          </div>
+          <div class="text-text">
+              Fetch all blogs by subject
+<pre>
+Blog[] blogs := Db.list(Blog{subject="My First blog"})</pre>
+          </div>
+
+          <div class="text-text">
+              Fetch one blog by name and authorId
+<pre>
+Blog blog := Db.one(Blog{name="My Blog"; authorId = 1})</pre>
+          </div>
+          <div class="text-text">
+              Create a blog
+<pre>Blog blog := Db.create(Blog{subject = "test"; it.detail="test"})
+echo(blog.id) 
+//Note: since id is annotated with autogen,
+// id will be auto populated</pre>
+          </div>
+          
+          <div class="text-text">
+              Fetching and updating a blog
+<pre>Blog blog := Db.one(Blog{id = 1})
+blog.authorId = 2
+Db.save(blog)</pre>
+          </div>
+
+          <div class="text-text">
+              Deleting a blog
+<pre>
+Blog blog := Db.one(Blog{id = 1})
+Db.remove(blog)
+</pre>
+          </div>
+          <div class="text-text">
+              Fetching a list of blogs with custom where clause
+<pre>Blog[] blogs := Db.list(Blog#, "subject = #{param.subject}", ["subject", "My Blog"])</pre>
+          </div>
+          
+          <div class="text-text">
+              Ad hoc querying for one value
+<pre>Row row := Db.queryOne("select 1*2 val from dual");
+echo(row->val)
+</pre>
+          </div>
+          <div class="text-text">
+              Ad hoc querying for one multiple values
+<pre>Row[] rows := Db.querylist("select id, name from employees where name like '#{param.name}%'",
+                                ["name", "A"]);
+rows.each{  
+  echo(row->id)
+  echo(row->name)
+}
+</pre>
+          </div>
+          <div class="text-title">
+            Annotations that go with the "Db" class
+          </div>
+          <div class="text-text">
+              You can make use of the following annotations when querying with the Db class
+              <pre>
+@Primary - Mark a column as the primary column, required when updating a row
+@Autogen - Mark a column as having autogenerated value after insert
+@Table{name = "xx"} - By default table name is assumed to be the class name, 
+                      to change this use this annotation on a class
+@Column{name="xx"} - By default column name is assumed to be the field name, 
+                     to change this use this annotation on a field 
+</pre>
+          </div>
+          
+          
+          <div class="title-text">  
+              Using sql maps
+          </div>  
+          <div class="text-text">
+            SqlMaps are the "holy-grail" of fanbatis. SqlMap lets you map query results to objects in the simples-possible way.
+          </div>
+          <div class="text-text">
+            Here's a sql map to select one blog by id
+            <pre>
+class BlogSql {
+  static Blog findById(Int id){
+    S<|
+         select * from blog where id = #{id}
+    |>
+  }
+}
+
+//Getting the blog
+blog := BlogSql.findById(1)
+          </pre>
+          </div>
+          <div class="text-text">
+              Take a look at how you can wrap a sql in a method. That's all there to it. Fanbatis will execute the query, map the result to return  type and return you the result
+          </div>
+          <div class="text-text">
+              There are 4 DSLs S<||> (for select), I<||> (for insert), U<||> (for update), D<||> (for delete)
+          </div>
+          <div class="text-text">
+              You can use any method parameter or any of it's own property for example
+              <pre>static Void saveBlog(Blog blog){
+  U<|
+       update blog set subject = <strong>#{blog.subject}</strong> where id = <strong>#{blog.id}</strong>
+  |>
+}</pre>
+          </div>
+          <div class="text-text">
+              Here's a simple insert
+              <pre>static Void create(Blog blog){
+  I<|
+    insert into tblog(subject, post) values(#{blog.subject}, #{blog.post})
+  |>
+}</pre>
+              When inserting you can fetch back autogenerated values using @UseGeneratedKeys facet, example
+              <pre><strong>@UseGeneratedKeys{key = "blog.id"}</strong>
+static Void create(Blog blog){
+  I<|
+    insert into tblog(subject, post) values(#{blog.subject}, #{blog.post})
+  |>
+}</pre>
+            
+            You can also fetch back auto generated values by querying using the @SelectKey facet
+            <pre><strong>@SelectKey{keyProperty="blog.id"; order="AFTER"; type=Int#; query = "SELECT IDENTITY()"}</strong>
+static Void insertBlogWithSelect(Blog blog){
+  I<|
+      insert into blog(subject, post)
+        values(#{blog.subject} , #{blog.post})
+  |>
+}</pre>
+          </div>
+          
+          <div class="title-text">
+              ResultMaps for complex query mapping
+          </div>
+          <div class="text-text">
+            Sometimes you will want to do more complex mapping when trying to fetch data from multiple tables using joins. Here's a example. You will want to look at the mybatis documentation see more about result maps.
+          </div>
+          <div class="text-text">
+            In this example we will solve the n+1 select problem by fetching all the blogs along with the author
+          </div>
+          <div class="text-text">
+            Assume the blog class with Author
+          <pre>class Blog {
+  Int? id
+  Str? subject
+  Str? detail
+  Author? author
+}
+  </pre>
+          </div>
+          <div class="text-text">
+            .. and the author class
+          <pre>class Author{
+  Int? id
+  Str? name
+  DateTime? birthDate
+}</pre>
+          </div>
+         
+          <div class="text-text">
+          Here's the sql map to fetch all blogs along with their authors
+          </div>
+
+          <div class="text-text">
+          <pre>using fanbatis
+class BlogSql{
+  <strong>@MapWith{name = "blogMap"}</strong>
+  Blog[] selectBlogsWithAuthor(){
+    S<|
+          select b.id blog_id, b.subject blog_subject,
+          b.detail blog_detail,
+          a.id author_id, a.name author_name,  
+          a.birthDate as birth_date
+          from
+          blog b 
+          left outer join
+          Author a on b.author_id = a.id
+     |>
+  }
+
+
+  static ResultMap blogMap(){ 
+    ResultMap{
+      it.type = Blog#
+      id->id = "blog_id"
+      result->subject = "blog_subject"
+      result->detail = "blog_detail"
+      association->author = Association{resultMap="authorMap"}
+    }
+  } 
+
+  static ResultMap authorMap(){
+    ResultMap{
+      it.type = Author#
+      id->id = "author_id"
+      result->name = "author_name"
+      result->birthDate = "birth_date"
+    }
+  }
+}</pre>
+          </div>
+
+          <div class="text-text">
+              Note how resultmaps are declared as static methods in the same class. Mention the resultmap's name using @MapWith annotation. 
+          </div>
+
+</div>

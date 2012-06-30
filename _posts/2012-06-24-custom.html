@@ -1,0 +1,27 @@
+---
+layout: howtos
+title: Custom error and not found pages
+secondtitle: custom
+permalink: /custom
+---
+
+<div style="padding:25px;min-height:500px;">
+    <div class="title-text">
+      Custom Error and NotFound Pages
+    </div>
+    <div class="text-text">
+       Custom error and notfound pages can be displayed using the CustomPageSetting
+    </div>
+    <div class="text-text">
+       To define custom error and notfound pages open Settings.fan and add a CustomPageSetting like this
+      <pre>add(CustomPageSetting{
+  notFound = Index#.method("notFound")
+  error = Index#.method("error")
+})</pre>
+   
+    </div>
+    <div class="text-text">
+        Now, When a page is not found the request will be routed to "notFound" method in the class Index and when an error occurs the request will be routed using the "error" method in class Index.
+    </div>
+    
+ </div>

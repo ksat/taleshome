@@ -1,0 +1,39 @@
+---
+layout: ide
+title: Debugging Tales project using Eclipse F4 IDE
+secondtitle: eclipse
+permalink: /eclipse
+---
+
+<div style="padding:10px">  
+  <div class="text-title">
+    Setting up eclipse IDE
+  </div>
+ 	<div class="text-text">
+    Create a new tales project using "fan tales new" command
+<pre>fan tales new newapp</pre>
+  </div>
+	<div class="text-text">
+			An app directory newapp/ is created for you
+	</div>
+	<div class="text-text">
+			<ol style="list-style:block;">
+				<li>Open F4 IDE, choose a location for workspace other than the project location</li>
+				<li>Select File->new->Fantom Project</li>
+				<li>Type your project name("newapp" in this example) in the project name box.</li>
+				<li>Select "Create project from existing location (from existing source)" </li>
+				<li>Click on browse and choose your app directory </li>
+				<li>click finish
+					<div>
+						<img src="/images/eclipsenewproj.png" width="400px;"/>
+					</div>
+				</li>
+				<li>Open fan/build.fan, Right click anywhere on the editor and select "Run as->Fantom class". This should build the pod for the first time</li>
+				<li>Open fan/Debug.fan and select "Debug As->Fantom class"</li>
+			</ol>
+	</div>
+	<div class="text-text">
+			That's it. now Just modify the classes as usual and and debug-away :)
+	</div>
+</div>
+

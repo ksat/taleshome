@@ -1,0 +1,47 @@
+---
+layout: fanquery
+title: What is fanquery
+secondtitle: whatis
+permalink: /what-is-fanquery
+---
+
+<div style="padding:10px">
+	<div class="text-title" style="margin-top:5px">
+		What is Fanquery?
+	</div>
+	<div class="text-text">
+		Fantom is awesome. One of the awesomeness is the fact that it compiles to Javascript.  
+		Jquery is amazing too. Fanquery lets you use jquery and all it's plugins right inside fantom.
+
+	</div>
+	<div class="text-text">
+		The goal is to match Jquery's syntax as much as possible, 
+		yet provide type safety and a sprinkle of what makes Fantom beautiful. A few examples..<br/>
+<pre text-align="left">Jq("#button").slideUp.slideDown(["duration":Jq.slow])
+	
+Jq("#link").click|cur, event|{
+  Win.cur.alert("Ouch!")
+}	
+
+Jq("#myphoto").fancybox</pre> 
+
+
+	</div>
+	<div class="text-text">
+	Impatient to see how it works? <a href="http://www.fanzy.net/fanquery" target="_blank">Try Fanquery online now</a>
+	or <a href="/start-using-fanquery">Download and start using Fanquery</a>
+	</div>
+
+	<div class="text-title">
+	Develop, port and use Jquery plugins
+	</div>
+	<div class="text-text">
+	Fanquery provides an easy way to develop your own plugin either from scratch totally in Fantom 
+	or just port an existing jquery plugin and wrap it up with a nice Fantom API.
+	</div>
+	<div class="text-text">
+	Read on to see <a href="/using-a-fanquery-plugin">How to use an existing fanquery plugin</a>
+	or <a href="/develop-fanquery-plugin">Develop your own plugin</a>
+	</div>
+
+</div>

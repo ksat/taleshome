@@ -1,0 +1,159 @@
+---
+layout: base
+highlight: home
+title: The Tales web framework for Fantom
+---
+<html>
+  <head>
+      <title>The Tales Web Framework for Fantom</title>
+      <style type="text/css" media="screen">
+          h2{
+            font-size: 14px;
+            font-family: "Ludica Grande", Arial;
+            display: block;
+            color: #414F61;
+        }
+        
+        pre.fan {
+          color: #333;
+          background: #F7F7ED;
+          -moz-border-radius: 5px;
+          -webkit-border-radius: 5px;
+          border: 1px solid #DFE0CD;
+          padding: 5px;
+          margin-top:4px;
+          display:block;
+          float:left;
+          width:280px;
+          padding-left:10px;
+          line-height:18px;
+          
+        }
+        
+        td{
+          vertical-align:top;
+          padding:8px;
+        }
+        
+        a{
+          text-decoration:underline;
+        }
+      </style>
+  </head>
+  <body>
+    <div style="padding:25px;">
+        <div align="center"  >
+          <h1>Easy web applications. Written in Fantom</h1>
+          
+          <div style="margin-top:10px;border-bottom:1px dashed #e4e4e4;">
+            <table>
+              <tr>
+                <td>
+                  <div style="background:#f0f0f0; width:400px;-moz-border-radius:3px;-webkit-border-radius:3px; line-height:40px;text-align:center;font-size:13px;">
+                        fanr install -r http://repo.talesframework.org:9000 tales
+                  </div>
+                </td>
+                <td style="vertical-align:middle;">
+                    <a href="/install-tales">Make your first app</a>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        
+        <div style="margin-top:15px; padding:10px;-moz-border-radius: 5px; -webkit-border-radius: 5px; ">
+           	<table >
+                <tr>
+                    <td width="50%" valign="top" style="vertical-align:top">
+                        <div style="overflow:hidden; margin-top:0px;">
+                         <h2>Code on the most readable Jvm language</h2>
+                          <div>
+<pre class="fan" style="margin-top:10px;">//Hello world written in tales
+using tales
+
+class HelloWorld : Page{
+  <span style="color:#555;">@Route{uri="/hello-world"}</span>
+  Void main(){
+    response.writeStr("Hello World")
+  }
+}
+</pre> <div style="height:10px;">&nbsp;</div>
+                          </div>
+                       </div>
+                    </td>
+                    <td valign="top" >
+                       <h2>Auto reload</h2>
+                       <div>
+                            Never Restart your server. Just edit your file, Save and hit refresh. Compiler errors are shown directly in browser.
+                       </div>
+                        <div style="overflow:hidden; margin-top:10px;">
+                            <h2>Full Stack</h2>
+                            <div>
+                                Tales provides everything you need to build a cool web application for your next big idea.
+                            </div>
+                        </div>
+                        <div style="overflow:hidden; margin-top:10px;">
+                             <h2>IDE support</h2>
+                             <div>
+                                 Run and Debug tales projects in any one of two <a href="/eclipse">awesome IDEs</a>.
+                             </div>
+                           </div>
+                    </td>
+                </tr>
+              </table>
+              
+              <table style="margin-top:8px;">
+                <tr>
+                    <td valign="top" width="336px !important;">
+                        <div style="overflow:hidden">
+                            <h2>Write client code in Fantom, use Jquery</h2>
+                            <pre class="fan">Jq.ready{
+ Jq("#button").click{
+   Win.cur.alert("Hello world")
+ }
+}</pre>
+                          </div>
+                        
+                          
+                          <div style="overflow:hidden; margin-top:30px;clear:both;">
+                              <h2>Html Stays Html templating</h2>
+                              <pre class="fan">&lt;div talesId="name">&lt;/div></pre>
+                              <div style="clear:both;padding-bottom:5px;text-align:left;padding-left:130px;"> + </div>
+                              <pre class="fan">html.tag("name").text("Iam Fantom")</pre>
+                              <div style="clear:both;padding-left:130px;padding-bottom:5px;text-align:left;"> = </div>
+                              <pre class="fan">&lt;div>Iam Fantom&lt;/div></pre>
+                            </div>
+                      
+                    </td>
+                    <td width="50%">
+                       <div style="overflow:hidden">
+                          <h2>A Little ORM, A little Data Mapping</h2>
+                          <pre class="fan">//Simple shortcuts for common use cases
+  
+User user := Db.one(User{id = 1})
+User[] users := Db.list(User{dept = 1})
+
+
+//For complex requirements just
+//wrap the query in a method
+
+User getUser(Int id){S<| 
+    select u.userid, u.name 
+    from User u,Company c 
+    where u.id = #{id} and 
+          u.companid  = c.id and
+          c.isdeleted = 0
+|>}
+</pre>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+           </div>
+					<br/>
+					<a href="https://bitbucket.org/ksat/tales/">Source</a>. License: <a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache version 2.0</a>
+        </div>
+        
+    </div>
+  </body>
+</html>

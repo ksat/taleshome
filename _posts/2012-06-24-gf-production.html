@@ -1,0 +1,44 @@
+---
+layout: gf
+title: Deploying tales in production mode
+secondtitle: production
+permalink: /gf-production
+---
+
+<div style="padding:10px">
+ <div class="title-text">
+ 	Making the detail page
+ </div>
+ <div class="text-text">
+		The detail page which displays one girlfriend and a list of note is left as a exercise. If you want the reference code the entire application and all it's <a href="/example/gf">source code is over here.</a>
+ </div>
+
+ <div class="title-text">
+	Beautifying with css
+ </div>
+ <div class="text-text">
+	This is a quick one..Take a look at the res/ folder , add any file in there and it will available for download directly
+ </div>
+ <div class="text-text">
+	For example try adding a css file "page.css" to res/css/.   Now, in your browser this file can be accessed from url http://localhost:8000/css/page.css. Since files in res are delivered as-is, it's great for putting custom javascript, css and images. 
+ </div>	
+ <div class="text-text">
+	 for example, I can include this css in the head tag like this
+     <pre>&lt;head>
+ &lt;link rel="stylesheet" href="/css/page.css" type="text/css"/>
+&lt;/head></pre>
+ </div>
+
+ <div class="title-text">
+	Running the code in Production mode
+ </div>
+ <div class="text-text">
+	 Remember the "fan tales run" command? All along we have been running the code in dev mode. Dev mode supports things like auto reloading which is great for development. However for running the code in production you might want to run the server in production mode.
+ </div>
+ <div class="text-text">
+	 To run code in production mode use the "exec" command instead of "run". Open command prompt. Cd to the application directory and type <pre>fan tales exec</pre>
+ </div>
+ <div class="text-text">
+		That's it. Your code is running production mode now.
+ </div>
+</div>

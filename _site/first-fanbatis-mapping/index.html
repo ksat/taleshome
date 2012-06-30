@@ -1,0 +1,108 @@
+<div style="padding:10px">
+	<div class="text-title">
+			Making your first query
+	</div>
+	<div class="text-text">
+			Start by firing up the h2 database that comes with fanbatis distribution
+				<pre>
+java -jar h2-1.2.145.jar</pre>
+	</div>
+	<div class="text-text">
+				Let's create the blog table next
+				<pre>
+create table IF NOT EXISTS blog
+ (id integer auto_increment primary key, 
+  subject varchar(200), detail varchar(2000));</pre>
+			</div>
+			<div class="text-text">
+			 	and insert a row
+			 	<pre>
+insert into blog(subject, detail) values('My First blog',
+'My First blog . Its cool');</pre>
+	</div>
+	<div class="text-text">
+			 	Write a Fantom class for blog
+<pre>class Blog {
+  Int? id
+  Str? subject
+  Str? detail
+}	</pre>
+	</div>
+
+	<div class="text-text">
+			 	Write a Sql Map that will fetch  a blog
+<pre>using fanbatis
+class BlogSql{
+   static Blog getBlogBySubject(Str subject){
+    S<|
+       select * from blog where subject = #{subject}
+    |>
+  }
+}</pre>
+	</div>
+	<div class="title-text">
+		If you're using tales
+	</div>
+	<div class="text-text">
+			Just write the above code in fan/sql/BlogSqlMap.fan
+	</div>
+	<div class="text-text">
+			Make sure Settings.fan has correct db configuration <br/><br/>
+			Define a binding like this in Bindings.fan
+			<pre>Bind{name="blogSqlMap"; toType="BlogSqlMap"}</pre>
+			In your page or service class, get blog sqlMap injected like this
+			<pre>class MyService{
+<strong>  @inject SqlMap? blogSqlMap</strong>
+  Void aServiceMethod(){
+     <strong>Blog blog := blogSqlMap->getBlogBySubject("3 idiots")</strong>
+  }							
+}</pre>
+	</div>
+
+	<div class="title-text">
+		If you using fanbatis outside of tales
+	</div>
+
+	<div class="text-text">
+			 	Write code that will use the sql map
+<pre>
+class FetchBlog{
+  Void main(){
+    Setup.setup //We will come to this in a second
+
+    BlogSqlMap map := BlogSqlMap()
+    Blog blog := map->getBlogBySubject("My First blog")
+    echo(blog.detail)
+  }
+}</pre>
+	</div>
+
+	<div class="text-text">
+			 	Write a Setup utility class 
+<pre>
+class Setup{
+  static const Str:Str props :=  Str:Str[
+    "url":"jdbc:h2:tcp://localhost/~/fanbatis",
+    "driver":"org.h2.Driver",
+    "username":"sa",
+    "password": ""]
+
+  static Void setup(){
+      if(Actor.locals["fanbatis-associate"] != null){
+        return
+      }
+      batis := Batis(true)
+      batis.configure(props)
+      Actor.locals["fanbatis-associate"] = DefaultAssociate(batis)
+  }
+}</pre>
+	</div>
+	<div class="text-text">
+			 	Make sure you configure the correct connection string, user name and password in Setup.fan and run FetchBlog.fan
+			 </div>
+
+	<div class="text-text" style="display:none;">
+			 	<a href="FirstMap.fan">Download FirstMap.fan</a> having all this in one script
+			 </div>
+
+</div>

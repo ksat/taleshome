@@ -1,0 +1,436 @@
+<html>
+ <head>
+	<link rel="stylesheet" href="/css/first.css" type="text/css" />
+	<title>Develop a fanquery plugin</title>
+	<style type="text/css" media="screen">
+	 	
+		.header {
+			display: block;
+			overflow: hidden;
+			height: 70px;
+			padding-left:120px;
+			padding-top:3px;
+		}
+		
+		.container{
+			width: 1000px;
+			overflow: hidden;
+		}
+		
+		
+		
+		#main {
+			background-color: white;
+			border-color: #CED5E0;
+			-webkit-border-radius: 4px;
+			-moz-border-radius: 4px;
+			border-radius: 4px;
+			display: block;
+			-moz-box-shadow: 0 1px 5px rgba(0, 0, 0, .15);
+			-webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, .15);
+			box-shadow: 0 1px 5px rgba(0, 0, 0, .15);
+			border: 1px #D5D5D5 solid;
+			width:780px;
+			margin-left:178px;
+			margin-bottom:20px;
+			z-index:200;
+			opacity:0.8;
+		}
+		
+		#inner{
+			/*margin:10px;*/
+		}
+		
+		ul li{
+			list-style:none;
+		}
+		
+		#sidebar0{
+			width:180px;
+			float:left;
+			padding-top:10px;
+		}
+		
+		#sidebar0 ul li{
+			list-style:none;
+		}
+		
+		#sidebar0 ul li.active {
+			border:1px solid transparent;
+			border-right:none !important;
+			-webkit-border-top-left-radius: 5px;
+			-webkit-border-bottom-left-radius: 5px;
+			-moz-border-radius-top-left: 5px;
+			-moz-border-radius-bottom-left: 5px;
+			border-top-left-radius: 5px;
+			border-bottom-left-radius: 5px;
+			background: white;
+			*background: none;
+			*font-weight:bold;
+			-moz-box-shadow: -5px 1px 5px 0px rgba(0, 0, 0, .15);
+			-webkit-box-shadow: -3px 1px 5px .5px rgba(0, 0, 0, .15);
+			box-shadow: -5px 1px 5px 0px rgba(0, 0, 0, .15);
+			list-style:none;
+			opacity:0.7;
+			font-weight:bold;
+		}
+		
+		
+		
+		li.active-grey{
+			background:#FAFAFA !important;
+		}
+		
+		#sidebar0 ul li a{
+			text-align: right;
+			display: block;
+			padding: 18px ;
+			font-size: 12px;
+			text-decoration: none;
+			padding-right: 20px;
+			padding-top:15px;
+		}
+		
+		#sidebar0 ul li.active a{
+			padding-top:18px;
+		}
+		
+		ul li a{
+			text-align: right;
+			display: block;
+			font-size: 12px;
+			text-decoration: none;
+			padding-right: 20px;
+			padding-bottom:8px;
+		}
+		
+		a {
+			color: #525252;
+			/*text-decoration: none;*/
+		}
+		
+		a.selected{
+			font-weight: bold;
+			color: #5092BD;
+		}
+		
+		ul li a.selected{
+			background:#666;
+			color:white;
+		}
+		
+		.text-title, .title-text {
+			margin-top: 24px;
+			color: #393;
+			font-size: 16px;
+			font-family: 'lucida grande',verdana;
+		}
+		
+		
+		.text-text {
+			font-size: 13px;
+			padding-left: 20px;
+			margin-top: 10px;
+			line-height: 18px;
+		}
+		pre, .output {
+			color: #333;
+			background: #EEE;
+			-moz-border-radius: 5px;
+			-webkit-border-radius: 5px;
+			border: 1px solid #DFE0CD;
+			padding: 10px;
+			margin-top:4px;
+			font-family: Consolas, monospace;
+		}
+		
+		ul.inner{
+			padding-left:0px !important;
+		}
+	</style>
+	<script type="text/javascript">
+			  var _gaq = _gaq || [];
+			  _gaq.push(['_setAccount', 'UA-19500723-1']);
+			  _gaq.push(['_trackPageview']);
+
+			  (function() {
+			    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			  })();
+
+			</script>
+</head>
+<body> 
+	<div class="header" align="center">
+			<div class="container" align="left">
+				<table width="100%">
+					<tr>
+						<td align="left"><img src="/images/tales_logo.png" /></td>
+						<td align="right" style="line-height:50px; padding-right:110px;">
+							 <a href="http://help.talesframework.org/discussions/discuss">Discuss or ask a question</a>
+						</td>
+					<tr>
+				</table>
+			</div>
+	</div>
+	<div align="center">
+		<div class="container" align="left" >
+				
+			<div id="sidebar0" style="float:left;margin-right:0px;">
+					<ul>
+							<li >
+								<a href="/" >Home</a>
+							 </li>
+					</ul>
+					
+					<div style="text-align:right; font-weight:bold;margin-right:20px; color:#393;font-size:13px;">
+							The Basics
+					</div>
+					<ul>
+						 	<li talesId="firstApp" >
+								<a href="/install-tales" >Install and make Your first app</a>
+							 </li>
+							<li talesId="examples">
+								<a href="http://examples.talesframework.org/" >Examples</a>
+							  </li>
+							<li talesId="ide" >
+								<a href="/eclipse" >IDE setup</a>
+							 </li>
+							<li talesId="gf" >
+								<a href="/gf-intro" class="">A more complete application</a>
+							 </li>
+							<li talesId="anatomy" >
+								<a href="/anatomy" class="">App Directory structure</a>
+							 </li>
+						</ul>
+						<div align="right">
+						<div style="text-align:right; border-top:1px solid #ccc; padding-top:10px; font-weight:bold;margin-right:20px; color:#393;font-size:13px; width:120px;">
+								Docs
+						</div>
+						</div>
+						<ul>
+							<li talesId="howtos" >
+								<a href="/templating" >Tales</a>
+							 </li>	
+							<!--
+							<li talesId="templating">
+								<a href="/templating" >Templating</a>
+							 </li>
+							 <li talesId="routing">
+								<a href="/routing">Routing</a>
+							  </li>
+							-->
+								<li talesId="fanquery"  class="active" >
+									<a href="/what-is-fanquery" class="">Fanquery</a>
+								 </li>
+								<li talesId="fanbatis" >
+									<a href="/fanbatis" class="">Fanbatis</a>
+								 </li>
+							</ul>
+			 </div>
+				<div id="main">
+					<div id="inner" >
+						<html>
+	<head>
+			
+			<style type="text/css" media="screen">
+				div.desc{
+					color:#555;
+					font-size:12px;
+					line-height:15px;
+				}
+				ol{
+					padding-left:20px;
+					padding-right:10px;
+				}
+				.example-link{
+					line-height:18px;
+					padding-top:10px;
+					border-bottom:1px dashed #ccc;
+				}
+				
+				a.selected{
+					color:#5092BD !important;
+					font-weight:bold;
+					background:none !important;
+				}
+				
+				ol.inner li{
+					padding-top:20px;
+				}
+			</style>
+	</head>
+	<body>
+			<div style="overflow:hidden;">
+					<table width="100%" cellspacing="0" cellpadding="0">
+						<tr>
+							<td valign="top" style="width:150px;background:#FAFAFA;height:200px;padding:10px;border-right:1px solid #eee">
+								<ul class="inner">
+									<li>
+										<a class="example-link " talesId="whatis" href="/what-is-fanquery">What is Fanquery?</a>
+										
+									</li>
+									<li>
+										<a class="example-link " talesId="startusing" href="/start-using-fanquery">Start using fanquery</a>
+									</li>
+									<li>
+										<a class="example-link " talesId="usingplugin" href="/using-a-fanquery-plugin">Using a fanquery plugin</a>
+									</li>
+									<li>
+										<a class="example-link selected" talesId="develop" href="/develop-fanquery-plugin">Develop or port a plugin</a>
+									</li>
+									<li>
+										<a class="example-link" talesId="examples" href="http://examples.talesframework.org/selector">Examples</a>
+									</li>
+									<li>
+										<a class="example-link" target="_blank" href="http://www.fanzy.net/fanquery">Try online</a>
+									</li>
+									
+									<div style="height:400px">
+											&nbsp;
+									</div>
+							</td>
+							<td valign="top" style="padding:10px;" align="left">
+								<div talesId="child"><div style="padding:10px">
+  <div class="text-title" style="margin-top:5px">
+    I) Adding more methods to Jq class
+  </div>
+  <div class="text-text">
+      Make sure you have read how to use <a href="/using-a-fanquery-plugin">fanqery plugins</a> before you read this page. <br/> In any app if you want to add more methods to the Jq class, you can do it. For eg., let's add a method "slideUpAndDown" to Jq class. Open fan/Jq.fan and modify it as below
+    <pre>using fanquery
+using fancybox
+
+@Js
+class Jq : JqBase{
+  new make(Obj? selector, JqBase? context := null) 
+                            : super(selector, context){}
+  <strong>Void slideUpAndDown(){</strong>
+    <strong>slideUp.slideDown</strong>
+  <strong>}</strong>
+}</pre> 
+    That's it. Now you can use this method like this 
+<pre>Jq("link").click{
+ Jq("button").slideUpAndDown
+}</pre>
+		Now let's go on to see how to develop reusable fanquery plugins
+  </div>
+  <div class="text-title" style="margin-top:5px">
+    II) Write a pure fantom fanquery plugin
+  </div>
+
+  <div class="text-text">
+    Let's develop a simple plugin called "betterclick" that will show an alert when clicked on anything it's attached to:
+  </div>
+
+  <div class="text-text">
+      1) Create a regular pod "betterclick" with on mixin BetterClick on it. Code it like this
+<pre>using fanquerybase
+using dom
+
+@Js
+mixin BetterClick{
+  JqBase betterClick(){
+    JqBase self := (Obj)this
+
+    self.click|cur, event|{
+      Win.cur.alert("Ouch, you clicked me...")
+      event.preventDefault
+    }
+
+    return self
+  }
+}</pre>
+      </div>
+      <div class="text-text">
+          That's it. Build pod. Now you can use it in <a href="/using-a-fanquery-plugin">your app like this</a>
+      </div>           
+  </div>
+ 
+  <div class="text-text">
+    Distribute betterclick.pod and your consumer's will be able to use the betterclick() method like this:
+  <pre>Jq("#mylink").betterClick()</pre>              
+
+  </div>
+
+  <div class="text-title" style="margin-top:5px">
+    III) Porting a Existing Jquery plugin
+  </div>
+
+  <div class="text-text">
+    Let's see how to code the fancybox plugin. Almost all the steps remains same, except you need to write some native javascript code 
+  </div>
+
+  <div class="text-text">
+  1) Write a regular pod("fancybox") with one class FancyBox like this
+  <pre>using fanquery
+@Js
+mixin FancyBox{
+  Void fancybox([Str:Obj]? props := null){
+    JqBase self := (Obj)this
+    FancyBoxNative.fancybox(self, props)
+  }
+
+  static Void close(){
+    FancyBoxNative.close
+  }
+}
+
+@Js
+class FancyBoxNative{
+  native static Void fancybox(JqBase self, [Str:Obj]? props := null)
+  native static Void close()
+}</pre>
+
+  </div>
+  <div class="text-text">
+    add <strong>js/FanyBoxNativePeer.js</strong> which looks like this
+  <pre>fan.fancybox.FancyBoxNativePeer = fan.sys.Obj.$extend(fan.sys.Obj);
+  
+fan.fancybox.FancyBoxNativePeer.fancybox = function(self, props){
+  var jsProps = toJsMap(props);
+  if(jsProps){
+    self.selector.fancybox(jsProps);
+  }
+  else{
+    self.selector.fancybox();
+  }
+
+}</pre>
+  </div>
+  <div class="text-text">
+      You can also add a <strong>fan/Conf.fan</strong>. It defines the set of additional js files that needs to be delivered. You can also optionally deliver more js files depending on conf parameter. You can include all these files in your pods res/ directory.
+      <pre>class Conf{
+  Str[] getExtraJsFiles([Str:Obj]? conf){
+    args := ["res/fancybox/jquery.fancybox-1.3.4.js"]
+    if(conf["easing"] == true){
+      args.add("res/fancybox/jquery.easing.js")
+    }
+    return args
+  }
+}</pre>
+  </div>
+  <div class="text-text">
+    Now when someone includes this plugin like this
+<pre><strong>@Js</strong>
+<strong>@Include{ plugins =[</strong>
+      <strong>Plugin{name="fancybox"; conf=["easing":true]}</strong>
+   <strong>]</strong>
+<strong>}</strong>
+class IndexJs{..}</pre>
+    Both fancybox js and easing js will be included.
+  </div>
+</div></div>
+							</td>
+						</tr>
+					</table>
+			</div>
+	</body>
+</html>
+					</div>
+				</div>
+			 
+		</div>
+	</div>
+</body>
+</html>

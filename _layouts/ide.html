@@ -1,0 +1,60 @@
+---
+layout: base
+highlight: ide
+---
+<html>
+	<head>
+			
+			<style type="text/css" media="screen">
+				div.desc{
+					color:#555;
+					font-size:12px;
+					line-height:15px;
+				}
+				ol{
+					padding-left:20px;
+					padding-right:10px;
+				}
+				.example-link{
+					line-height:18px;
+					padding-top:10px;
+					border-bottom:1px dashed #ccc;
+				}
+				
+				a.selected{
+					color:#5092BD !important;
+					font-weight:bold;
+					background:none !important;
+				}
+				
+				ol.inner li{
+					padding-top:20px;
+				}
+			</style>
+	</head>
+	<body>
+			<div style="overflow:hidden;">
+					<table width="100%" cellspacing="0" cellpadding="0">
+						<tr>
+							<td valign="top" style="width:150px;background:#FAFAFA;height:200px;padding:10px;border-right:1px solid #eee">
+								<ul class="inner">
+									<li>
+										<a class="example-link {%if page.secondtitle == 'eclipse' %}selected{% endif %}" talesId="eclipse" href="/eclipse">Eclipse (F4 Ide)</a>
+										
+									</li>
+									<li>
+										<a class="example-link {%if page.secondtitle == 'netbeans' %}selected{% endif %}" talesId="netbeans" href="/netbeans">Netbeans (FantomIDE)</a>
+									</li>
+									<li>
+										<a class="example-link {%if page.secondtitle == 'textmate' %}selected{% endif %}" talesId="textmate" href="/textmate">Textmate or other text editors</a>
+									</li>
+								</ul>
+							</td>
+							<td valign="top" style="padding:10px;" align="left">
+								<div talesId="child">{{content}}</div>
+							</td>
+						</tr>
+					</table>
+			</div>
+	</body>
+</html>

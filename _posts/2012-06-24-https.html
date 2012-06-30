@@ -1,0 +1,45 @@
+---
+layout: howtos
+title: Https in Tales
+secondtitle: https
+permalink: /https
+---
+<div style="padding:10px">  
+  <div class="text-title">
+    Https
+  </div>
+
+  <div class="text-text">
+    SSL support in Tales is as simple as adding "cert" and "key" files to cert/ directory 
+  </div>
+  <div class="text-text">
+    To get started, create a cert/ directory directly under your app directory and copy the "key" and "cert" files into it. 
+  </div>
+  
+  <div class="text-text">
+    You can generate the cert files using openssl like this
+    <pre>openssl genrsa 1024 > host.key</pre>
+    <pre>openssl req -new -x509 -nodes -sha1 -days 365 -key host.key > host.cert</pre>
+  </div>
+  
+  <div class="text-text">
+    Now open fan/Settings.fan and add a Https Setting like this
+    <pre>using tales
+
+class Settings : tales::Settings{
+    override Void main(){
+      add(HttpsSetting{})
+    }
+}</pre>
+  </div>
+  <div class="text-text">
+      You can pass additional parameters to HttpsSetting 
+      <pre>add(HttpsSetting{
+  port = &lt;port>
+  keyFile = &lt;key-file-location>        
+  certFile = &lt;cert-file-location>
+  certPassword = &lt;certificate-password>
+})
+</pre>
+  </div>
+</div>

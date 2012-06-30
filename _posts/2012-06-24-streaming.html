@@ -1,0 +1,62 @@
+---
+layout: howtos
+title: Streaming content
+secondtitle: streaming
+permalink: /streaming
+---
+<div style="padding:10px">  
+  <div class="text-title">
+    Async methods
+  </div>
+
+  <div class="text-text">
+    Usually tales ends the request when your handler method returns.
+    but Anotate the method with @Async facet and tales will not close it when the method completes. You should complete the the request yourself by calling the response.proceed method
+  </div>
+  <div class="text-text">
+    <pre>@Async
+@Route{uri = "/aysnc"}
+Void aysnc(){
+  response.writeStr("Test")
+  response.proceed
+}</pre>
+  </div>
+  <div class="text-text">
+     Note that it's totally up to you to when to call the proceed method. If you never call it the request will never close. The proceed method takes an optional Err? parameter(on dev mode this will be used to pretty print the error on screen, on production mode this will lead to the display of custom error page)
+  </div>
+  
+  <div class="text-title">
+    Streaming data 
+  </div>
+  
+  <div class="text-text">
+    You can club async methods with response.stream to stream long responses a little at a time. Whatever is passed to stream is directly written to client. 
+    
+    <pre>using tales
+using concurrent
+
+class Index : Page{
+    @Async
+    @Route{uri = "/async"}
+    Void write100Lines(){
+        (Write100Lines(ActorPool())).send(Unsafe(response))
+    }
+}
+
+const class Write100Lines : Actor{
+    new make(ActorPool pool):super(pool){}
+
+    override Obj? receive(Obj? msg){
+        Response response := ((Unsafe)msg).val
+        (1..10).each{
+            response.writeStr("test")
+            Actor.sleep(1sec)
+        }
+        response.proceed
+
+        return null
+    }
+}</pre>
+  </div>
+  
+</div>

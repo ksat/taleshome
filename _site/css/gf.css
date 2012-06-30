@@ -1,0 +1,39 @@
+div#wrap{
+	width:450px;border:1px solid white;padding:5px;
+}
+
+div#title{
+	text-align:right;padding-right:10px;line-height:25px;margin-bottom:10px;border-bottom:1px solid white;
+}
+
+div#note-input{
+	line-height:30px;
+}
+
+textarea{
+	width:430px;height:50px;margin-bottom:10px;
+}
+
+div#input{
+	line-height:25px;margin:5px; padding-bottom:10px;
+}
+
+input#name{
+	height:20px;width:300px;
+	font-size:15px;
+}
+
+a.gf{
+	color: #36C;
+	font-size:14px;
+	line-height:30px;
+}
+
+a{
+	color: #36C;
+}
+
+li{
+	font-size:14px;
+	line-height:30px;
+}

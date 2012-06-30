@@ -1,0 +1,74 @@
+---
+layout: base
+highlight: fanbatis
+---
+<html>
+	<head>
+			
+			<style type="text/css" media="screen">
+				div.desc{
+					color:#555;
+					font-size:12px;
+					line-height:15px;
+				}
+				ol{
+					padding-left:20px;
+					padding-right:10px;
+				}
+				.example-link{
+					line-height:18px;
+					padding-top:10px;
+					border-bottom:1px dashed #ccc;
+				}
+				
+				a.selected{
+					color:#5092BD !important;
+					font-weight:bold;
+					background:none !important;
+				}
+				
+				ol.inner li{
+					padding-top:20px;
+				}
+			</style>
+	</head>
+	<body>
+			<div style="overflow:hidden;">
+					<table width="100%" cellspacing="0" cellpadding="0">
+						<tr>
+							<td valign="top" style="width:150px;background:#FAFAFA;height:200px;padding:10px;border-right:1px solid #eee">
+								<ul class="inner">
+									<li>
+										<a class="example-link {%if page.secondtitle == 'whatis' %}selected{% endif %}" talesId="whatis" href="/what-is-fanbatis">What is Fanbatis?</a>
+									</li>
+									<li>
+										<a class="example-link {%if page.secondtitle == 'install' %}selected{% endif %}" talesId="install" href="/install-fanbatis">Installing Fanbatis</a>
+									</li>
+									<li>
+										<a class="example-link {%if page.secondtitle == 'first' %}selected{% endif %}" talesId="firstmapping" href="/first-fanbatis-mapping">Your first mapping</a>
+									</li>
+									<li>
+										<a class="example-link {%if page.secondtitle == 'shorthand' %}selected{% endif %}" talesId="shorthand" href="/short-hand-queries">Short hand queries</a>
+									</li>
+									<li>
+										<a class="example-link {%if page.secondtitle == 'adhoc' %}selected{% endif %}" talesId="adhoc" href="/ad-hoc-queries">Ad hoc queries</a>
+									</li>
+									<li>
+										<a class="example-link {%if page.secondtitle == 'sqlmaps' %}selected{% endif %}" talesId="sqlmaps" href="/sql-maps">Sql Maps</a>
+									</li>
+									<li>
+										<a class="example-link {%if page.secondtitle == 'resultmaps' %}selected{% endif %}" talesId="resultmaps" href="/result-maps">Result Maps</a>
+									</li>
+									
+									<div style="height:400px">
+											&nbsp;
+									</div>
+							</td>
+							<td valign="top" style="padding:10px;" align="left">
+								<div talesId="child">{{content}}</div>
+							</td>
+						</tr>
+					</table>
+			</div>
+	</body>
+</html>

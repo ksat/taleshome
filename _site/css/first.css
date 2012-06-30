@@ -1,0 +1,71 @@
+@CHARSET "ISO-8859-1";
+body{
+	font-family:"Lucida Grande",verdana,arial,helvetica,sans-serif;
+	font-size: 12px;
+	color:#222222;
+	background: #E6E6E6 url('/images/bg_main_app.jpg');
+	margin:0px;
+	padding:0px;
+}
+
+.up-and-running{
+	height:45px;color: #07495A; 
+	font-family: sans-serif;
+	font-size: 35px;
+	padding-top:10px;
+	text-shadow: white 1px 1px 0px;
+	margin-top:10px;
+}
+
+table{
+	font-size:12px;
+}
+
+.desc-div{
+	width:623px;
+	height:345px;
+	background: url('/images/login_bg.png');
+	overflow:hidden;
+}
+
+.wrapper, #wrapper{
+	padding-top:30px;
+	width: 510px;	
+}
+
+.head-line{
+	font-weight:bold;color:#555555;
+	margin-top:8px;font-size:14px;line-height:20px;font-family: 'Lucida Grande', Lucida, Verdana, sans-serif;
+	text-align:left;
+}
+.desc-text{
+	color: #666;font-family: 'Lucida Grande', Lucida, Verdana, sans-serif;font-size: 13px;line-height: 24px;padding-left: 3px; 
+}
+
+.watch-video{
+	text-decoration:none; line-height:24px;color:#4C4B35;font-size:14px;
+}
+
+
+.bottom-link{
+	margin-top:15px;
+	text-align:center;
+}
+
+.login_div{
+	text-align:right;
+}
+
+.main-div{
+	margin-top:50px;
+}
+
+
+h1{
+	font-size: 20px;
+	font-weight: bold;
+	/*text-shadow: rgb(249, 249, 249) 0px 2px 0px;*/
+	text-shadow: white 2px 2px 2px ; 
+	line-height:18px;
+}
+

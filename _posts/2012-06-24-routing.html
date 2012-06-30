@@ -1,0 +1,78 @@
+---
+layout: howtos
+title: Tales routing
+secondtitle: routing
+permalink: /routing
+---
+
+     <div style="padding:25px;">
+        <div class="title-text">
+          Routing in Tales
+        </div>
+        <div class="text-text">
+          There are two approaches to define routes. You can define a route using the @Route facet right on a method or you can define your routes in the RouteDef.fan file. Each method has its own pros and cons. 
+        </div>
+        <div class="text-text">
+          Let's start with a simple route. Create a new application. Open Index.fan and write the following code:
+          <pre>
+class Index : Page{
+  @Route{uri="/test"}
+  Void main(){
+    response.writeStr("Hello dude")
+  }
+}</pre>
+        Now open your browser and go to http://localhost:8000/test. You can see "Hello dude" printed on screen
+        </div>
+        <div class="title-text">Get and Post Parameters</div>
+        <div class="text-text">
+            The parameters are automatically mapped to method arguments for eg., this method:
+          <pre> @Route{uri="/test"}
+Void main(Str name){
+  response.writeStr("Hello $name")
+}
+</pre>  
+        and in your browser go to url <strong>http://localhost:8080/test?name=Kaushik</strong>, You should see Hello Kaushik in the output. </pre>
+         This is also true for post parametes. For eg., Try creating an html with a form posting to url "/test" and with a input text with name "name" like this
+<pre>&lt;form action="/test" method="post">
+  &lt;input type="text" name="name" />
+  &lt;input type="submt" />
+&lt;/form>
+</pre>
+      The post parameters are mapped to correct variables too.
+        </div>
+
+				<div class="title-text">Path parameters</div>
+				<div class="text-text">
+					You can also define path parameters
+					<pre>@Route{uri="/test/{name}"}
+Void main(Str name){
+}</pre>
+				and this method will match a url like <strong>/test/Kaushik</strong> and name will be mapped to "Kaushik".
+				</div>
+				<div class="text-text">
+					it is possible to define the types of the path variables. for eg., <strong>@Route{uri="/test/{name:$int}"}</strong> will only match /test/1 and not /test/abcd.
+				</div>
+				<div class="text-text">
+					like wise you can also define $str and $bool.  The types can be any valid regular expression. For eg., instead of $int you can define <pre>@Route{uri="/test/{name:[0-9]+"}</pre> and this will match only numbers after /test/.  <br/>
+					You can also define a route to match only specific request methods for eg., <pre>@Route{uri="/test"; method=RequestMethod.post}</pre> will only match post requests. To match any request, just don't set a method or set RequestMethod.any
+				</div>
+				<div class="title-text">Externalizing routes</div>
+				<div class="text-text">Defining routes along with methods as facets is cool and quick, but it has the following disadvantages
+					<ol>
+							<li>Does not clearly define the order in which routes will be picked up</li>
+							<li>You cannot see all the routes that your app defines in one place.</li>
+					</ol>
+					If you want to externalize your routes, open fan/RoutesDef.fan and define a route like this
+					<pre>using tales
+class RoutesDef : tales::RoutesDef{
+  override Void main(){
+    add(Route{uri="/test"; toMethod=Test#.method("main")})
+  }
+}
+</pre>
+				Note that Route definition is almost same except that along with the uri you should define a "toMethod"(which is obvious since tales cannot figure out the method from the facet)
+
+				
+				</div>
+				
+     </div>

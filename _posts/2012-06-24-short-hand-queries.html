@@ -1,0 +1,96 @@
+---
+layout: fanbatis
+title: Short hand queries
+secondtitle: shorthand
+permalink: /short-hand-queries
+---
+
+<div style="padding:10px">
+	<div class="text-title">
+								Short hand queries (Using Entity Mixin)
+						</div>
+						<div class="text-text">
+								The entity facet provides you a way to do short-hand queries 
+						</div>
+						<div class="text-text">
+	  						Let's revisit the Blog class. Let's modify it and add the @Entity facet
+<pre>@Serializable
+@Entity
+class Blog {
+ @Primary
+ @Autogen
+ Int? id
+ Str? subject
+ Str? detail
+
+ @Column{name="author_id"}
+ Int? authorId
+}</pre>
+	  					</div>
+	
+						
+	  					<div class="text-text" >
+	  					 	The @Primary and @Autogen facet describes that the Id field is primary and has a auto generated value. You can also use the @Table and @Column annotation to specify alternate names used in the database.  
+	  					</div>
+	  					<div class="text-text" style="font-weight:bold;">
+	  					 	Here are a few examples of doing short-hand queries
+	  					</div>
+	  					<div class="text-text">
+	  						Fetch one blog by id 
+<pre>
+Blog blog := Db.one(Blog{id = 1})</pre>
+						</div>
+
+						<div class="text-text">
+	  					 	Fetch all blogs
+<pre>
+Blog[] blogs := Db.list( Blog{})</pre>
+						</div>
+						<div class="text-text">
+	  					 	Fetch all blogs by subject
+<pre>
+Blog[] blogs := Db.list(Blog{subject="My First blog"})</pre>
+						</div>
+
+						<div class="text-text">
+	  					 	Fetch one blog by name and authorId
+<pre>
+Blog blog := Db.one(Blog{name="My Blog"; authorId = 1})</pre>
+						</div>
+						<div class="text-text">
+	  					 	Create a blog
+<pre>Blog blog := Db.create(Blog{subject = "test"; it.detail="test"})
+echo(blog.id) 
+//Note: since id is annotated with autogen,
+// id will be auto populated</pre>
+						</div>
+						
+						<div class="text-text">
+	  					 	Fetching and updating a blog
+<pre>Blog blog := Db.one(Blog{id = 1})
+blog.authorId = 2
+Db.save(blog)</pre>
+						</div>
+
+						<div class="text-text">
+	  					 	Deleting a blog
+<pre>
+Blog blog := Blog{id = 1}.one
+Db.remove(blog)
+</pre>
+						</div>
+						<div class="text-text">
+	  					 	Fetching a list of blogs with custom where clause ordered by id
+<pre>Blog[] blogs := Db.list(Blog{},
+  Filter{ 
+	orderBy = "id desc";
+	where="subject=#{param.name}"; 
+	whereParams=["subject":"My Blog"] 
+  })</pre>
+						</div>
+
+						<div class="text-text" style="display:none">
+	  					 	<a href="ShortHand.fan">Download ShortHand.fan</a> having all this in one script
+	  					 </div>
+							
+</div>

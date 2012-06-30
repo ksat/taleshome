@@ -1,0 +1,59 @@
+---
+layout: fanquery
+title: Start using fanquery
+secondtitle: startusing
+permalink: /start-using-fanquery
+---
+
+<div style="padding:10px">
+  <div class="text-title" style="margin-top:5px">
+              Using fanquery with tales:
+  </div>
+  <div class="text-text">
+    Though fanquery was initially developed as a project separate from tales, tales provides some really handy tools like auto-reloading which is essential for working with javascript. So even if you are using fanquery outside of tales, just develop it using tales and then copy the scripts to your other environment.
+  </div>
+  <div class="text-text">
+    Create a new app. <pre>fan tales new fanquerytest</pre> cd to the "fanquerytest" and start the server using <pre>fan tales run</pre>
+    
+    create <strong>fan/IndexJs.fan</strong>. And type the following code
+    <pre>using fanquery
+using tales
+
+@Js
+class IndexJs : PageJs{
+  override Void main(){
+    Jq.ready{
+      Win.cur.alert("hello")
+    }
+  }
+}</pre>       
+  </div>
+  <div class="text-text">
+    The code should be simple to follow through
+    <ol>
+      <li>We add the <strong>@Js facet</strong> to the class that <strong>extends PageJs</strong></li>
+      <li>main() is called as the page loads. Jq.ready{} is equivalent of $(document).ready{} jquery method</li>
+      <li>when dom is ready we show an alert</li>
+    </ol>
+  </div>
+  <div class="text-text">
+    Now we need to tell the index page to use the IndexJs script. Open Index.fan and add make the following changes(shown in bold):
+<pre>using tales
+class Index : Page{
+  @Route{uri = "/"}
+  Void main(){
+    html := Html("template/Index.html")
+    html.tag("dynamic").text("Tales")
+    <strong>html.jsMain(IndexJs#)</strong>
+    response.writeTag(html)
+  }
+}</pre>
+    The only important line is <pre>html.jsMain(IndexJs#)</pre>. We indicate that the script in IndexJs has to be used for this html.
+Now modify IndexJs.fan to try out various Jquery methods.
+  </div>
+
+  <div class="text-text">
+    Read this <a href="/using-a-fanquery-plugin">if want to use some plugin </a>
+  </div>
+</div>  
+</div>

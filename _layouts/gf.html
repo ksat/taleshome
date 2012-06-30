@@ -1,0 +1,74 @@
+---
+layout: base
+highlight: gf
+---
+<html>
+	<head>
+			
+			<style type="text/css" media="screen">
+				div.desc{
+					color:#555;
+					font-size:12px;
+					line-height:15px;
+				}
+				ol{
+					padding-left:20px;
+					padding-right:10px;
+				}
+				.example-link{
+					line-height:18px;
+					padding-top:10px;
+					border-bottom:1px dashed #ccc;
+				}
+				
+				a.selected{
+					color:#5092BD !important;
+					font-weight:bold;
+					background:none !important;
+				}
+				
+				ol.inner li{
+					padding-top:20px;
+				}
+			</style>
+	</head>
+	<body>
+			<div style="overflow:hidden;">
+					<table width="100%" cellspacing="0" cellpadding="0">
+						<tr>
+							<td valign="top" style="width:150px;background:#FAFAFA;height:200px;padding:10px;border-right:1px solid #eee">
+								<ul class="inner">
+									<li>
+										<a class="example-link {%if page.secondtitle == 'intro' %}selected{% endif %}" talesId="intro" href="/gf-intro">The girlfriend app</a>
+										
+									</li>
+									<li>
+										<a class="example-link {%if page.secondtitle == 'install' %}selected{% endif %}" talesId="install" href="/gf-install">Install tales and get started</a>
+									</li>
+									<li>
+										<a class="example-link {%if page.secondtitle == 'model' %}selected{% endif %}" talesId="model" href="/gf-model">Creating tables and model classes</a>
+									</li>
+									<li>
+										<a class="example-link {%if page.secondtitle == 'ui' %}selected{% endif %}" talesId="ui" href="/gf-ui">Creating the UI</a>
+									</li>
+									<li>
+										<a class="example-link {%if page.secondtitle == 'ajax' %}selected{% endif %}" talesId="ajax" href="/gf-ajax">Spurring up with Ajax</a>
+									</li>
+									<!--
+									<li>
+										<a class="example-link" talesId="detail" href="/gf-detail">Adding the detail page (understanding routes) </a>
+									</li>
+									-->
+									<li>
+										<a class="example-link {%if page.secondtitle == 'production' %}selected{% endif %}" talesId="production" href="/gf-production">Deploying</a>
+									</li>
+								</ul>
+							</td>
+							<td valign="top" style="padding:10px;" align="left">
+								<div talesId="child">{{content}}</div>
+							</td>
+						</tr>
+					</table>
+			</div>
+	</body>
+</html>

@@ -1,0 +1,101 @@
+---
+layout: gf
+title: Creating tales and model classes
+secondtitle: model
+permalink: /gf-model
+---
+
+<div style="padding:10px">	
+	<div class="text-title" style="margin-top:5px">
+				Creating tables
+		</div>
+		<div class="text-text" style="margin-top:5px">
+			Think  about the tables required. I'd say two tables are required:
+			<ul>
+			  <li>Girlfriend</li>
+			   <li>Notes</li>
+			</ul>
+		</div>
+		<div class="text-text" style="margin-top:5px">
+			Let's create the two tables. Fire your mysql client and create the two tables like this: 
+			<pre text-align="left">CREATE TABLE girlfriend (
+  id int NOT NULL AUTO_INCREMENT,
+  name varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);</pre>
+			<pre text-align="left">CREATE TABLE gfnote (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  gfid int(11) DEFAULT NULL,
+  text varchar(30) DEFAULT NULL,
+PRIMARY KEY (`id`)
+); 
+			</pre>
+		</div>
+		<div class="text-title" style="margin-top:5px">
+				Creating Model Objects
+		</div>
+		<div class="text-text" style="margin-top:5px">
+			Create the following two classes to represent the rows in two tables correspondingly 
+			<br />
+			<strong>fan/GirlFriend.fan :</strong>
+			<pre>using fanbatis 
+@Entity
+class GirlFriend{
+  @Primary
+  @Autogen
+  Int? id
+  Str? name
+  DateTime? lastUpdated
+}</pre>
+		<br />
+		<strong>fan/Note.fan :</strong>
+		<pre>using fanbatis 
+@Entity
+@Table{name="gfnote"}
+class Note{
+  @Primary
+  @Autogen
+  Int? id
+  Int? gfId
+  Str? text
+}</pre>
+		</div>
+		<div class="text-text" style="margin-top:5px">
+			Quick things to note:
+			<ol>
+			  <li>You need to mark your entity classes with @Entity facet. You will also generally want to mark an Entity with @Js and @Serializable if you also want to share them with your client(js) code also written in fantom</li>
+			 <li>If the table name is different from your class name use the @Table{name="table_name"} facet, if the column name is different from  your field name use @Column{name="table_name"} facet </li>
+			</ol>
+		</div>
+		<div class="text-title" >
+			Quick fanbatis introduction (A.K.A how to query)
+		</div>
+		<div class="text-text" style="margin-top:5px">
+			Once you have the model classes, you can do crud like this.. 
+			<div style="margin-top:8px;">
+				<strong style="color:#666">Fetch one GirlFriend row from db:</strong>
+				<pre>GirlFriend  gf := Db.one(GirlFriend{it.id = id})</pre>
+			</div>
+			<div style="margin-top:8px;">
+				<strong style="color:#666">Fetch a list of all GirlFriend rows from db:</strong>
+				<pre>GirlFriend[] gfs := Db.list(GirlFriend{}) </pre>
+			</div>
+			<div style="margin-top:8px;">
+				<strong style="color:#666">Create a GirlFriend row:</strong>
+				<pre>Db.create(GirlFriend{it.name = name})  </pre>
+			</div>
+			<div style="margin-top:8px;">
+				<strong style="color:#666">Save a GirlFriend row:</strong>
+				<pre>GirlFriend  gf := Db.one(GirlFriend{it.id = id})
+gf.name = "new name"
+Db.save(gf)
+</pre>
+			</div>
+		</div>
+		<div class="text-text" style="margin-top:5px">
+				For more information on fanbatis <a href="/what-is-fanbatis/">look here</a>		
+		</div>
+		<div class="text-text" style="margin-top:5px">
+				Now that we have our model classes ready, and know how to query, we can <a href="/gf-ui">Start writing the ui code</a>
+		</div>
+</div>
